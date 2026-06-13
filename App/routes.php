@@ -7,9 +7,11 @@ use App\Controllers\WorkOrderController;
 
 // API Routes
 Router::get("api/outfits", [ApiController::class, "viewOutfitAll"]);
+Router::get("api/users", [ApiController::class, "allUsers"]);
 
 // Page Routes
 Router::get("", [IndexController::class, 'homepage']);
+Router::get("about-us", [IndexController::class, 'aboutUs']);
 
 Router::get("outfits", [OutfitController::class, "viewAll"]);
 Router::get("outfit/create", [OutfitController::class, "create"]);

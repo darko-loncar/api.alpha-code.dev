@@ -2,8 +2,12 @@
 declare(strict_types=1);
 namespace Core;
 
+use Core\Container;
+
 final class Kernel 
 {
+    private Container $container;
+
     public function run()
     {
         header("X-Frame-Options: DENY");
@@ -17,6 +21,8 @@ final class Kernel
         $config = require __DIR__ . '/../App/config.php';
         $this->setErrorHandling($config["app_debug"]);
 
+        $this->container = new Container();
+
         require_once __DIR__ . '/../App/helpers.php';
         require_once __DIR__ . '/../App/bootstrap.php';
         require_once __DIR__ . '/../App/routes.php';
@@ -25,15 +31,10 @@ final class Kernel
         $handler = $match["handler"];
         $params = $match["params"]; 
 
-        if ($handler instanceof \Closure) {
-            return $handler(...$params);
-        }
-
-        // [Class, method]
         if (is_array($handler)) {
             [$class, $method] = $handler;
-            $instance = new $class();
-            return $instance->$method(...$params);
+            $controller_instance = $this->container->make($class);
+            return $controller_instance->$method(...$params);
         }
 
         throw new \RuntimeException("Invalid route handler");

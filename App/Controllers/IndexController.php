@@ -1,19 +1,27 @@
 <?php
 namespace App\Controllers;
 
-use Core\Response;
 use Core\Db;
-use App\Entities\OutfitMid;
+use Core\Response;
+use Modules\QueryBuilder;
 use Modules\View;
 
 class IndexController
 {
+    public function __construct(
+        private DB $db
+    ){}
 
     public function homepage()
     {
-        $hair = OutfitMid::find(1);
-        $html = (new View("Homepage", ['pageId' => 'index', 'data' => $hair]))->getHtml();
+        $html = (new View("Homepage", ['pageId' => 'index', 'data' => []]))->getHtml();
         return Response::html($html);
+    }
+
+    public function aboutUs()
+    {
+        $html = "<h1>About Us</h1><p>Lorem Ipsum</p>";
+        return $html;
     }
 }
 

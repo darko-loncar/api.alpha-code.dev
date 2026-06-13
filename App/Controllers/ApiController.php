@@ -2,7 +2,6 @@
 namespace App\Controllers;
 
 use Modules\QueryBuilder;
-use App\Entities\Outfit;
 use Core\Response;
 
 class ApiController
@@ -21,4 +20,12 @@ class ApiController
 
         return Response::json($outfits);
     }
+
+    public function allUsers()
+    {
+        $users = (new QueryBuilder("user"))->get();
+        return Response::json($users);
+    }
+
+
 }

@@ -2,45 +2,48 @@
 declare(strict_types=1);
 namespace Core;
 
+use ReflectionClass;
+use RuntimeException;
+use Exception;
+
 final class Container
 {
     private array $services = [];
-    private array $instances = [];
-    private static ?self $instance = null;
 
-    public static function setInstance(self $container): void
+    public function registerService(string $name, mixed $service): void
     {
-        self::$instance = $container;
+        $this->services[$name] = $service;
     }
 
-    public static function getInstance(): self
+    public function get(string $name): mixed
     {
-        if (!self::$instance) {
-            throw new \RuntimeException("Container not initialized");
-        }
-        return self::$instance;
+        return $this->services[$name]
+            ?? throw new RuntimeException("Service '{$name}' not found.");
     }
 
-    public function set(string $id, mixed $factory): void
+    public function make(string $class): object
     {
-        $this->services[$id] = $factory;
-    }
+        $ref = new ReflectionClass($class);
+        $constructor = $ref->getConstructor();
 
-    public function get(string $id): mixed
-    {
-        if (isset($this->instances[$id])) {
-            return $this->instances[$id];
+        if (!$constructor) {
+            return new $class();
         }
 
-        if (!isset($this->services[$id])) {
-            throw new \InvalidArgumentException("Service not found: $id");
+        $params = [];
+
+        foreach ($constructor->getParameters() as $param) {
+            $type = $param->getType();
+
+            if ($type && !$type->isBuiltin()) {
+                $params[] = $this->get($type->getName());
+            } else {
+                throw new Exception("Cannot resolve {$param->getName()}");
+            }
         }
 
-        return $this->instances[$id] = ($this->services[$id]);
+        return $ref->newInstanceArgs($params);
     }
 
-    public function has(string $id): bool
-    {
-        return isset($this->instances[$id]) || isset($this->services[$id]);
-    }
 }
+
