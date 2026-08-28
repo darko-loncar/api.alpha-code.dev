@@ -1,7 +1,7 @@
 <?php
 namespace App\Entities;
 
-class WorkItem extends \Core\Entity  
+class WorkItem extends \Components\Entity
 {
     public string $name;
     public string $description;

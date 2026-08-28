@@ -2,119 +2,142 @@
 declare(strict_types=1);
 namespace Core;
 
-/**
- * Supported HTTP methods.
- */
-enum HttpMethods : string {
-    case GET  = 'GET';
-    case POST  = 'POST';
-    case PUT = 'PUT';
-    case DELETE = 'DELETE';
-};
-
 final class Router
 {
     // Define allowed HTTP methods for routing
-    const VALID_METHODS = ['GET', 'POST', 'PUT', 'DELETE'];
+    private const VALID_METHODS = ['GET', 'POST', 'PUT', 'DELETE'];
 
-    // Store the routes for each HTTP method
-    private static array $routes = [];
+    // Store exact routes for direct lookup and dynamic routes for regex matching.
+    private array $exactRoutes = [
+        'GET' => [],
+        'POST' => [],
+        'PUT' => [],
+        'DELETE' => [],
+    ];
+
+    private array $dynamicRoutes = [
+        'GET' => [],
+        'POST' => [],
+        'PUT' => [],
+        'DELETE' => [],
+    ];
 
     /**
-     * Add GET route
-     * @param string $routeString
-     * @param callable $handler
-     * @return void
+     * Register a route for GET requests.
+     *
+     * @param string $routeString Route path, optionally containing simple named parameters such as {id}.
+     * @param array $handler Route handler.
      */
-    public static function get(string $routeString, callable|array|string $handler)
+    public function get(string $routeString, array $handler): void
     {        
-        static::addRoute($routeString, "GET", $handler);
+        $this->addRoute($routeString, "GET", $handler);
     }
 
     /**
-     * Add POST route
-     * @param string $routeString
-     * @param callable $handler
-     * @return void
+     * Register a route for POST requests.
+     *
+     * @param string $routeString Route path, optionally containing simple named parameters such as {id}.
+     * @param array $handler Route handler.
      */
-    public static function post(string $routeString, callable|array|string $handler)
+    public function post(string $routeString, array $handler): void
     {
-        static::addRoute($routeString, "POST", $handler);
+        $this->addRoute($routeString, "POST", $handler);
     }
 
     /**
-     * Registers a new route with its associated HTTP method and controller action.
+     * Register a route for PUT requests.
+     *
+     * @param string $routeString Route path, optionally containing simple named parameters such as {id}.
+     * @param array $handler Route handler.
+     */
+    public function put(string $routeString, array $handler): void
+    {
+        $this->addRoute($routeString, "PUT", $handler);
+    }
+
+    /**
+     * Register a route for DELETE requests.
+     *
+     * @param string $routeString Route path, optionally containing simple named parameters such as {id}.
+     * @param array $handler Route handler.
+     */
+    public function delete(string $routeString, array $handler): void
+    {
+        $this->addRoute($routeString, "DELETE", $handler);
+    }
+
+    /**
+    * Register a route with its associated HTTP method and handler.
      *
      * This method allows the user to define routes by specifying the URL pattern,
      * the HTTP method, and the handler to handle the route.
      *
-     * @param string $routeString The URL pattern for the route (e.g., "/user/{id}").
-     * @param string $httpMethod The HTTP method for the route (e.g., "GET", "POST").
-     * @param callable $handler.
+    * @param string $routeString URL pattern with optional simple named parameters such as {id}.
+    * @param string $httpMethod HTTP method supported by this router.
+    * @param array $handler Route handler.
      * 
-     * @throws \InvalidArgumentException If the HTTP method is invalid or the controller action is improperly formatted.
-     * @return static
+    * @throws \InvalidArgumentException If the HTTP method or route parameter is invalid.
      */
-    public static function addRoute(string $routeString, string $httpMethod, callable|array|string $handler)
+    public function addRoute(string $routeString, string $httpMethod, array $handler): void
     {
         // Validate the HTTP method
-        if (!in_array($httpMethod, static::VALID_METHODS)) {
+        $httpMethod = strtoupper($httpMethod);
+        if (!in_array($httpMethod, self::VALID_METHODS, true)) {
             throw new \InvalidArgumentException("Invalid HTTP method: $httpMethod");
         }
 
-        // Add the route to the routes array
-        static::$routes[] = [
-            "routeString" => $routeString,
-            "httpMethod" => $httpMethod,
-            "handler" => $handler,
-            "regex" => static::compileRouteRegex($routeString),    
-        ];
+        // Normalize route
+        $normalizedRoute = trim($routeString, '/');
+        $route = ["handler" => $handler];
+
+        // If route contains "{", it's a dynamic route; otherwise, it's an exact route.}
+        if(str_contains($normalizedRoute, '{')) {
+            $route["regex"] = $this->compileRouteRegex($routeString);
+            $this->dynamicRoutes[$httpMethod][$normalizedRoute] = $route;
+        } else {
+            $this->exactRoutes[$httpMethod][$normalizedRoute] = $route;
+        }
+
     }
 
     /**
-     * Handles the incoming request by matching the request URI and HTTP method to a defined route,
-     * then dispatches the request to the corresponding controller and action.
-     *
-     * This method iterates through the defined routes, matching the request's URI and HTTP method.
-     * When a match is found, the corresponding controller is instantiated, and the relevant action
-     * is called with any parameters extracted from the URI.
-     *
-     * If no route matches the request, this method returns `null`.
-     *
-     * @param string $requestUri The URI of the incoming request, typically the path part of the URL.
-     * @param string $requestHttpMethod The HTTP method of the request (e.g., GET, POST, etc.).
-     * @throws \Exception If the controller or action method for the matched route is not found.
-     * @return mixed|null The response generated by the controller action, or `null` if no route is matched.
-     * @see matches() for the method used to match the URI against the route's regular expression.
-     */    
-    public static function matchRequest(string $requestUri, string $requestHttpMethod) : mixed
+    * Match a request URI and HTTP method against the registered routes.
+    *
+    * Exact routes use direct lookup. Dynamic routes are tested using their
+    * compiled patterns in registration order.
+    *
+    * @param string $requestUri The URI of the incoming request, typically the path part of the URL.
+    * @param string $requestHttpMethod The HTTP method of the request (e.g., GET, POST, etc.).
+    * @return array{array, params: array<string, int|string>}|null
+    *               The matched handler and route parameters, or `null` when no route matches.
+    */    
+    public function matchRequest(string $requestUri, string $requestHttpMethod): ?array
     {
         // Normalize request Uri
-        $normalizedRequestUri = trim($requestUri, '/');
-        $normalizedRequestUri = strtok($normalizedRequestUri, '?') ?: ""; // `strtok` splits the URI at the `?` and keeps the part before it.
+        $normalizedRequestUri = strtok($requestUri, '?') ?: ""; // `strtok` splits the URI at the `?` and keeps the part before it.
+        $normalizedRequestUri = trim($normalizedRequestUri, '/');
+        $requestHttpMethod = strtoupper($requestHttpMethod);
 
-        // Get the list of routes
-        $routes = self::$routes;
+        // First try to match fixed routes.
+        $exactRoute = $this->exactRoutes[$requestHttpMethod][$normalizedRequestUri] ?? null;
+        if ($exactRoute !== null) {
+            return [
+                "handler" => $exactRoute["handler"],
+                "params" => [],
+            ];
+        }
 
-        // Loop through each route and check for a match
+        // Try to match dynamic routes
+        $routes = $this->dynamicRoutes[$requestHttpMethod] ?? [];
+
+        // Loop through each dynamic route and check for a match
         foreach ($routes as $route) {
 
-            // Skip if $requestHttpMethod doesn't match
-            if($route['httpMethod'] !== $requestHttpMethod) continue;
-
             // Attempt to match the route to the request URI and HTTP method
-            $params = static::matches($route['regex'], $normalizedRequestUri);
+            $params = $this->matches($route['regex'], $normalizedRequestUri);
 
-            // If the route matched, execute the controller action
+            // If the route matched, return the handler
             if ($params !== false) {
-
-                // Cast params to appropriate type
-                foreach ($params as $key => &$param) {
-                    if (is_numeric($param)) {
-                        $param = (int) $param;  // Cast the parameter to an integer
-                    }
-                }
-
                 return [
                     "handler" => $route["handler"],
                     "params" => $params
@@ -122,20 +145,21 @@ final class Router
                 }
         }
 
-        // If no routes matched, return null (to be handled externally)
+        // If no routes matched...
         return null;
     }
 
     /**
-     * Compiles a route string into a regular expression pattern.
+    * Compile a route string into a regular expression pattern.
      *
-     * This method transforms a route pattern such as "/user/{id}" into a regex like "/user/(?P<id>[a-zA-Z0-9\-_]+)".
-     * It handles optional route parameters and applies regex patterns to match typical parameter formats.
+    * Only simple named parameters such as `{id}`, `{slug}`, and `{uuid}` are
+    * supported. Inline parameter constraints are not supported.
      *
-     * @param string $routePattern The route pattern (e.g., "/user/{id}").
-     * @return string The compiled regex pattern that matches the route (e.g., "/user/(?P<id>[a-zA-Z0-9\-_]+)").
+    * @param string $routePattern Route pattern, for example `/user/{id}`.
+    * @return string Compiled regular expression used for dynamic route matching.
+    * @throws \InvalidArgumentException If a route parameter is invalid.
      */
-    private static function compileRouteRegex(string $routePattern): string
+    private function compileRouteRegex(string $routePattern): string
     {
         // Remove leading/trailing slashes from the route pattern
         $routePattern = trim($routePattern, "/");
@@ -143,37 +167,52 @@ final class Router
         // Split the route pattern into parts by slashes
         $parts = explode("/", $routePattern);
     
-        // Map each part to a regex pattern
-        $patternParts = array_map(function ($part) {
-            // If the part contains a parameter (e.g., {id})
-            if (preg_match('/^\{(.+?)(?::(.+?))?\}$/', $part, $matches)) {
-                $paramName = $matches[1];
-                $paramPattern = $matches[2] ?? '[a-zA-Z0-9\-_]+'; // Default pattern for parameters
-                return "(?P<$paramName>$paramPattern)"; // Named capture group for the parameter
-            }
-            // If it's not a parameter, escape it for regex
-            return preg_quote($part, '/');
-        }, $parts);
+        // Compile each route segment into its regex representation.
+        $patternParts = [];
+        foreach ($parts as $part) {
 
-        // Combine all parts into a single regex pattern
-        return "^" . implode("/", $patternParts) . "$";
+            // Check if route segment starts and ends with {}, and extract the text between as param name
+            if (str_starts_with($part, '{') && str_ends_with($part, '}')) {
+                $paramName = substr($part, 1, -1);
+
+               if (!preg_match('/^[a-zA-Z]+$/', $paramName)) {
+                    throw new \InvalidArgumentException("Invalid route parameter: $part");
+                    }
+
+                $patternParts[] = "(?P<$paramName>[a-zA-Z0-9_-]+)";
+                continue;
+            }
+
+            $patternParts[] = preg_quote($part, '/');
+        }
+
+        return '^' . implode('/', $patternParts) . '$';
     }
 
     /**
-     * Matches a route's regex against the request URI.
+     * Match a compiled route pattern against a request URI.
      *
      * This method performs regex match against the URI.
      * It returns matched parameters as an associative array or false if no match is found.
      *
-     * @param string $routeRegex The compiled regex pattern for the route.
-     * @param string $requestUri The request URI.
-     * @return array|bool An associative array of matched parameters or false if no match is found.
+    * @param string $routeRegex Compiled route pattern.
+    * @param string $requestUri Normalized request URI.
+    * @return array<string, string>|false Named route parameters or `false` when unmatched.
      */
-    private static function matches(string $routeRegex, string $requestUri): array|bool
+    private function matches(string $routeRegex, string $requestUri): array|bool
     {          
-        // Match the request URI against the route regex and filter out numeric keys (only keeping named parameters)
-        return (preg_match("~{$routeRegex}~", $requestUri, $matches))
-            ? array_filter($matches, fn($key) => !is_int($key), ARRAY_FILTER_USE_KEY) 
-            : false;
+        if (preg_match("~{$routeRegex}~", $requestUri, $matches) !== 1) {
+                return false;
+            }
+
+        unset($matches[0]);
+
+        foreach ($matches as $key => $value) {
+            if (is_int($key)) {
+                unset($matches[$key]);
+            }
+        }
+
+    return $matches;
     }
 }

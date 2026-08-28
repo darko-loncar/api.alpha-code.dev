@@ -1,14 +1,20 @@
 <?php
 declare(strict_types=1);
 
-namespace Services;
+namespace App\Services;
 
 class ExchangeRateFetcher 
 {
-    public static function fetch() {
+    private string $apiUrl;
+
+    public function __construct(string $apiUrl) {
+        $this->apiUrl = $apiUrl;
+    }
+
+    public function fetch() {
 
         // Set API URL
-        $apiUrl = "https://api.frankfurter.dev/v1/latest";
+        $apiUrl = $this->apiUrl;
         
         // Initialize cURL
         $ch = curl_init($apiUrl);

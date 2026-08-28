@@ -1,7 +1,7 @@
 <?php
 declare(strict_types=1);
 
-namespace Modules;
+namespace Components;
 
 use PDO;
 
@@ -33,7 +33,7 @@ final class QueryBuilder
     /**
      * Shared PDO connection used for all queries.
      */
-    private static PDO $db;
+    private readonly PDO $db;
 
     /**
      * Base table for the query.
@@ -103,20 +103,26 @@ final class QueryBuilder
      *
      * @param PDO $dbConnection Database connection instance.
      */
-    public static function setConnection(PDO $dbConnection): void
+    public function setConnection(PDO $dbConnection): void
     {
-        self::$db = $dbConnection;
+        $this->$db = $dbConnection;
     }
 
     /**
-     * Create a new query builder for a given table.
+     * Create a new query builder.
      *
-     * @param string $table Base table name.
+     * @param PDO $pdo Pdo database connection.
      */
-    public function __construct(string $table)
+    public function __construct(PDO $db)
+    {
+        $this->db = $db;
+    }
+
+    public function table(string $table): self
     {
         $this->table = $table;
         $this->tables[] = $table;
+        return $this;
     }
 
     /**
@@ -125,7 +131,7 @@ final class QueryBuilder
      * If no table prefix is provided, the base table is assumed.
      *
      * @param array<int, string> $columns Column names to select.
-     * @return self
+     * @return this
      */
     public function select(array $columns): self
     {
@@ -146,9 +152,9 @@ final class QueryBuilder
      * @param string $column Column name.
      * @param string $operator SQL operator (=, <, >, LIKE, etc.).
      * @param mixed $value Value to bind.
-     * @return self
+     * @return this
      */
-    public function where(string $column, string $operator, mixed $value): self
+    public function where(string $column, string $operator, mixed $value): this
     {
         $paramKey = ':where_' . str_replace('.', '_', $column) . count($this->params);
 
@@ -163,9 +169,9 @@ final class QueryBuilder
      *
      * @param string $column Column name.
      * @param array<int, mixed> $values List of values.
-     * @return self
+     * @return this
      */
-    public function whereIn(string $column, array $values): self
+    public function whereIn(string $column, array $values): this
     {
         if (empty($values)) {
             return $this;
@@ -189,9 +195,9 @@ final class QueryBuilder
      *
      * @param string $column Column name (base table assumed).
      * @param OrderDirection $orderDirection Sort direction.
-     * @return self
+     * @return this
      */
-    public function orderBy(string $column, OrderDirection $orderDirection): self
+    public function orderBy(string $column, OrderDirection $orderDirection): this
     {
         $this->orderBy[] = "{$this->table}.{$column} {$orderDirection->value}";
         return $this;
@@ -202,9 +208,9 @@ final class QueryBuilder
      *
      * @param int $limit Maximum number of rows.
      * @param int|null $offset Starting offset.
-     * @return self
+     * @return this
      */
-    public function limit(int $limit, ?int $offset = null): self
+    public function limit(int $limit, ?int $offset = null): this
     {
         $this->limit = $limit;
         $this->offset = $offset;
@@ -231,7 +237,7 @@ final class QueryBuilder
         string $localKey,
         string $foreignKey = 'id',
         array $fields = []
-    ): self {
+    ): this {
 
         $this->joins[] =
             "LEFT JOIN `$table` ON {$this->table}.{$localKey} = {$table}.{$foreignKey}";
@@ -314,7 +320,7 @@ final class QueryBuilder
     {
         $sql = $this->buildSQL();
 
-        $stmt = self::$db->prepare($sql);
+        $stmt = $this->db->prepare($sql);
 
         foreach ($this->params as $key => $value) {
             $stmt->bindValue($key, $value);

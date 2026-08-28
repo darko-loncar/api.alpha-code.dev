@@ -1,8 +1,8 @@
 <?php
 declare(strict_types=1);
-namespace Modules;
+namespace Components;
 
-use Modules\QueryBuilder;
+use Components\QueryBuilder;
 
 class EntitySelect {
 

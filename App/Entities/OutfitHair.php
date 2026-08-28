@@ -1,7 +1,7 @@
 <?php
 namespace App\Entities;
 
-class OutfitHair extends \Core\Entity 
+class OutfitHair extends \Components\Entity
 {
     public string $name;
     public string $description;

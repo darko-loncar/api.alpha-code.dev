@@ -12,12 +12,12 @@ final class Response
         public readonly array $headers = []
     ) {}
 
-    public static function json(mixed $data, int $status = 200, array $headers = []): self 
+    public static function json(array $data, int $status = 200, array $headers = []): self
     {
-        return new self($data, $status,'application/json',$headers);
+        return new self(json_encode($data, JSON_THROW_ON_ERROR), $status, 'application/json', $headers);
     }
 
-    public static function html( string $html, int $status = 200, array $headers = []): self 
+    public static function html(string $html, int $status = 200, array $headers = []): self
     {
         return new self($html,$status,'text/html',$headers);
     }
@@ -49,7 +49,7 @@ final class Response
         );
     }
 
-    public function render(): void
+    public function send(): void
     {
     if (!headers_sent()) {
             http_response_code($this->status);
@@ -73,7 +73,7 @@ final class Response
         }
 
         echo match ($this->contentType) {
-            'application/json' => json_encode($this->body, JSON_THROW_ON_ERROR),
+            'application/json' => (string) $this->body,
             default => (string) $this->body,
         };
     }

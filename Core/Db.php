@@ -1,33 +1,20 @@
 <?php
 declare(strict_types=1);
-
 namespace Core;
-
 use PDO;
-use PDOException;
 
 /**
- * Enum representing supported database drivers.
- * 
- * Using enum ensures type safety and avoids magic strings.
+ * Enum representing supported database drivers. 
  */
 enum DbDriver: string {
     case MYSQL = 'mysql';
     case PGSQL = 'pgsql';
-    case SQLSRV = 'sqlsrv';
 }
 
 /**
  * Class Db
  * 
- * PDO-based database connector.
- * 
- * Responsibilities:
- * - Accepts database connection parameters
- * - Creates and holds a PDO instance
- * - Provides access to PDO via getPDO()
- * 
- * This class is immutable and uses readonly properties.
+ * PDO-based database connector. 
  */
 final class Db
 {
@@ -38,7 +25,6 @@ final class Db
     private const DEFAULT_PORTS = [
         'mysql'  => 3306,   // MySQL / MariaDB
         'pgsql'  => 5432,   // PostgreSQL
-        'sqlsrv' => 1433,   // MS SQL Server
     ];
 
     /**
@@ -51,30 +37,30 @@ final class Db
      * 
      * Initializes a PDO connection based on the provided driver and connection parameters.
      * 
-     * @param string $driver Supported database driver ('mysql', 'pgsql', 'sqlsrv')
-     * @param string $hostname Database host
-     * @param string $db_name Database name
-     * @param string $db_user Database username
-     * @param string $db_password Database password
-     * @param int|null $port Optional. Database port; defaults to standard port for the driver
+     * @param string $driver        Supported database driver ('mysql', 'pgsql')
+     * @param string $hostname      Database host
+     * @param string $dbName        Database name
+     * @param string $dbUser        Database username
+     * @param string $dbPassword    Database password
+     * @param int|null $port        Optional. Database port; defaults to standard port for the driver
      * 
      * @throws PDOException If connection fails
      */
     public function __construct(
         string $driver, 
         string $hostname, 
-        string $db_name, 
-        string $db_user, 
-        string $db_password, 
+        string $dbName, 
+        string $dbUser, 
+        string $dbPassword, 
         ?int $port = null
     ) {
 
         // Validate and parse driver
-        $driver = match (strtolower(trim($driver))) {
-            'mysql'  => DbDriver::MYSQL,
-            'pgsql'  => DbDriver::PGSQL,
-            'sqlsrv' => DbDriver::SQLSRV,
-            default  => throw new PDOException("Unsupported database driver: $driver"),
+        $driver = 
+            match (strtolower(trim($driver))) {
+                'mysql'  => DbDriver::MYSQL,
+                'pgsql'  => DbDriver::PGSQL,
+            default => throw new \InvalidArgumentException("Unsupported database driver: {$driver}. Supported drivers are: mysql, pgsql."),
         };
         
         // Use provided port or default port for driver
@@ -82,9 +68,8 @@ final class Db
 
         // Build DSN string based on driver
         $dsn = match ($driver) {
-            DbDriver::MYSQL     => "mysql:host=$hostname;port=$port;dbname=$db_name;charset=utf8mb4",
-            DbDriver::PGSQL     => "pgsql:host=$hostname;port=$port;dbname=$db_name",
-            DbDriver::SQLSRV    => "sqlsrv:Server=$hostname,$port;Database=$db_name",
+            DbDriver::MYSQL     => "mysql:host=$hostname;port=$port;dbname=$dbName;charset=utf8mb4",
+            DbDriver::PGSQL     => "pgsql:host=$hostname;port=$port;dbname=$dbName",
         };
 
         // PDO options
@@ -95,12 +80,7 @@ final class Db
         ];
 
         // Attempt connection
-        try {
-            $this->pdo = new PDO($dsn, $db_user, $db_password, $options);
-        } catch (PDOException $e) {
-            throw new PDOException(
-                "Database connection failed for driver {$driver->value} at {$hostname}/{$db_name}: " . $e->getMessage());
-        }
+        $this->pdo = new PDO($dsn, $dbUser, $dbPassword, $options);
     }
 
     /**
@@ -110,7 +90,7 @@ final class Db
      * 
      * @return PDO
      */
-    public function getPDO(): PDO
+    public function getPdo(): PDO
     {
         return $this->pdo;
     }

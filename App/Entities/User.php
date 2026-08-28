@@ -1,7 +1,7 @@
 <?php
 namespace App\Entities;
 
-class User extends \Core\Entity
+class User extends \Components\Entity
 {
     public string $first_name = "";
     public string $last_name = "";

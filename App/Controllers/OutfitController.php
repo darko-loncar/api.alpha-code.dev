@@ -3,9 +3,10 @@ namespace App\Controllers;
 
 use Core\Exceptions\NotFoundException;
 use Core\Request;
-use Modules\QueryBuilder;
-use Modules\EntitySelect;
-use Modules\View;
+use Core\Db;
+use Components\QueryBuilder;
+use Components\EntitySelect;
+use Components\View;
 use App\Entities\Outfit;
 use App\Entities\OutfitHair;
 use App\Entities\OutfitFace;
@@ -19,8 +20,12 @@ use Core\Response;
 
 class OutfitController
 {
+    public function __construct(private Db $db){}
+
     public function viewAll()
     {
+        $pdo = $this->db->getPDO();
+
         $outfits = (new QueryBuilder(Outfit::getTableName()))->get();
         $html = (new View("Outfits", [
             'pageTitle' => "Pregled Outfita",
@@ -127,7 +132,7 @@ class OutfitController
         $outfit->update();
 
         // Redirect to edit form
-        $this->redirect("/outfit/$id");
+        return Response::redirect("/outfit/$id");
     }
 
     public function store()
@@ -160,7 +165,7 @@ class OutfitController
         $outfit->insert();
 
         // Redirect to edit form
-        $this->redirect("/outfit/".$outfit->getId());
+        return Response::redirect("/outfit/".$outfit->getId());
     }
 
     private function processSelText() 

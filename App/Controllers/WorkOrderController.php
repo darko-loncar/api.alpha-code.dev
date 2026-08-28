@@ -2,8 +2,8 @@
 namespace App\Controllers;
 
 use Core\Response;
-use Modules\EntitySelect;
-use Modules\View;
+use Components\EntitySelect;
+use Components\View;
 use App\Entities\WorkItem;
 
 class WorkOrderController

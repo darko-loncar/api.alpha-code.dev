@@ -12,7 +12,7 @@
  * @package Entity
  */
 declare(strict_types=1);
-namespace Core;
+namespace Components;
 
 use PDO;
 use PDOStatement;

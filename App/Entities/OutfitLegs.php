@@ -1,7 +1,7 @@
 <?php
 namespace App\Entities;
 
-class OutfitLegs extends \Core\Entity  
+class OutfitLegs extends \Components\Entity
 {
     public string $name;
     public string $description;

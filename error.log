@@ -1,453 +1,152 @@
-[05-Jun-2026 21:02:21 Europe/Berlin] Error: require_once(C:\http\htdocs\crystal-core\Core/../../app/routes.php): Failed to open stream: No such file or directory in C:\http\htdocs\crystal-core\Core\Kernel.php on line 34
-[05-Jun-2026 21:02:21 Europe/Berlin] Error: require_once(C:\http\htdocs\crystal-core\Core/../../app/routes.php): Failed to open stream: No such file or directory in C:\http\htdocs\crystal-core\Core\Kernel.php on line 34
-[05-Jun-2026 21:02:46 Europe/Berlin] Exception: Class "Modules\QueryBuilder" not found in C:\http\htdocs\crystal-core\app\app.php on line 90
-[05-Jun-2026 21:03:17 Europe/Berlin] Exception: Class "Modules\QueryBuilder" not found in C:\http\htdocs\crystal-core\app\app.php on line 90
-[05-Jun-2026 21:59:27 Europe/Berlin] Core\Router::get(): Argument #2 ($handler) must be of type callable, array given, called in C:\http\htdocs\crystal-core\app\routes.php on line 5
-[05-Jun-2026 21:59:27 Europe/Berlin] Core\Router::get(): Argument #2 ($handler) must be of type callable, array given, called in C:\http\htdocs\crystal-core\app\routes.php on line 5
-[05-Jun-2026 22:00:01 Europe/Berlin] Core\Router::get(): Argument #2 ($handler) must be of type callable, array given, called in C:\http\htdocs\crystal-core\app\routes.php on line 5
-[05-Jun-2026 22:00:39 Europe/Berlin] Core\Router::get(): Argument #2 ($handler) must be of type callable, array given, called in C:\http\htdocs\crystal-core\app\routes.php on line 4
-[05-Jun-2026 22:01:13 Europe/Berlin] Core\Router::get(): Argument #2 ($handler) must be of type callable, array given, called in C:\http\htdocs\crystal-core\app\routes.php on line 4
-[05-Jun-2026 22:01:31 Europe/Berlin] Core\Router::get(): Argument #2 ($handler) must be of type callable, array given, called in C:\http\htdocs\crystal-core\app\routes.php on line 4
-[05-Jun-2026 22:01:48 Europe/Berlin] Core\Router::get(): Argument #2 ($handler) must be of type callable, array given, called in C:\http\htdocs\crystal-core\app\routes.php on line 4
-[05-Jun-2026 22:02:25 Europe/Berlin] Core\Router::get(): Argument #2 ($handler) must be of type callable, array given, called in C:\http\htdocs\crystal-core\app\routes.php on line 5
-[05-Jun-2026 22:03:38 Europe/Berlin] Core\Router::get(): Argument #2 ($handler) must be of type callable, array given, called in C:\http\htdocs\crystal-core\app\routes.php on line 4
-[05-Jun-2026 22:04:37 Europe/Berlin] Core\Router::get(): Argument #2 ($handler) must be of type callable, array given, called in C:\http\htdocs\crystal-core\app\routes.php on line 4
-[05-Jun-2026 22:05:04 Europe/Berlin] Core\Router::get(): Argument #2 ($handler) must be of type callable, array given, called in C:\http\htdocs\crystal-core\app\routes.php on line 4
-[05-Jun-2026 22:05:35 Europe/Berlin] Core\Router::get(): Argument #2 ($handler) must be of type callable, array given, called in C:\http\htdocs\crystal-core\app\routes.php on line 4
-[05-Jun-2026 22:05:36 Europe/Berlin] Core\Router::get(): Argument #2 ($handler) must be of type callable, array given, called in C:\http\htdocs\crystal-core\app\routes.php on line 4
-[05-Jun-2026 22:06:09 Europe/Berlin] Core\Router::get(): Argument #2 ($handler) must be of type callable, array given, called in C:\http\htdocs\crystal-core\app\routes.php on line 4
-[05-Jun-2026 22:07:06 Europe/Berlin] Core\Router::get(): Argument #2 ($handler) must be of type callable, array given, called in C:\http\htdocs\crystal-core\app\routes.php on line 6
-[05-Jun-2026 22:07:34 Europe/Berlin] Core\Router::get(): Argument #2 ($handler) must be of type callable, array given, called in C:\http\htdocs\crystal-core\app\routes.php on line 6
-[05-Jun-2026 22:07:49 Europe/Berlin] syntax error, unexpected token "}"
-[05-Jun-2026 22:07:55 Europe/Berlin] Core\Router::get(): Argument #2 ($handler) must be of type callable, array given, called in C:\http\htdocs\crystal-core\app\routes.php on line 6
-[05-Jun-2026 22:08:23 Europe/Berlin] Core\Router::get(): Argument #2 ($handler) must be of type string, array given, called in C:\http\htdocs\crystal-core\app\routes.php on line 6
-[05-Jun-2026 22:15:30 Europe/Berlin] Core\Router::get(): Argument #2 ($handler) must be of type callable, array given, called in C:\http\htdocs\crystal-core\app\routes.php on line 11
-[05-Jun-2026 22:15:31 Europe/Berlin] Core\Router::get(): Argument #2 ($handler) must be of type callable, array given, called in C:\http\htdocs\crystal-core\app\routes.php on line 11
-[05-Jun-2026 22:22:04 Europe/Berlin] Call to undefined method Core\Router::handleRequest()
-[05-Jun-2026 22:22:20 Europe/Berlin] Call to undefined method Core\Router::handleRequest()
-[05-Jun-2026 22:25:13 Europe/Berlin] Undefined array key "controllerName" in C:\http\htdocs\crystal-core\Core\Router.php:123
-[05-Jun-2026 22:36:36 Europe/Berlin] Outfit not found
-[05-Jun-2026 22:37:30 Europe/Berlin] Outfit not found
-[05-Jun-2026 22:40:35 Europe/Berlin] Outfit not found
-[05-Jun-2026 22:40:50 Europe/Berlin] Outfit not found
-[05-Jun-2026 22:41:38 Europe/Berlin] Outfit not found
-[05-Jun-2026 22:42:46 Europe/Berlin] Outfit not found
-[05-Jun-2026 22:44:46 Europe/Berlin] Outfit not found
-[05-Jun-2026 23:03:47 Europe/Berlin] Outfit not found
-[05-Jun-2026 23:06:19 Europe/Berlin] Trying to access array offset on value of type null in C:\http\htdocs\crystal-core\Core\Kernel.php:29
-[05-Jun-2026 23:07:53 Europe/Berlin] syntax error, unexpected token "public"
-[05-Jun-2026 23:08:29 Europe/Berlin] syntax error, unexpected token "public"
-[05-Jun-2026 23:09:33 Europe/Berlin] Call to a member function render() on string
-[05-Jun-2026 23:09:39 Europe/Berlin] View file not found: C:\http\htdocs\crystal-core\Modules/../../views/OutfitEditor.php
-[05-Jun-2026 23:11:30 Europe/Berlin] syntax error, unexpected token "public"
-[05-Jun-2026 23:12:02 Europe/Berlin] syntax error, unexpected token "public"
-[05-Jun-2026 23:13:15 Europe/Berlin] syntax error, unexpected token "public"
-[05-Jun-2026 23:22:38 Europe/Berlin] Trying to access array offset on value of type null in C:\http\htdocs\crystal-core\Core\Kernel.php:29
-[05-Jun-2026 23:23:02 Europe/Berlin] Trying to access array offset on value of type null in C:\http\htdocs\crystal-core\Core\Kernel.php:29
-[05-Jun-2026 23:26:43 Europe/Berlin] Trying to access array offset on value of type null in C:\http\htdocs\crystal-core\Core\Kernel.php:29
-[05-Jun-2026 23:27:02 Europe/Berlin] Trying to access array offset on value of type null in C:\http\htdocs\crystal-core\Core\Kernel.php:29
-[05-Jun-2026 23:28:50 Europe/Berlin] Trying to access array offset on value of type null in C:\http\htdocs\crystal-core\Core\Kernel.php:29
-[05-Jun-2026 23:33:37 Europe/Berlin] Attempt to read property "fk_outfit_hair" on null in C:\http\htdocs\crystal-core\app\Controllers\OutfitController.php:36
-[05-Jun-2026 23:33:37 Europe/Berlin] Trying to access array offset on value of type null in C:\http\htdocs\crystal-core\Core\Kernel.php:29
-[05-Jun-2026 23:33:40 Europe/Berlin] View file not found: C:\http\htdocs\crystal-core\Modules/../../views/OutfitEditor.php
-[05-Jun-2026 23:33:40 Europe/Berlin] Trying to access array offset on value of type null in C:\http\htdocs\crystal-core\Core\Kernel.php:29
-[05-Jun-2026 23:35:05 Europe/Berlin] Exception: View file not found: C:\http\htdocs\crystal-core\Modules/../../views/OutfitEditor.php in C:\http\htdocs\crystal-core\Modules\View.php on line 102
-[05-Jun-2026 23:35:05 Europe/Berlin] Error: Trying to access array offset on value of type null in C:\http\htdocs\crystal-core\Core\Kernel.php on line 29
-[05-Jun-2026 23:37:43 Europe/Berlin] Error: Trying to access array offset on value of type null in C:\http\htdocs\crystal-core\Core\Kernel.php on line 29
-[05-Jun-2026 23:38:14 Europe/Berlin] Error: Trying to access array offset on value of type null in C:\http\htdocs\crystal-core\Core\Kernel.php on line 29
-[05-Jun-2026 23:39:30 Europe/Berlin] Error: Undefined property: Core\Response::$message in C:\http\htdocs\crystal-core\Core\Response.php on line 53
-[05-Jun-2026 23:39:55 Europe/Berlin] Error: Trying to access array offset on value of type null in C:\http\htdocs\crystal-core\Core\Kernel.php on line 29
-[05-Jun-2026 23:40:30 Europe/Berlin] Error: Trying to access array offset on value of type null in C:\http\htdocs\crystal-core\Core\Kernel.php on line 29
-[05-Jun-2026 23:43:03 Europe/Berlin] Error: Trying to access array offset on value of type null in C:\http\htdocs\crystal-core\Core\Kernel.php on line 29
-[05-Jun-2026 23:51:26 Europe/Berlin] Error: Trying to access array offset on value of type null in C:\http\htdocs\crystal-core\Core\Kernel.php on line 29
-[05-Jun-2026 23:52:52 Europe/Berlin] Error: Trying to access array offset on value of type null in C:\http\htdocs\crystal-core\Core\Kernel.php on line 29
-[05-Jun-2026 23:53:10 Europe/Berlin] Error: Trying to access array offset on value of type null in C:\http\htdocs\crystal-core\Core\Kernel.php on line 29
-[05-Jun-2026 23:53:18 Europe/Berlin] Error: Trying to access array offset on value of type null in C:\http\htdocs\crystal-core\Core\Kernel.php on line 29
-[05-Jun-2026 23:54:47 Europe/Berlin] Error: Trying to access array offset on value of type null in C:\http\htdocs\crystal-core\Core\Kernel.php on line 29
-[05-Jun-2026 23:55:35 Europe/Berlin] Exception: Core\Response::error(): Return value must be of type Core\Response, none returned in C:\http\htdocs\crystal-core\Core\Response.php on line 38
-[05-Jun-2026 23:55:35 Europe/Berlin] Error: Trying to access array offset on value of type null in C:\http\htdocs\crystal-core\Core\Kernel.php on line 29
-[05-Jun-2026 23:56:50 Europe/Berlin] Error: Trying to access array offset on value of type null in C:\http\htdocs\crystal-core\Core\Kernel.php on line 29
-[05-Jun-2026 23:57:44 Europe/Berlin] Error: Trying to access array offset on value of type null in C:\http\htdocs\crystal-core\Core\Kernel.php on line 29
-[05-Jun-2026 23:58:09 Europe/Berlin] Error: Trying to access array offset on value of type null in C:\http\htdocs\crystal-core\Core\Kernel.php on line 29
-[05-Jun-2026 23:59:06 Europe/Berlin] Error: Trying to access array offset on value of type null in C:\http\htdocs\crystal-core\Core\Kernel.php on line 29
-[05-Jun-2026 23:59:19 Europe/Berlin] Error: Trying to access array offset on value of type null in C:\http\htdocs\crystal-core\Core\Kernel.php on line 29
-[06-Jun-2026 00:00:03 Europe/Berlin] Error: Trying to access array offset on value of type null in C:\http\htdocs\crystal-core\Core\Kernel.php on line 29
-[06-Jun-2026 00:00:44 Europe/Berlin] Error: Trying to access array offset on value of type null in C:\http\htdocs\crystal-core\Core\Kernel.php on line 29
-[06-Jun-2026 00:15:02 Europe/Berlin] Exception: Controller action must return Core\Response in C:\http\htdocs\crystal-core\Core\Controller.php on line 28
-[06-Jun-2026 00:15:02 Europe/Berlin] Error: Trying to access array offset on value of type null in C:\http\htdocs\crystal-core\Core\Kernel.php on line 29
-[06-Jun-2026 00:18:31 Europe/Berlin] Exception: Core\Kernel::run(): Return value must be of type Core\Response, string returned in C:\http\htdocs\crystal-core\Core\Kernel.php on line 40
-[06-Jun-2026 00:18:31 Europe/Berlin] Error: Trying to access array offset on value of type null in C:\http\htdocs\crystal-core\Core\Kernel.php on line 29
-[06-Jun-2026 00:19:25 Europe/Berlin] Exception: Core\Kernel::run(): Return value must be of type Core\Response, string returned in C:\http\htdocs\crystal-core\Core\Kernel.php on line 40
-[06-Jun-2026 00:19:25 Europe/Berlin] Error: Trying to access array offset on value of type null in C:\http\htdocs\crystal-core\Core\Kernel.php on line 29
-[06-Jun-2026 00:19:43 Europe/Berlin] Exception: Call to a member function render() on string in C:\http\htdocs\crystal-core\public\index.php on line 5
-[06-Jun-2026 00:19:43 Europe/Berlin] Error: Trying to access array offset on value of type null in C:\http\htdocs\crystal-core\Core\Kernel.php on line 29
-[06-Jun-2026 00:21:05 Europe/Berlin] Error: Trying to access array offset on value of type null in C:\http\htdocs\crystal-core\Core\Kernel.php on line 29
-[06-Jun-2026 00:21:44 Europe/Berlin] Error: Trying to access array offset on value of type null in C:\http\htdocs\crystal-core\Core\Kernel.php on line 29
-[06-Jun-2026 00:47:03 Europe/Berlin] Error: Undefined variable $DB_CONNECTION in C:\http\htdocs\crystal-core\app\app.php on line 17
-[06-Jun-2026 00:47:04 Europe/Berlin] Error: Undefined variable $DB_CONNECTION in C:\http\htdocs\crystal-core\app\app.php on line 17
-[06-Jun-2026 00:55:37 Europe/Berlin] Error: Undefined variable $config in C:\http\htdocs\crystal-core\app\app.php on line 17
-[06-Jun-2026 00:55:38 Europe/Berlin] Error: Undefined variable $config in C:\http\htdocs\crystal-core\app\app.php on line 17
-[06-Jun-2026 00:56:27 Europe/Berlin] Error: Undefined variable $config in C:\http\htdocs\crystal-core\app\app.php on line 17
-[06-Jun-2026 00:56:27 Europe/Berlin] Error: Undefined variable $config in C:\http\htdocs\crystal-core\app\app.php on line 17
-[06-Jun-2026 00:57:22 Europe/Berlin] Error: Undefined variable $config in C:\http\htdocs\crystal-core\app\app.php on line 17
-[06-Jun-2026 00:57:23 Europe/Berlin] Error: Undefined variable $config in C:\http\htdocs\crystal-core\app\app.php on line 17
-[06-Jun-2026 00:58:17 Europe/Berlin] Error: Undefined variable $config in C:\http\htdocs\crystal-core\app\app.php on line 17
-[06-Jun-2026 00:58:18 Europe/Berlin] Error: Undefined variable $config in C:\http\htdocs\crystal-core\app\app.php on line 17
-[06-Jun-2026 00:58:57 Europe/Berlin] Error: Undefined variable $config in C:\http\htdocs\crystal-core\app\app.php on line 17
-[06-Jun-2026 00:58:57 Europe/Berlin] Error: Undefined variable $config in C:\http\htdocs\crystal-core\app\app.php on line 17
-[06-Jun-2026 01:00:49 Europe/Berlin] Error: Undefined variable $config in C:\http\htdocs\crystal-core\app\app.php on line 17
-[06-Jun-2026 01:00:49 Europe/Berlin] Error: Undefined variable $config in C:\http\htdocs\crystal-core\app\app.php on line 17
-[06-Jun-2026 01:00:50 Europe/Berlin] Error: Undefined variable $config in C:\http\htdocs\crystal-core\app\app.php on line 17
-[06-Jun-2026 01:00:50 Europe/Berlin] Error: Undefined variable $config in C:\http\htdocs\crystal-core\app\app.php on line 17
-[06-Jun-2026 01:00:51 Europe/Berlin] Error: Undefined variable $config in C:\http\htdocs\crystal-core\app\app.php on line 17
-[06-Jun-2026 01:00:51 Europe/Berlin] Error: Undefined variable $config in C:\http\htdocs\crystal-core\app\app.php on line 17
-[06-Jun-2026 01:03:36 Europe/Berlin] Error: Undefined variable $config in C:\http\htdocs\crystal-core\app\app.php on line 21
-[06-Jun-2026 01:03:36 Europe/Berlin] Error: Undefined variable $config in C:\http\htdocs\crystal-core\app\app.php on line 21
-[06-Jun-2026 01:04:19 Europe/Berlin] Error: Undefined variable $config in C:\http\htdocs\crystal-core\app\app.php on line 20
-[06-Jun-2026 01:04:19 Europe/Berlin] Error: Undefined variable $config in C:\http\htdocs\crystal-core\app\app.php on line 20
-[06-Jun-2026 01:05:05 Europe/Berlin] Error: require(C:\http\htdocs\crystal-core\appconfig.php): Failed to open stream: No such file or directory in C:\http\htdocs\crystal-core\app\app.php on line 15
-[06-Jun-2026 01:05:06 Europe/Berlin] Error: require(C:\http\htdocs\crystal-core\appconfig.php): Failed to open stream: No such file or directory in C:\http\htdocs\crystal-core\app\app.php on line 15
-[06-Jun-2026 01:05:21 Europe/Berlin] Error: Undefined variable $config in C:\http\htdocs\crystal-core\app\app.php on line 20
-[06-Jun-2026 01:05:21 Europe/Berlin] Error: Undefined variable $config in C:\http\htdocs\crystal-core\app\app.php on line 20
-[06-Jun-2026 01:05:29 Europe/Berlin] Error: Undefined variable $config in C:\http\htdocs\crystal-core\app\app.php on line 20
-[06-Jun-2026 01:05:29 Europe/Berlin] Error: Undefined variable $config in C:\http\htdocs\crystal-core\app\app.php on line 20
-[06-Jun-2026 01:05:35 Europe/Berlin] Error: Undefined variable $config in C:\http\htdocs\crystal-core\app\app.php on line 20
-[06-Jun-2026 01:05:35 Europe/Berlin] Error: Undefined variable $config in C:\http\htdocs\crystal-core\app\app.php on line 20
-[06-Jun-2026 01:06:00 Europe/Berlin] Error: Undefined variable $config in C:\http\htdocs\crystal-core\app\app.php on line 20
-[06-Jun-2026 01:06:01 Europe/Berlin] Error: Undefined variable $config in C:\http\htdocs\crystal-core\app\app.php on line 20
-[06-Jun-2026 01:06:01 Europe/Berlin] Error: Undefined variable $config in C:\http\htdocs\crystal-core\app\app.php on line 20
-[06-Jun-2026 01:06:02 Europe/Berlin] Error: Undefined variable $config in C:\http\htdocs\crystal-core\app\app.php on line 20
-[06-Jun-2026 01:06:42 Europe/Berlin] Error: Undefined variable $config in C:\http\htdocs\crystal-core\app\app.php on line 20
-[06-Jun-2026 01:06:42 Europe/Berlin] Error: Undefined variable $config in C:\http\htdocs\crystal-core\app\app.php on line 20
-[06-Jun-2026 01:09:31 Europe/Berlin] Error: Trying to access array offset on value of type bool in C:\http\htdocs\crystal-core\app\app.php on line 20
-[06-Jun-2026 01:09:31 Europe/Berlin] Error: Trying to access array offset on value of type bool in C:\http\htdocs\crystal-core\app\app.php on line 20
-[06-Jun-2026 01:10:04 Europe/Berlin] Error: Trying to access array offset on value of type bool in C:\http\htdocs\crystal-core\app\app.php on line 20
-[06-Jun-2026 01:10:04 Europe/Berlin] Error: Trying to access array offset on value of type bool in C:\http\htdocs\crystal-core\app\app.php on line 20
-[06-Jun-2026 01:10:24 Europe/Berlin] Error: require_once(C:\http\htdocs\crystal-core\app/app/config.php): Failed to open stream: No such file or directory in C:\http\htdocs\crystal-core\app\app.php on line 15
-[06-Jun-2026 01:10:25 Europe/Berlin] Error: require_once(C:\http\htdocs\crystal-core\app/app/config.php): Failed to open stream: No such file or directory in C:\http\htdocs\crystal-core\app\app.php on line 15
-[06-Jun-2026 01:10:34 Europe/Berlin] Error: require_once(C:\http\htdocs\crystal-core\app../app/config.php): Failed to open stream: No such file or directory in C:\http\htdocs\crystal-core\app\app.php on line 15
-[06-Jun-2026 01:10:34 Europe/Berlin] Error: require_once(C:\http\htdocs\crystal-core\app../app/config.php): Failed to open stream: No such file or directory in C:\http\htdocs\crystal-core\app\app.php on line 15
-[06-Jun-2026 01:11:07 Europe/Berlin] Error: require_once(C:\http\htdocs\crystal-core\Core/../config.php): Failed to open stream: No such file or directory in C:\http\htdocs\crystal-core\Core\Bootstrap.php on line 16
-[06-Jun-2026 01:11:08 Europe/Berlin] Error: require_once(C:\http\htdocs\crystal-core\Core/../config.php): Failed to open stream: No such file or directory in C:\http\htdocs\crystal-core\Core\Bootstrap.php on line 16
-[06-Jun-2026 01:11:40 Europe/Berlin] Exception: Core\Db::__construct(): Argument #6 ($port) must be of type ?int, string given, called in C:\http\htdocs\crystal-core\app\app.php on line 17 in C:\http\htdocs\crystal-core\Core\Db.php on line 63
-[06-Jun-2026 01:11:41 Europe/Berlin] Exception: Core\Db::__construct(): Argument #6 ($port) must be of type ?int, string given, called in C:\http\htdocs\crystal-core\app\app.php on line 17 in C:\http\htdocs\crystal-core\Core\Db.php on line 63
-[06-Jun-2026 01:11:59 Europe/Berlin] Exception: Class "Core\Controller" not found in C:\http\htdocs\crystal-core\app\Controllers\OutfitController.php on line 22
-[06-Jun-2026 01:11:59 Europe/Berlin] Error: Trying to access array offset on value of type null in C:\http\htdocs\crystal-core\Core\Kernel.php on line 29
-[06-Jun-2026 01:12:25 Europe/Berlin] Exception: Class "App\Controllers\Controller" not found in C:\http\htdocs\crystal-core\app\Controllers\OutfitController.php on line 21
-[06-Jun-2026 01:12:25 Europe/Berlin] Error: Trying to access array offset on value of type null in C:\http\htdocs\crystal-core\Core\Kernel.php on line 29
-[06-Jun-2026 01:12:58 Europe/Berlin] Error: Trying to access array offset on value of type null in C:\http\htdocs\crystal-core\Core\Kernel.php on line 29
-[06-Jun-2026 01:13:38 Europe/Berlin] Error: Undefined variable $container in C:\http\htdocs\crystal-core\app\app.php on line 16
-[06-Jun-2026 01:13:39 Europe/Berlin] Error: Undefined variable $container in C:\http\htdocs\crystal-core\app\app.php on line 16
-[06-Jun-2026 01:14:56 Europe/Berlin] Exception: Class "Core\Env" not found in C:\http\htdocs\crystal-core\Core\Kernel.php on line 14
-[06-Jun-2026 01:14:56 Europe/Berlin] Exception: Class "Core\Env" not found in C:\http\htdocs\crystal-core\Core\Kernel.php on line 14
-[06-Jun-2026 01:15:47 Europe/Berlin] Exception: syntax error, unexpected double-quote mark, expecting "-" or identifier or variable or number in C:\http\htdocs\crystal-core\Core\Kernel.php on line 29
-[06-Jun-2026 01:15:47 Europe/Berlin] Exception: syntax error, unexpected double-quote mark, expecting "-" or identifier or variable or number in C:\http\htdocs\crystal-core\Core\Kernel.php on line 29
-[06-Jun-2026 01:16:00 Europe/Berlin] Exception: Class "Core\Env" not found in C:\http\htdocs\crystal-core\Core\Kernel.php on line 19
-[06-Jun-2026 01:16:00 Europe/Berlin] Exception: Class "Core\Env" not found in C:\http\htdocs\crystal-core\Core\Kernel.php on line 19
-[06-Jun-2026 01:19:08 Europe/Berlin] Exception: Modules\QueryBuilder::setConnection(): Argument #1 ($dbConnection) must be of type PDO, Core\Db given, called in C:\http\htdocs\crystal-core\app\app.php on line 25 in C:\http\htdocs\crystal-core\Modules\QueryBuilder.php on line 31
-[06-Jun-2026 01:19:08 Europe/Berlin] Exception: Modules\QueryBuilder::setConnection(): Argument #1 ($dbConnection) must be of type PDO, Core\Db given, called in C:\http\htdocs\crystal-core\app\app.php on line 25 in C:\http\htdocs\crystal-core\Modules\QueryBuilder.php on line 31
-[06-Jun-2026 01:22:31 Europe/Berlin] Exception: Core\Bootstrap::init(): Return value must be of type Core\Container, none returned in C:\http\htdocs\crystal-core\Core\Bootstrap.php on line 16
-[06-Jun-2026 01:22:32 Europe/Berlin] Exception: Core\Bootstrap::init(): Return value must be of type Core\Container, none returned in C:\http\htdocs\crystal-core\Core\Bootstrap.php on line 16
-[06-Jun-2026 01:23:33 Europe/Berlin] Error: Undefined variable $config in C:\http\htdocs\crystal-core\app\Controllers\OutfitController.php on line 32
-[06-Jun-2026 01:23:33 Europe/Berlin] Error: Trying to access array offset on value of type null in C:\http\htdocs\crystal-core\Core\Kernel.php on line 29
-[06-Jun-2026 01:28:47 Europe/Berlin] Exception: Core\Bootstrap::init(): Return value must be of type Core\Container, none returned in C:\http\htdocs\crystal-core\Core\Bootstrap.php on line 22
-[06-Jun-2026 01:28:48 Europe/Berlin] Exception: Core\Bootstrap::init(): Return value must be of type Core\Container, none returned in C:\http\htdocs\crystal-core\Core\Bootstrap.php on line 22
-[06-Jun-2026 01:39:30 Europe/Berlin] Exception: Using $this when not in object context in C:\http\htdocs\crystal-core\app\app.php on line 12
-[06-Jun-2026 01:39:30 Europe/Berlin] Exception: Using $this when not in object context in C:\http\htdocs\crystal-core\app\app.php on line 12
-[06-Jun-2026 01:42:01 Europe/Berlin] Error: Undefined variable $container in C:\http\htdocs\crystal-core\app\Controllers\OutfitController.php on line 31
-[06-Jun-2026 01:42:02 Europe/Berlin] Error: Trying to access array offset on value of type null in C:\http\htdocs\crystal-core\Core\Kernel.php on line 29
-[06-Jun-2026 01:43:14 Europe/Berlin] Exception: Call to undefined method Core\Container::getInstance() in C:\http\htdocs\crystal-core\app\Controllers\OutfitController.php on line 32
-[06-Jun-2026 01:43:14 Europe/Berlin] Error: Trying to access array offset on value of type null in C:\http\htdocs\crystal-core\Core\Kernel.php on line 29
-[06-Jun-2026 01:45:00 Europe/Berlin] Error: Trying to access array offset on value of type bool in C:\http\htdocs\crystal-core\app\app.php on line 14
-[06-Jun-2026 01:45:01 Europe/Berlin] Error: Trying to access array offset on value of type bool in C:\http\htdocs\crystal-core\app\app.php on line 14
-[06-Jun-2026 01:45:19 Europe/Berlin] Error: require_once(C:\http\htdocs\crystal-core\app/app/config.php): Failed to open stream: No such file or directory in C:\http\htdocs\crystal-core\app\app.php on line 11
-[06-Jun-2026 01:45:19 Europe/Berlin] Error: require_once(C:\http\htdocs\crystal-core\app/app/config.php): Failed to open stream: No such file or directory in C:\http\htdocs\crystal-core\app\app.php on line 11
-[06-Jun-2026 01:45:33 Europe/Berlin] Error: require_once(C:\http\htdocs\crystal-core\app/../../app/config.php): Failed to open stream: No such file or directory in C:\http\htdocs\crystal-core\app\app.php on line 11
-[06-Jun-2026 01:45:33 Europe/Berlin] Error: require_once(C:\http\htdocs\crystal-core\app/../../app/config.php): Failed to open stream: No such file or directory in C:\http\htdocs\crystal-core\app\app.php on line 11
-[06-Jun-2026 01:46:03 Europe/Berlin] Error: Trying to access array offset on value of type bool in C:\http\htdocs\crystal-core\app\app.php on line 15
-[06-Jun-2026 01:46:03 Europe/Berlin] Error: Trying to access array offset on value of type bool in C:\http\htdocs\crystal-core\app\app.php on line 15
-[06-Jun-2026 01:46:33 Europe/Berlin] Error: require_once(C:\http\htdocs\crystal-core\app./config.php): Failed to open stream: Permission denied in C:\http\htdocs\crystal-core\app\app.php on line 12
-[06-Jun-2026 01:46:34 Europe/Berlin] Error: require_once(C:\http\htdocs\crystal-core\app./config.php): Failed to open stream: Permission denied in C:\http\htdocs\crystal-core\app\app.php on line 12
-[06-Jun-2026 01:46:50 Europe/Berlin] Error: require_once(C:\http\htdocs\crystal-core\appconfig.php): Failed to open stream: No such file or directory in C:\http\htdocs\crystal-core\app\app.php on line 12
-[06-Jun-2026 01:46:50 Europe/Berlin] Error: require_once(C:\http\htdocs\crystal-core\appconfig.php): Failed to open stream: No such file or directory in C:\http\htdocs\crystal-core\app\app.php on line 12
-[06-Jun-2026 01:48:50 Europe/Berlin] Exception: Call to undefined method Core\Container::getInstance() in C:\http\htdocs\crystal-core\app\Controllers\OutfitController.php on line 32
-[06-Jun-2026 01:48:50 Europe/Berlin] Error: Trying to access array offset on value of type null in C:\http\htdocs\crystal-core\Core\Kernel.php on line 29
-[06-Jun-2026 01:50:13 Europe/Berlin] Error: Undefined variable $container in C:\http\htdocs\crystal-core\app\Controllers\OutfitController.php on line 32
-[06-Jun-2026 01:50:14 Europe/Berlin] Error: Trying to access array offset on value of type null in C:\http\htdocs\crystal-core\Core\Kernel.php on line 29
-[06-Jun-2026 01:53:03 Europe/Berlin] Exception: Core\Container::setInstance(): Argument #1 ($container) must be of type Core\Container, string given, called in C:\http\htdocs\crystal-core\app\app.php on line 22 in C:\http\htdocs\crystal-core\Core\Container.php on line 11
-[06-Jun-2026 01:53:03 Europe/Berlin] Exception: Core\Container::setInstance(): Argument #1 ($container) must be of type Core\Container, string given, called in C:\http\htdocs\crystal-core\app\app.php on line 22 in C:\http\htdocs\crystal-core\Core\Container.php on line 11
-[06-Jun-2026 01:55:03 Europe/Berlin] Exception: Container not initialized in C:\http\htdocs\crystal-core\Core\Container.php on line 19
-[06-Jun-2026 01:55:03 Europe/Berlin] Error: Trying to access array offset on value of type null in C:\http\htdocs\crystal-core\Core\Kernel.php on line 29
-[06-Jun-2026 02:00:16 Europe/Berlin] Error: Trying to access array offset on value of type null in C:\http\htdocs\crystal-core\Core\Kernel.php on line 29
-[06-Jun-2026 02:01:14 Europe/Berlin] Exception: Object of type Core\Db is not callable in C:\http\htdocs\crystal-core\Core\Container.php on line 40
-[06-Jun-2026 02:01:14 Europe/Berlin] Error: Trying to access array offset on value of type null in C:\http\htdocs\crystal-core\Core\Kernel.php on line 29
-[06-Jun-2026 02:03:20 Europe/Berlin] Exception: Object of type Core\Db is not callable in C:\http\htdocs\crystal-core\Core\Container.php on line 40
-[06-Jun-2026 02:03:20 Europe/Berlin] Error: Trying to access array offset on value of type null in C:\http\htdocs\crystal-core\Core\Kernel.php on line 29
-[06-Jun-2026 02:04:06 Europe/Berlin] Exception: Object of type Core\Db is not callable in C:\http\htdocs\crystal-core\Core\Container.php on line 40
-[06-Jun-2026 02:04:07 Europe/Berlin] Error: Trying to access array offset on value of type null in C:\http\htdocs\crystal-core\Core\Kernel.php on line 29
-[06-Jun-2026 02:05:14 Europe/Berlin] Exception: Array callback must have exactly two elements in C:\http\htdocs\crystal-core\Core\Container.php on line 40
-[06-Jun-2026 02:05:14 Europe/Berlin] Error: Trying to access array offset on value of type null in C:\http\htdocs\crystal-core\Core\Kernel.php on line 29
-[06-Jun-2026 02:13:12 Europe/Berlin] Error: Trying to access array offset on value of type null in C:\http\htdocs\crystal-core\Core\Kernel.php on line 29
-[06-Jun-2026 02:13:44 Europe/Berlin] Error: Trying to access array offset on value of type null in C:\http\htdocs\crystal-core\Core\Kernel.php on line 29
-[06-Jun-2026 02:13:57 Europe/Berlin] Exception: Object of type Core\Db is not callable in C:\http\htdocs\crystal-core\Core\Container.php on line 39
-[06-Jun-2026 02:13:57 Europe/Berlin] Error: Trying to access array offset on value of type null in C:\http\htdocs\crystal-core\Core\Kernel.php on line 29
-[06-Jun-2026 02:14:32 Europe/Berlin] Error: Trying to access array offset on value of type null in C:\http\htdocs\crystal-core\Core\Kernel.php on line 29
-[06-Jun-2026 02:15:25 Europe/Berlin] Error: Trying to access array offset on value of type null in C:\http\htdocs\crystal-core\Core\Kernel.php on line 29
-[06-Jun-2026 02:30:57 Europe/Berlin] Error: Undefined variable $container in C:\http\htdocs\crystal-core\app\Controllers\OutfitController.php on line 34
-[06-Jun-2026 02:30:57 Europe/Berlin] Error: Trying to access array offset on value of type null in C:\http\htdocs\crystal-core\Core\Kernel.php on line 29
-[06-Jun-2026 02:34:11 Europe/Berlin] Exception: View file not found: C:\http\htdocs\crystal-core\Modules/../../views/Homepage.php in C:\http\htdocs\crystal-core\Modules\View.php on line 102
-[06-Jun-2026 02:34:11 Europe/Berlin] Error: Trying to access array offset on value of type null in C:\http\htdocs\crystal-core\Core\Kernel.php on line 29
-[06-Jun-2026 02:35:01 Europe/Berlin] Error: Trying to access array offset on value of type null in C:\http\htdocs\crystal-core\Core\Kernel.php on line 29
-[06-Jun-2026 02:35:01 Europe/Berlin] Error: Trying to access array offset on value of type null in C:\http\htdocs\crystal-core\Core\Kernel.php on line 29
-[06-Jun-2026 02:35:01 Europe/Berlin] Error: Trying to access array offset on value of type null in C:\http\htdocs\crystal-core\Core\Kernel.php on line 29
-[06-Jun-2026 02:36:05 Europe/Berlin] Error: Trying to access array offset on value of type null in C:\http\htdocs\crystal-core\Core\Kernel.php on line 29
-[06-Jun-2026 02:36:05 Europe/Berlin] Error: Trying to access array offset on value of type null in C:\http\htdocs\crystal-core\Core\Kernel.php on line 29
-[06-Jun-2026 02:37:22 Europe/Berlin] Error: Trying to access array offset on value of type null in C:\http\htdocs\crystal-core\Core\Kernel.php on line 29
-[06-Jun-2026 02:37:23 Europe/Berlin] Error: Trying to access array offset on value of type null in C:\http\htdocs\crystal-core\Core\Kernel.php on line 29
-[06-Jun-2026 02:37:23 Europe/Berlin] Error: Trying to access array offset on value of type null in C:\http\htdocs\crystal-core\Core\Kernel.php on line 29
-[06-Jun-2026 02:38:06 Europe/Berlin] Exception: Class "IndexController" not found in C:\http\htdocs\crystal-core\Core\Kernel.php on line 39
-[06-Jun-2026 02:38:06 Europe/Berlin] Error: Trying to access array offset on value of type null in C:\http\htdocs\crystal-core\Core\Kernel.php on line 29
-[06-Jun-2026 02:38:26 Europe/Berlin] Error: Trying to access array offset on value of type null in C:\http\htdocs\crystal-core\Core\Kernel.php on line 29
-[06-Jun-2026 02:38:26 Europe/Berlin] Error: Trying to access array offset on value of type null in C:\http\htdocs\crystal-core\Core\Kernel.php on line 29
-[06-Jun-2026 02:38:26 Europe/Berlin] Error: Trying to access array offset on value of type null in C:\http\htdocs\crystal-core\Core\Kernel.php on line 29
-[06-Jun-2026 02:43:52 Europe/Berlin] Error: Undefined variable $boo in C:\http\htdocs\crystal-core\app\Controllers\OutfitController.php on line 33
-[06-Jun-2026 02:43:53 Europe/Berlin] Error: Trying to access array offset on value of type null in C:\http\htdocs\crystal-core\Core\Kernel.php on line 29
-[06-Jun-2026 02:58:02 Europe/Berlin] Error: Trying to access array offset on value of type null in C:\http\htdocs\crystal-core\Core\Kernel.php on line 29
-[06-Jun-2026 02:58:02 Europe/Berlin] Error: Trying to access array offset on value of type null in C:\http\htdocs\crystal-core\Core\Kernel.php on line 29
-[06-Jun-2026 02:58:46 Europe/Berlin] Error: Trying to access array offset on value of type null in C:\http\htdocs\crystal-core\Core\Kernel.php on line 29
-[06-Jun-2026 02:58:46 Europe/Berlin] Error: Trying to access array offset on value of type null in C:\http\htdocs\crystal-core\Core\Kernel.php on line 29
-[06-Jun-2026 02:59:56 Europe/Berlin] Error: Trying to access array offset on value of type null in C:\http\htdocs\crystal-core\Core\Kernel.php on line 29
-[06-Jun-2026 02:59:57 Europe/Berlin] Error: Trying to access array offset on value of type null in C:\http\htdocs\crystal-core\Core\Kernel.php on line 29
-[06-Jun-2026 03:00:20 Europe/Berlin] Exception: Call to undefined function Core\dd() in C:\http\htdocs\crystal-core\Core\Kernel.php on line 29
-[06-Jun-2026 03:00:21 Europe/Berlin] Exception: Call to undefined function Core\dd() in C:\http\htdocs\crystal-core\Core\Kernel.php on line 29
-[06-Jun-2026 03:38:49 Europe/Berlin] Exception: Class "Router" not found in C:\http\htdocs\crystal-core\public\index.php on line 12
-[06-Jun-2026 03:38:49 Europe/Berlin] Exception: Class "Router" not found in C:\http\htdocs\crystal-core\public\index.php on line 12
-[06-Jun-2026 03:39:04 Europe/Berlin] Exception: Class "Request" not found in C:\http\htdocs\crystal-core\public\index.php on line 14
-[06-Jun-2026 03:39:04 Europe/Berlin] Exception: Class "Request" not found in C:\http\htdocs\crystal-core\public\index.php on line 14
-[06-Jun-2026 03:39:16 Europe/Berlin] Exception: Too few arguments to function Core\Kernel::run(), 0 passed in C:\http\htdocs\crystal-core\public\index.php on line 22 and exactly 2 expected in C:\http\htdocs\crystal-core\Core\Kernel.php on line 7
-[06-Jun-2026 03:39:16 Europe/Berlin] Error: Trying to access array offset on value of type null in C:\http\htdocs\crystal-core\public\index.php on line 19
-[06-Jun-2026 04:19:51 Europe/Berlin] Exception: Class "Core\QueryBuilder" not found in C:\http\htdocs\crystal-core\app\bootstrap.php on line 17
-[06-Jun-2026 04:19:51 Europe/Berlin] Exception: Class "Core\QueryBuilder" not found in C:\http\htdocs\crystal-core\app\bootstrap.php on line 17
-[06-Jun-2026 04:21:08 Europe/Berlin] Exception: Class "Core\QueryBuilder" not found in C:\http\htdocs\crystal-core\app\bootstrap.php on line 17
-[06-Jun-2026 04:21:09 Europe/Berlin] Exception: Class "Core\QueryBuilder" not found in C:\http\htdocs\crystal-core\app\bootstrap.php on line 17
-[06-Jun-2026 04:21:18 Europe/Berlin] Exception: Class "Core\QueryBuilder" not found in C:\http\htdocs\crystal-core\app\bootstrap.php on line 17
-[06-Jun-2026 04:21:18 Europe/Berlin] Exception: Class "Core\QueryBuilder" not found in C:\http\htdocs\crystal-core\app\bootstrap.php on line 17
-[06-Jun-2026 04:21:28 Europe/Berlin] Exception: Class "Core\QueryBuilder" not found in C:\http\htdocs\crystal-core\app\bootstrap.php on line 17
-[06-Jun-2026 04:21:28 Europe/Berlin] Exception: Class "Core\QueryBuilder" not found in C:\http\htdocs\crystal-core\app\bootstrap.php on line 17
-[06-Jun-2026 04:21:59 Europe/Berlin] Exception: Class "Modules\QueryBuilder" not found in C:\http\htdocs\crystal-core\app\bootstrap.php on line 17
-[06-Jun-2026 04:21:59 Europe/Berlin] Exception: Class "Modules\QueryBuilder" not found in C:\http\htdocs\crystal-core\app\bootstrap.php on line 17
-[06-Jun-2026 04:28:47 Europe/Berlin] Exception: Database connection failed for driver mysql at localhost/: SQLSTATE[HY000] [1045] Access denied for user ''@'localhost' (using password: NO) in C:\http\htdocs\crystal-core\Core\Db.php on line 101
-[06-Jun-2026 04:28:47 Europe/Berlin] Exception: Database connection failed for driver mysql at localhost/: SQLSTATE[HY000] [1045] Access denied for user ''@'localhost' (using password: NO) in C:\http\htdocs\crystal-core\Core\Db.php on line 101
-[06-Jun-2026 11:37:59 Europe/Berlin] Error: Trying to access array offset on value of type null in C:\http\htdocs\crystal-core\Core\Kernel.php on line 21
-[06-Jun-2026 11:37:59 Europe/Berlin] PHP Warning:  include(C:\http\htdocs\crystal-core\Core/../Pages/error.php): Failed to open stream: No such file or directory in C:\http\htdocs\crystal-core\Core\Kernel.php on line 115
-[06-Jun-2026 11:37:59 Europe/Berlin] PHP Warning:  include(): Failed opening 'C:\http\htdocs\crystal-core\Core/../Pages/error.php' for inclusion (include_path='C:\http\php\PEAR') in C:\http\htdocs\crystal-core\Core\Kernel.php on line 115
-[06-Jun-2026 11:37:59 Europe/Berlin] Error: Trying to access array offset on value of type null in C:\http\htdocs\crystal-core\Core\Kernel.php on line 21
-[06-Jun-2026 11:37:59 Europe/Berlin] PHP Warning:  include(C:\http\htdocs\crystal-core\Core/../Pages/error.php): Failed to open stream: No such file or directory in C:\http\htdocs\crystal-core\Core\Kernel.php on line 115
-[06-Jun-2026 11:37:59 Europe/Berlin] PHP Warning:  include(): Failed opening 'C:\http\htdocs\crystal-core\Core/../Pages/error.php' for inclusion (include_path='C:\http\php\PEAR') in C:\http\htdocs\crystal-core\Core\Kernel.php on line 115
-[06-Jun-2026 11:38:27 Europe/Berlin] Error: Trying to access array offset on value of type null in C:\http\htdocs\crystal-core\Core\Kernel.php on line 21
-[06-Jun-2026 11:38:27 Europe/Berlin] Error: Trying to access array offset on value of type null in C:\http\htdocs\crystal-core\Core\Kernel.php on line 21
-[06-Jun-2026 11:53:33 Europe/Berlin] Exception: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'crystal_core.outfits' doesn't exist in C:\http\htdocs\crystal-core\Modules\QueryBuilder.php on line 144
-[06-Jun-2026 11:53:33 Europe/Berlin] PHP Fatal error:  Uncaught TypeError: http_response_code(): Argument #1 ($response_code) must be of type int, string given in C:\http\htdocs\crystal-core\Core\Kernel.php:92
+[28-Aug-2026 14:19:16 Europe/Berlin] PHP Parse error:  syntax error, unexpected token "private" in C:\xampp\htdocs\api.alpha-code\Core\Router.php on line 171
+[28-Aug-2026 14:19:52 Europe/Berlin] PHP Warning:  Undefined variable $normalizedRequestUri in C:\xampp\htdocs\api.alpha-code\Core\Router.php on line 117
+[28-Aug-2026 14:19:52 Europe/Berlin] PHP Fatal error:  Uncaught TypeError: strtok(): Argument #1 ($string) must be of type string, null given in C:\xampp\htdocs\api.alpha-code\Core\Router.php:117
 Stack trace:
-#0 C:\http\htdocs\crystal-core\Core\Kernel.php(92): http_response_code('42S02')
-#1 [internal function]: Core\Kernel->Core\{closure}(Object(PDOException))
-#2 {main}
-  thrown in C:\http\htdocs\crystal-core\Core\Kernel.php on line 92
-[06-Jun-2026 11:53:34 Europe/Berlin] Error: Trying to access array offset on value of type null in C:\http\htdocs\crystal-core\Core\Kernel.php on line 18
-[06-Jun-2026 11:55:20 Europe/Berlin] Exception: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'crystal_core.outfits' doesn't exist in C:\http\htdocs\crystal-core\Modules\QueryBuilder.php on line 144
-[06-Jun-2026 11:55:20 Europe/Berlin] PHP Fatal error:  Uncaught TypeError: http_response_code(): Argument #1 ($response_code) must be of type int, string given in C:\http\htdocs\crystal-core\Core\Kernel.php:92
+#0 C:\xampp\htdocs\api.alpha-code\Core\Router.php(117): strtok(NULL, '?')
+#1 C:\xampp\htdocs\api.alpha-code\boot.php(56): Core\Router->matchRequest('/', 'GET')
+#2 C:\xampp\htdocs\api.alpha-code\public\index.php(2): require_once('C:\\xampp\\htdocs...')
+#3 {main}
+  thrown in C:\xampp\htdocs\api.alpha-code\Core\Router.php on line 117
+[28-Aug-2026 14:20:19 Europe/Berlin] PHP Warning:  Undefined variable $requesrUri in C:\xampp\htdocs\api.alpha-code\Core\Router.php on line 117
+[28-Aug-2026 14:20:19 Europe/Berlin] PHP Fatal error:  Uncaught TypeError: strtok(): Argument #1 ($string) must be of type string, null given in C:\xampp\htdocs\api.alpha-code\Core\Router.php:117
 Stack trace:
-#0 C:\http\htdocs\crystal-core\Core\Kernel.php(92): http_response_code('42S02')
-#1 [internal function]: Core\Kernel->Core\{closure}(Object(PDOException))
-#2 {main}
-  thrown in C:\http\htdocs\crystal-core\Core\Kernel.php on line 92
-[06-Jun-2026 11:55:22 Europe/Berlin] Exception: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'crystal_core.outfits' doesn't exist in C:\http\htdocs\crystal-core\Modules\QueryBuilder.php on line 144
-[06-Jun-2026 11:55:22 Europe/Berlin] PHP Fatal error:  Uncaught TypeError: http_response_code(): Argument #1 ($response_code) must be of type int, string given in C:\http\htdocs\crystal-core\Core\Kernel.php:92
+#0 C:\xampp\htdocs\api.alpha-code\Core\Router.php(117): strtok(NULL, '?')
+#1 C:\xampp\htdocs\api.alpha-code\boot.php(56): Core\Router->matchRequest('/', 'GET')
+#2 C:\xampp\htdocs\api.alpha-code\public\index.php(2): require_once('C:\\xampp\\htdocs...')
+#3 {main}
+  thrown in C:\xampp\htdocs\api.alpha-code\Core\Router.php on line 117
+[28-Aug-2026 14:20:26 Europe/Berlin] PHP Warning:  Undefined variable $requesrUri in C:\xampp\htdocs\api.alpha-code\Core\Router.php on line 117
+[28-Aug-2026 14:20:26 Europe/Berlin] PHP Fatal error:  Uncaught TypeError: strtok(): Argument #1 ($string) must be of type string, null given in C:\xampp\htdocs\api.alpha-code\Core\Router.php:117
 Stack trace:
-#0 C:\http\htdocs\crystal-core\Core\Kernel.php(92): http_response_code('42S02')
-#1 [internal function]: Core\Kernel->Core\{closure}(Object(PDOException))
-#2 {main}
-  thrown in C:\http\htdocs\crystal-core\Core\Kernel.php on line 92
-[06-Jun-2026 11:55:29 Europe/Berlin] Exception: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'crystal_core.outfits' doesn't exist in C:\http\htdocs\crystal-core\Modules\QueryBuilder.php on line 144
-[06-Jun-2026 11:55:29 Europe/Berlin] PHP Fatal error:  Uncaught TypeError: http_response_code(): Argument #1 ($response_code) must be of type int, string given in C:\http\htdocs\crystal-core\Core\Kernel.php:92
+#0 C:\xampp\htdocs\api.alpha-code\Core\Router.php(117): strtok(NULL, '?')
+#1 C:\xampp\htdocs\api.alpha-code\boot.php(56): Core\Router->matchRequest('/', 'GET')
+#2 C:\xampp\htdocs\api.alpha-code\public\index.php(2): require_once('C:\\xampp\\htdocs...')
+#3 {main}
+  thrown in C:\xampp\htdocs\api.alpha-code\Core\Router.php on line 117
+[28-Aug-2026 14:20:27 Europe/Berlin] PHP Warning:  Undefined variable $requesrUri in C:\xampp\htdocs\api.alpha-code\Core\Router.php on line 117
+[28-Aug-2026 14:20:27 Europe/Berlin] PHP Fatal error:  Uncaught TypeError: strtok(): Argument #1 ($string) must be of type string, null given in C:\xampp\htdocs\api.alpha-code\Core\Router.php:117
 Stack trace:
-#0 C:\http\htdocs\crystal-core\Core\Kernel.php(92): http_response_code('42S02')
-#1 [internal function]: Core\Kernel->Core\{closure}(Object(PDOException))
-#2 {main}
-  thrown in C:\http\htdocs\crystal-core\Core\Kernel.php on line 92
-[06-Jun-2026 11:55:33 Europe/Berlin] Exception: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'crystal_core.outfits' doesn't exist in C:\http\htdocs\crystal-core\Modules\QueryBuilder.php on line 144
-[06-Jun-2026 11:55:33 Europe/Berlin] PHP Fatal error:  Uncaught TypeError: http_response_code(): Argument #1 ($response_code) must be of type int, string given in C:\http\htdocs\crystal-core\Core\Kernel.php:92
+#0 C:\xampp\htdocs\api.alpha-code\Core\Router.php(117): strtok(NULL, '?')
+#1 C:\xampp\htdocs\api.alpha-code\boot.php(56): Core\Router->matchRequest('/', 'GET')
+#2 C:\xampp\htdocs\api.alpha-code\public\index.php(2): require_once('C:\\xampp\\htdocs...')
+#3 {main}
+  thrown in C:\xampp\htdocs\api.alpha-code\Core\Router.php on line 117
+[28-Aug-2026 14:44:16 Europe/Berlin] PHP Parse error:  syntax error, unexpected token ",", expecting ")" in C:\xampp\htdocs\api.alpha-code\Core\Router.php on line 205
+[28-Aug-2026 14:44:25 Europe/Berlin] PHP Parse error:  syntax error, unexpected token ",", expecting ")" in C:\xampp\htdocs\api.alpha-code\Core\Router.php on line 205
+[28-Aug-2026 14:44:28 Europe/Berlin] PHP Parse error:  syntax error, unexpected token ",", expecting ")" in C:\xampp\htdocs\api.alpha-code\Core\Router.php on line 205
+[28-Aug-2026 14:44:37 Europe/Berlin] PHP Fatal error:  Uncaught Error: Undefined constant "Core\PREG_NO_AUTO_CAPTURE" in C:\xampp\htdocs\api.alpha-code\Core\Router.php:205
 Stack trace:
-#0 C:\http\htdocs\crystal-core\Core\Kernel.php(92): http_response_code('42S02')
-#1 [internal function]: Core\Kernel->Core\{closure}(Object(PDOException))
-#2 {main}
-  thrown in C:\http\htdocs\crystal-core\Core\Kernel.php on line 92
-[06-Jun-2026 11:59:16 Europe/Berlin] Exception: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'crystal_core.outfits' doesn't exist in C:\http\htdocs\crystal-core\Modules\QueryBuilder.php on line 144
-[06-Jun-2026 11:59:16 Europe/Berlin] PHP Fatal error:  Uncaught TypeError: http_response_code(): Argument #1 ($response_code) must be of type int, string given in C:\http\htdocs\crystal-core\Core\Kernel.php:92
+#0 C:\xampp\htdocs\api.alpha-code\Core\Router.php(137): Core\Router->matches('^view\\-outfit/(...', 'view-outfit/53')
+#1 C:\xampp\htdocs\api.alpha-code\boot.php(56): Core\Router->matchRequest('/view-outfit/53', 'GET')
+#2 C:\xampp\htdocs\api.alpha-code\public\index.php(2): require_once('C:\\xampp\\htdocs...')
+#3 {main}
+  thrown in C:\xampp\htdocs\api.alpha-code\Core\Router.php on line 205
+[28-Aug-2026 14:46:54 Europe/Berlin] PHP Fatal error:  Uncaught Error: Undefined constant "Core\PREG_NO_AUTO_CAPTURE" in C:\xampp\htdocs\api.alpha-code\Core\Router.php:204
 Stack trace:
-#0 C:\http\htdocs\crystal-core\Core\Kernel.php(92): http_response_code('42S02')
-#1 [internal function]: Core\Kernel->Core\{closure}(Object(PDOException))
-#2 {main}
-  thrown in C:\http\htdocs\crystal-core\Core\Kernel.php on line 92
-[06-Jun-2026 11:59:16 Europe/Berlin] Error: Trying to access array offset on value of type null in C:\http\htdocs\crystal-core\Core\Kernel.php on line 18
-[06-Jun-2026 12:00:10 Europe/Berlin] Exception: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'crystal_core.outfits' doesn't exist in C:\http\htdocs\crystal-core\Modules\QueryBuilder.php on line 144
-[06-Jun-2026 12:00:10 Europe/Berlin] PHP Fatal error:  Uncaught TypeError: http_response_code(): Argument #1 ($response_code) must be of type int, string given in C:\http\htdocs\crystal-core\Core\Kernel.php:92
+#0 C:\xampp\htdocs\api.alpha-code\Core\Router.php(137): Core\Router->matches('^view\\-outfit/(...', 'view-outfit/53')
+#1 C:\xampp\htdocs\api.alpha-code\boot.php(56): Core\Router->matchRequest('/view-outfit/53', 'GET')
+#2 C:\xampp\htdocs\api.alpha-code\public\index.php(2): require_once('C:\\xampp\\htdocs...')
+#3 {main}
+  thrown in C:\xampp\htdocs\api.alpha-code\Core\Router.php on line 204
+[28-Aug-2026 14:46:55 Europe/Berlin] PHP Fatal error:  Uncaught Error: Undefined constant "Core\PREG_NO_AUTO_CAPTURE" in C:\xampp\htdocs\api.alpha-code\Core\Router.php:204
 Stack trace:
-#0 C:\http\htdocs\crystal-core\Core\Kernel.php(92): http_response_code('42S02')
-#1 [internal function]: Core\Kernel->Core\{closure}(Object(PDOException))
-#2 {main}
-  thrown in C:\http\htdocs\crystal-core\Core\Kernel.php on line 92
-[06-Jun-2026 12:00:10 Europe/Berlin] Error: Trying to access array offset on value of type null in C:\http\htdocs\crystal-core\Core\Kernel.php on line 18
-[06-Jun-2026 12:00:50 Europe/Berlin] Exception: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'crystal_core.outfits' doesn't exist in C:\http\htdocs\crystal-core\Modules\QueryBuilder.php on line 144
-[06-Jun-2026 12:00:50 Europe/Berlin] PHP Fatal error:  Uncaught TypeError: http_response_code(): Argument #1 ($response_code) must be of type int, string given in C:\http\htdocs\crystal-core\Core\Kernel.php:92
+#0 C:\xampp\htdocs\api.alpha-code\Core\Router.php(137): Core\Router->matches('^view\\-outfit/(...', 'view-outfit/53')
+#1 C:\xampp\htdocs\api.alpha-code\boot.php(56): Core\Router->matchRequest('/view-outfit/53', 'GET')
+#2 C:\xampp\htdocs\api.alpha-code\public\index.php(2): require_once('C:\\xampp\\htdocs...')
+#3 {main}
+  thrown in C:\xampp\htdocs\api.alpha-code\Core\Router.php on line 204
+[28-Aug-2026 14:47:19 Europe/Berlin] PHP Fatal error:  Uncaught Error: Undefined constant "PREG_NO_AUTO_CAPTURE" in C:\xampp\htdocs\api.alpha-code\Core\Router.php:204
 Stack trace:
-#0 C:\http\htdocs\crystal-core\Core\Kernel.php(92): http_response_code('42S02')
-#1 [internal function]: Core\Kernel->Core\{closure}(Object(PDOException))
-#2 {main}
-  thrown in C:\http\htdocs\crystal-core\Core\Kernel.php on line 92
-[06-Jun-2026 12:00:50 Europe/Berlin] Error: Trying to access array offset on value of type null in C:\http\htdocs\crystal-core\Core\Kernel.php on line 18
-[06-Jun-2026 12:01:01 Europe/Berlin] Exception: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'crystal_core.outfits' doesn't exist in C:\http\htdocs\crystal-core\Modules\QueryBuilder.php on line 144
-[06-Jun-2026 12:01:01 Europe/Berlin] PHP Fatal error:  Uncaught TypeError: http_response_code(): Argument #1 ($response_code) must be of type int, string given in C:\http\htdocs\crystal-core\Core\Kernel.php:92
+#0 C:\xampp\htdocs\api.alpha-code\Core\Router.php(137): Core\Router->matches('^view\\-outfit/(...', 'view-outfit/53')
+#1 C:\xampp\htdocs\api.alpha-code\boot.php(56): Core\Router->matchRequest('/view-outfit/53', 'GET')
+#2 C:\xampp\htdocs\api.alpha-code\public\index.php(2): require_once('C:\\xampp\\htdocs...')
+#3 {main}
+  thrown in C:\xampp\htdocs\api.alpha-code\Core\Router.php on line 204
+[28-Aug-2026 14:47:20 Europe/Berlin] PHP Fatal error:  Uncaught Error: Undefined constant "PREG_NO_AUTO_CAPTURE" in C:\xampp\htdocs\api.alpha-code\Core\Router.php:204
 Stack trace:
-#0 C:\http\htdocs\crystal-core\Core\Kernel.php(92): http_response_code('42S02')
-#1 [internal function]: Core\Kernel->Core\{closure}(Object(PDOException))
-#2 {main}
-  thrown in C:\http\htdocs\crystal-core\Core\Kernel.php on line 92
-[06-Jun-2026 12:01:01 Europe/Berlin] Error: Trying to access array offset on value of type null in C:\http\htdocs\crystal-core\Core\Kernel.php on line 18
-[06-Jun-2026 12:01:02 Europe/Berlin] Exception: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'crystal_core.outfits' doesn't exist in C:\http\htdocs\crystal-core\Modules\QueryBuilder.php on line 144
-[06-Jun-2026 12:01:02 Europe/Berlin] PHP Fatal error:  Uncaught TypeError: http_response_code(): Argument #1 ($response_code) must be of type int, string given in C:\http\htdocs\crystal-core\Core\Kernel.php:92
+#0 C:\xampp\htdocs\api.alpha-code\Core\Router.php(137): Core\Router->matches('^view\\-outfit/(...', 'view-outfit/53')
+#1 C:\xampp\htdocs\api.alpha-code\boot.php(56): Core\Router->matchRequest('/view-outfit/53', 'GET')
+#2 C:\xampp\htdocs\api.alpha-code\public\index.php(2): require_once('C:\\xampp\\htdocs...')
+#3 {main}
+  thrown in C:\xampp\htdocs\api.alpha-code\Core\Router.php on line 204
+[28-Aug-2026 14:47:25 Europe/Berlin] PHP Fatal error:  Uncaught Error: Undefined constant "PREG_NO_AUTO_CAPTURE" in C:\xampp\htdocs\api.alpha-code\Core\Router.php:204
 Stack trace:
-#0 C:\http\htdocs\crystal-core\Core\Kernel.php(92): http_response_code('42S02')
-#1 [internal function]: Core\Kernel->Core\{closure}(Object(PDOException))
-#2 {main}
-  thrown in C:\http\htdocs\crystal-core\Core\Kernel.php on line 92
-[06-Jun-2026 12:01:02 Europe/Berlin] Error: Trying to access array offset on value of type null in C:\http\htdocs\crystal-core\Core\Kernel.php on line 18
-[06-Jun-2026 12:01:33 Europe/Berlin] PHP Fatal error:  Uncaught PDOException: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'crystal_core.outfits' doesn't exist in C:\http\htdocs\crystal-core\Modules\QueryBuilder.php:144
+#0 C:\xampp\htdocs\api.alpha-code\Core\Router.php(137): Core\Router->matches('^view\\-outfit/(...', 'view-outfit/53')
+#1 C:\xampp\htdocs\api.alpha-code\boot.php(56): Core\Router->matchRequest('/view-outfit/53', 'GET')
+#2 C:\xampp\htdocs\api.alpha-code\public\index.php(2): require_once('C:\\xampp\\htdocs...')
+#3 {main}
+  thrown in C:\xampp\htdocs\api.alpha-code\Core\Router.php on line 204
+[28-Aug-2026 14:47:25 Europe/Berlin] PHP Fatal error:  Uncaught Error: Undefined constant "PREG_NO_AUTO_CAPTURE" in C:\xampp\htdocs\api.alpha-code\Core\Router.php:204
 Stack trace:
-#0 C:\http\htdocs\crystal-core\Modules\QueryBuilder.php(144): PDO->prepare('SELECT outfits....')
-#1 C:\http\htdocs\crystal-core\App\Controllers\OutfitController.php(28): Modules\QueryBuilder->get()
-#2 C:\http\htdocs\crystal-core\Core\Kernel.php(29): App\Controllers\OutfitController->viewAll()
-#3 C:\http\htdocs\crystal-core\public\index.php(6): Core\Kernel->run()
-#4 {main}
-  thrown in C:\http\htdocs\crystal-core\Modules\QueryBuilder.php on line 144
-[06-Jun-2026 12:01:33 Europe/Berlin] PHP Warning:  Trying to access array offset on value of type null in C:\http\htdocs\crystal-core\Core\Kernel.php on line 18
-[06-Jun-2026 12:01:33 Europe/Berlin] PHP Warning:  Trying to access array offset on value of type null in C:\http\htdocs\crystal-core\Core\Kernel.php on line 19
-[06-Jun-2026 12:01:33 Europe/Berlin] PHP Fatal error:  Uncaught RuntimeException: Invalid route handler in C:\http\htdocs\crystal-core\Core\Kernel.php:32
+#0 C:\xampp\htdocs\api.alpha-code\Core\Router.php(137): Core\Router->matches('^view\\-outfit/(...', 'view-outfit/53')
+#1 C:\xampp\htdocs\api.alpha-code\boot.php(56): Core\Router->matchRequest('/view-outfit/53', 'GET')
+#2 C:\xampp\htdocs\api.alpha-code\public\index.php(2): require_once('C:\\xampp\\htdocs...')
+#3 {main}
+  thrown in C:\xampp\htdocs\api.alpha-code\Core\Router.php on line 204
+[28-Aug-2026 14:47:29 Europe/Berlin] PHP Fatal error:  Uncaught Error: Undefined constant "PREG_NO_AUTO_CAPTURE" in C:\xampp\htdocs\api.alpha-code\Core\Router.php:204
 Stack trace:
-#0 C:\http\htdocs\crystal-core\public\index.php(6): Core\Kernel->run()
-#1 {main}
-  thrown in C:\http\htdocs\crystal-core\Core\Kernel.php on line 32
-[06-Jun-2026 12:01:56 Europe/Berlin] PHP Fatal error:  Uncaught PDOException: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'outfit.outfit_hair_fkid' in 'on clause' in C:\http\htdocs\crystal-core\Modules\QueryBuilder.php:144
+#0 C:\xampp\htdocs\api.alpha-code\Core\Router.php(137): Core\Router->matches('^view\\-outfit/(...', 'view-outfit/54')
+#1 C:\xampp\htdocs\api.alpha-code\boot.php(56): Core\Router->matchRequest('/view-outfit/54', 'GET')
+#2 C:\xampp\htdocs\api.alpha-code\public\index.php(2): require_once('C:\\xampp\\htdocs...')
+#3 {main}
+  thrown in C:\xampp\htdocs\api.alpha-code\Core\Router.php on line 204
+[28-Aug-2026 14:47:40 Europe/Berlin] PHP Fatal error:  Uncaught Error: Undefined constant "PREG_NO_AUTO_CAPTURE" in C:\xampp\htdocs\api.alpha-code\Core\Router.php:204
 Stack trace:
-#0 C:\http\htdocs\crystal-core\Modules\QueryBuilder.php(144): PDO->prepare('SELECT outfit.*...')
-#1 C:\http\htdocs\crystal-core\App\Controllers\OutfitController.php(28): Modules\QueryBuilder->get()
-#2 C:\http\htdocs\crystal-core\Core\Kernel.php(29): App\Controllers\OutfitController->viewAll()
-#3 C:\http\htdocs\crystal-core\public\index.php(6): Core\Kernel->run()
-#4 {main}
-  thrown in C:\http\htdocs\crystal-core\Modules\QueryBuilder.php on line 144
-[06-Jun-2026 12:01:57 Europe/Berlin] PHP Warning:  Trying to access array offset on value of type null in C:\http\htdocs\crystal-core\Core\Kernel.php on line 18
-[06-Jun-2026 12:01:57 Europe/Berlin] PHP Warning:  Trying to access array offset on value of type null in C:\http\htdocs\crystal-core\Core\Kernel.php on line 19
-[06-Jun-2026 12:01:57 Europe/Berlin] PHP Fatal error:  Uncaught RuntimeException: Invalid route handler in C:\http\htdocs\crystal-core\Core\Kernel.php:32
+#0 C:\xampp\htdocs\api.alpha-code\Core\Router.php(137): Core\Router->matches('^view\\-outfit/(...', 'view-outfit/22')
+#1 C:\xampp\htdocs\api.alpha-code\boot.php(56): Core\Router->matchRequest('/view-outfit/22', 'GET')
+#2 C:\xampp\htdocs\api.alpha-code\public\index.php(2): require_once('C:\\xampp\\htdocs...')
+#3 {main}
+  thrown in C:\xampp\htdocs\api.alpha-code\Core\Router.php on line 204
+[28-Aug-2026 14:48:35 Europe/Berlin] PHP Fatal error:  Uncaught Error: Undefined constant "PREG_NO_AUTO_CAPTURE" in C:\xampp\htdocs\api.alpha-code\Core\Router.php:204
 Stack trace:
-#0 C:\http\htdocs\crystal-core\public\index.php(6): Core\Kernel->run()
-#1 {main}
-  thrown in C:\http\htdocs\crystal-core\Core\Kernel.php on line 32
-[06-Jun-2026 12:02:39 Europe/Berlin] PHP Fatal error:  Uncaught PDOException: SQLSTATE[23000]: Integrity constraint violation: 1052 Column 'id' in order clause is ambiguous in C:\http\htdocs\crystal-core\Modules\QueryBuilder.php:144
+#0 C:\xampp\htdocs\api.alpha-code\Core\Router.php(137): Core\Router->matches('^view\\-outfit/(...', 'view-outfit/22')
+#1 C:\xampp\htdocs\api.alpha-code\boot.php(56): Core\Router->matchRequest('/view-outfit/22', 'GET')
+#2 C:\xampp\htdocs\api.alpha-code\public\index.php(2): require_once('C:\\xampp\\htdocs...')
+#3 {main}
+  thrown in C:\xampp\htdocs\api.alpha-code\Core\Router.php on line 204
+[28-Aug-2026 14:48:35 Europe/Berlin] PHP Fatal error:  Uncaught Error: Undefined constant "PREG_NO_AUTO_CAPTURE" in C:\xampp\htdocs\api.alpha-code\Core\Router.php:204
 Stack trace:
-#0 C:\http\htdocs\crystal-core\Modules\QueryBuilder.php(144): PDO->prepare('SELECT outfit.*...')
-#1 C:\http\htdocs\crystal-core\App\Controllers\OutfitController.php(28): Modules\QueryBuilder->get()
-#2 C:\http\htdocs\crystal-core\Core\Kernel.php(29): App\Controllers\OutfitController->viewAll()
-#3 C:\http\htdocs\crystal-core\public\index.php(6): Core\Kernel->run()
-#4 {main}
-  thrown in C:\http\htdocs\crystal-core\Modules\QueryBuilder.php on line 144
-[06-Jun-2026 12:02:39 Europe/Berlin] PHP Warning:  Trying to access array offset on value of type null in C:\http\htdocs\crystal-core\Core\Kernel.php on line 18
-[06-Jun-2026 12:02:39 Europe/Berlin] PHP Warning:  Trying to access array offset on value of type null in C:\http\htdocs\crystal-core\Core\Kernel.php on line 19
-[06-Jun-2026 12:02:39 Europe/Berlin] PHP Fatal error:  Uncaught RuntimeException: Invalid route handler in C:\http\htdocs\crystal-core\Core\Kernel.php:32
+#0 C:\xampp\htdocs\api.alpha-code\Core\Router.php(137): Core\Router->matches('^view\\-outfit/(...', 'view-outfit/22')
+#1 C:\xampp\htdocs\api.alpha-code\boot.php(56): Core\Router->matchRequest('/view-outfit/22', 'GET')
+#2 C:\xampp\htdocs\api.alpha-code\public\index.php(2): require_once('C:\\xampp\\htdocs...')
+#3 {main}
+  thrown in C:\xampp\htdocs\api.alpha-code\Core\Router.php on line 204
+[28-Aug-2026 14:48:36 Europe/Berlin] PHP Fatal error:  Uncaught Error: Undefined constant "PREG_NO_AUTO_CAPTURE" in C:\xampp\htdocs\api.alpha-code\Core\Router.php:204
 Stack trace:
-#0 C:\http\htdocs\crystal-core\public\index.php(6): Core\Kernel->run()
-#1 {main}
-  thrown in C:\http\htdocs\crystal-core\Core\Kernel.php on line 32
-[06-Jun-2026 12:19:16 Europe/Berlin] PHP Warning:  Trying to access array offset on value of type null in C:\http\htdocs\crystal-core\Core\Kernel.php on line 18
-[06-Jun-2026 12:19:16 Europe/Berlin] PHP Warning:  Trying to access array offset on value of type null in C:\http\htdocs\crystal-core\Core\Kernel.php on line 19
-[06-Jun-2026 12:19:16 Europe/Berlin] PHP Fatal error:  Uncaught RuntimeException: Invalid route handler in C:\http\htdocs\crystal-core\Core\Kernel.php:32
+#0 C:\xampp\htdocs\api.alpha-code\Core\Router.php(137): Core\Router->matches('^view\\-outfit/(...', 'view-outfit/22')
+#1 C:\xampp\htdocs\api.alpha-code\boot.php(56): Core\Router->matchRequest('/view-outfit/22', 'GET')
+#2 C:\xampp\htdocs\api.alpha-code\public\index.php(2): require_once('C:\\xampp\\htdocs...')
+#3 {main}
+  thrown in C:\xampp\htdocs\api.alpha-code\Core\Router.php on line 204
+[28-Aug-2026 14:48:36 Europe/Berlin] PHP Fatal error:  Uncaught Error: Undefined constant "PREG_NO_AUTO_CAPTURE" in C:\xampp\htdocs\api.alpha-code\Core\Router.php:204
 Stack trace:
-#0 C:\http\htdocs\crystal-core\public\index.php(6): Core\Kernel->run()
-#1 {main}
-  thrown in C:\http\htdocs\crystal-core\Core\Kernel.php on line 32
-[06-Jun-2026 12:20:38 Europe/Berlin] PHP Warning:  Trying to access array offset on value of type null in C:\http\htdocs\crystal-core\Core\Kernel.php on line 18
-[06-Jun-2026 12:20:38 Europe/Berlin] PHP Warning:  Trying to access array offset on value of type null in C:\http\htdocs\crystal-core\Core\Kernel.php on line 19
-[06-Jun-2026 12:20:38 Europe/Berlin] PHP Fatal error:  Uncaught RuntimeException: Invalid route handler in C:\http\htdocs\crystal-core\Core\Kernel.php:32
+#0 C:\xampp\htdocs\api.alpha-code\Core\Router.php(137): Core\Router->matches('^view\\-outfit/(...', 'view-outfit/22')
+#1 C:\xampp\htdocs\api.alpha-code\boot.php(56): Core\Router->matchRequest('/view-outfit/22', 'GET')
+#2 C:\xampp\htdocs\api.alpha-code\public\index.php(2): require_once('C:\\xampp\\htdocs...')
+#3 {main}
+  thrown in C:\xampp\htdocs\api.alpha-code\Core\Router.php on line 204
+[28-Aug-2026 14:48:39 Europe/Berlin] PHP Fatal error:  Uncaught Error: Undefined constant "PREG_NO_AUTO_CAPTURE" in C:\xampp\htdocs\api.alpha-code\Core\Router.php:204
 Stack trace:
-#0 C:\http\htdocs\crystal-core\public\index.php(6): Core\Kernel->run()
-#1 {main}
-  thrown in C:\http\htdocs\crystal-core\Core\Kernel.php on line 32
-[06-Jun-2026 12:20:46 Europe/Berlin] PHP Warning:  Trying to access array offset on value of type null in C:\http\htdocs\crystal-core\Core\Kernel.php on line 18
-[06-Jun-2026 12:20:46 Europe/Berlin] PHP Warning:  Trying to access array offset on value of type null in C:\http\htdocs\crystal-core\Core\Kernel.php on line 19
-[06-Jun-2026 12:20:46 Europe/Berlin] PHP Fatal error:  Uncaught RuntimeException: Invalid route handler in C:\http\htdocs\crystal-core\Core\Kernel.php:32
-Stack trace:
-#0 C:\http\htdocs\crystal-core\public\index.php(6): Core\Kernel->run()
-#1 {main}
-  thrown in C:\http\htdocs\crystal-core\Core\Kernel.php on line 32
-[06-Jun-2026 12:21:05 Europe/Berlin] PHP Warning:  Trying to access array offset on value of type null in C:\http\htdocs\crystal-core\Core\Kernel.php on line 18
-[06-Jun-2026 12:21:05 Europe/Berlin] PHP Warning:  Trying to access array offset on value of type null in C:\http\htdocs\crystal-core\Core\Kernel.php on line 19
-[06-Jun-2026 12:21:05 Europe/Berlin] PHP Fatal error:  Uncaught RuntimeException: Invalid route handler in C:\http\htdocs\crystal-core\Core\Kernel.php:32
-Stack trace:
-#0 C:\http\htdocs\crystal-core\public\index.php(6): Core\Kernel->run()
-#1 {main}
-  thrown in C:\http\htdocs\crystal-core\Core\Kernel.php on line 32
-[06-Jun-2026 12:22:06 Europe/Berlin] PHP Warning:  Trying to access array offset on value of type null in C:\http\htdocs\crystal-core\Core\Kernel.php on line 18
-[06-Jun-2026 12:22:06 Europe/Berlin] PHP Warning:  Trying to access array offset on value of type null in C:\http\htdocs\crystal-core\Core\Kernel.php on line 19
-[06-Jun-2026 12:22:06 Europe/Berlin] PHP Fatal error:  Uncaught RuntimeException: Invalid route handler in C:\http\htdocs\crystal-core\Core\Kernel.php:32
-Stack trace:
-#0 C:\http\htdocs\crystal-core\public\index.php(6): Core\Kernel->run()
-#1 {main}
-  thrown in C:\http\htdocs\crystal-core\Core\Kernel.php on line 32
-[06-Jun-2026 12:26:43 Europe/Berlin] PHP Warning:  Trying to access array offset on value of type null in C:\http\htdocs\crystal-core\Core\Kernel.php on line 18
-[06-Jun-2026 12:26:43 Europe/Berlin] PHP Warning:  Trying to access array offset on value of type null in C:\http\htdocs\crystal-core\Core\Kernel.php on line 19
-[06-Jun-2026 12:26:43 Europe/Berlin] PHP Fatal error:  Uncaught RuntimeException: Invalid route handler in C:\http\htdocs\crystal-core\Core\Kernel.php:32
-Stack trace:
-#0 C:\http\htdocs\crystal-core\public\index.php(6): Core\Kernel->run()
-#1 {main}
-  thrown in C:\http\htdocs\crystal-core\Core\Kernel.php on line 32
-[06-Jun-2026 12:26:54 Europe/Berlin] PHP Warning:  Trying to access array offset on value of type null in C:\http\htdocs\crystal-core\Core\Kernel.php on line 18
-[06-Jun-2026 12:26:54 Europe/Berlin] PHP Warning:  Trying to access array offset on value of type null in C:\http\htdocs\crystal-core\Core\Kernel.php on line 19
-[06-Jun-2026 12:26:54 Europe/Berlin] PHP Fatal error:  Uncaught RuntimeException: Invalid route handler in C:\http\htdocs\crystal-core\Core\Kernel.php:32
-Stack trace:
-#0 C:\http\htdocs\crystal-core\public\index.php(6): Core\Kernel->run()
-#1 {main}
-  thrown in C:\http\htdocs\crystal-core\Core\Kernel.php on line 32
-[06-Jun-2026 12:27:23 Europe/Berlin] PHP Warning:  Trying to access array offset on value of type null in C:\http\htdocs\crystal-core\Core\Kernel.php on line 18
-[06-Jun-2026 12:27:23 Europe/Berlin] PHP Warning:  Trying to access array offset on value of type null in C:\http\htdocs\crystal-core\Core\Kernel.php on line 19
-[06-Jun-2026 12:27:23 Europe/Berlin] PHP Fatal error:  Uncaught RuntimeException: Invalid route handler in C:\http\htdocs\crystal-core\Core\Kernel.php:32
-Stack trace:
-#0 C:\http\htdocs\crystal-core\public\index.php(6): Core\Kernel->run()
-#1 {main}
-  thrown in C:\http\htdocs\crystal-core\Core\Kernel.php on line 32
-[06-Jun-2026 12:27:30 Europe/Berlin] PHP Warning:  Trying to access array offset on value of type null in C:\http\htdocs\crystal-core\Core\Kernel.php on line 18
-[06-Jun-2026 12:27:30 Europe/Berlin] PHP Warning:  Trying to access array offset on value of type null in C:\http\htdocs\crystal-core\Core\Kernel.php on line 19
-[06-Jun-2026 12:27:30 Europe/Berlin] PHP Fatal error:  Uncaught RuntimeException: Invalid route handler in C:\http\htdocs\crystal-core\Core\Kernel.php:32
-Stack trace:
-#0 C:\http\htdocs\crystal-core\public\index.php(6): Core\Kernel->run()
-#1 {main}
-  thrown in C:\http\htdocs\crystal-core\Core\Kernel.php on line 32
-[09-Jun-2026 14:22:51 Europe/Berlin] PHP Warning:  Trying to access array offset on value of type null in C:\http\htdocs\crystal-core\Core\Kernel.php on line 18
-[09-Jun-2026 14:22:51 Europe/Berlin] PHP Warning:  Trying to access array offset on value of type null in C:\http\htdocs\crystal-core\Core\Kernel.php on line 19
-[09-Jun-2026 14:22:51 Europe/Berlin] PHP Fatal error:  Uncaught RuntimeException: Invalid route handler in C:\http\htdocs\crystal-core\Core\Kernel.php:32
-Stack trace:
-#0 C:\http\htdocs\crystal-core\public\index.php(6): Core\Kernel->run()
-#1 {main}
-  thrown in C:\http\htdocs\crystal-core\Core\Kernel.php on line 32
-[09-Jun-2026 16:25:23 Europe/Berlin] PHP Warning:  Trying to access array offset on value of type null in C:\http\htdocs\crystal-core\Core\Kernel.php on line 18
-[09-Jun-2026 16:25:23 Europe/Berlin] PHP Warning:  Trying to access array offset on value of type null in C:\http\htdocs\crystal-core\Core\Kernel.php on line 19
-[09-Jun-2026 16:25:23 Europe/Berlin] PHP Fatal error:  Uncaught RuntimeException: Invalid route handler in C:\http\htdocs\crystal-core\Core\Kernel.php:32
-Stack trace:
-#0 C:\http\htdocs\crystal-core\public\index.php(6): Core\Kernel->run()
-#1 {main}
-  thrown in C:\http\htdocs\crystal-core\Core\Kernel.php on line 32
-[09-Jun-2026 16:32:07 Europe/Berlin] PHP Warning:  Trying to access array offset on value of type null in C:\http\htdocs\crystal-core\Core\Kernel.php on line 18
-[09-Jun-2026 16:32:07 Europe/Berlin] PHP Warning:  Trying to access array offset on value of type null in C:\http\htdocs\crystal-core\Core\Kernel.php on line 19
-[09-Jun-2026 16:32:07 Europe/Berlin] PHP Fatal error:  Uncaught RuntimeException: Invalid route handler in C:\http\htdocs\crystal-core\Core\Kernel.php:32
-Stack trace:
-#0 C:\http\htdocs\crystal-core\public\index.php(6): Core\Kernel->run()
-#1 {main}
-  thrown in C:\http\htdocs\crystal-core\Core\Kernel.php on line 32
+#0 C:\xampp\htdocs\api.alpha-code\Core\Router.php(137): Core\Router->matches('^view\\-outfit/(...', 'view-outfit/28')
+#1 C:\xampp\htdocs\api.alpha-code\boot.php(56): Core\Router->matchRequest('/view-outfit/28', 'GET')
+#2 C:\xampp\htdocs\api.alpha-code\public\index.php(2): require_once('C:\\xampp\\htdocs...')
+#3 {main}
+  thrown in C:\xampp\htdocs\api.alpha-code\Core\Router.php on line 204
+[28-Aug-2026 14:50:08 Europe/Berlin] PHP Parse error:  Unclosed '{' on line 6 in C:\xampp\htdocs\api.alpha-code\Core\Router.php on line 218
+[28-Aug-2026 14:50:16 Europe/Berlin] PHP Parse error:  Unclosed '{' on line 6 in C:\xampp\htdocs\api.alpha-code\Core\Router.php on line 218
+[28-Aug-2026 14:50:17 Europe/Berlin] PHP Parse error:  Unclosed '{' on line 6 in C:\xampp\htdocs\api.alpha-code\Core\Router.php on line 218
+[28-Aug-2026 15:17:53 Europe/Berlin] PHP Warning:  Undefined variable $match in C:\xampp\htdocs\api.alpha-code\Core\Container.php on line 66
+[28-Aug-2026 15:17:54 Europe/Berlin] PHP Warning:  Undefined variable $match in C:\xampp\htdocs\api.alpha-code\Core\Container.php on line 66
+[28-Aug-2026 15:17:55 Europe/Berlin] PHP Warning:  Undefined variable $match in C:\xampp\htdocs\api.alpha-code\Core\Container.php on line 66
+[28-Aug-2026 15:17:57 Europe/Berlin] PHP Warning:  Undefined variable $match in C:\xampp\htdocs\api.alpha-code\Core\Container.php on line 66
+[28-Aug-2026 15:17:57 Europe/Berlin] PHP Warning:  Undefined variable $match in C:\xampp\htdocs\api.alpha-code\Core\Container.php on line 66
+[28-Aug-2026 15:17:58 Europe/Berlin] PHP Warning:  Undefined variable $match in C:\xampp\htdocs\api.alpha-code\Core\Container.php on line 66
+[28-Aug-2026 15:17:59 Europe/Berlin] PHP Warning:  Undefined variable $match in C:\xampp\htdocs\api.alpha-code\Core\Container.php on line 66
+[28-Aug-2026 15:17:59 Europe/Berlin] PHP Warning:  Undefined variable $match in C:\xampp\htdocs\api.alpha-code\Core\Container.php on line 66
+[28-Aug-2026 15:18:10 Europe/Berlin] PHP Warning:  Undefined variable $match in C:\xampp\htdocs\api.alpha-code\Core\Container.php on line 66
+[28-Aug-2026 15:18:11 Europe/Berlin] PHP Warning:  Undefined variable $match in C:\xampp\htdocs\api.alpha-code\Core\Container.php on line 66
+[28-Aug-2026 15:18:12 Europe/Berlin] PHP Warning:  Undefined variable $match in C:\xampp\htdocs\api.alpha-code\Core\Container.php on line 66
+[28-Aug-2026 15:18:13 Europe/Berlin] PHP Warning:  Undefined variable $match in C:\xampp\htdocs\api.alpha-code\Core\Container.php on line 66
+[28-Aug-2026 15:18:14 Europe/Berlin] PHP Warning:  Undefined variable $match in C:\xampp\htdocs\api.alpha-code\Core\Container.php on line 66
+[28-Aug-2026 15:18:15 Europe/Berlin] PHP Warning:  Undefined variable $match in C:\xampp\htdocs\api.alpha-code\Core\Container.php on line 66
+[28-Aug-2026 15:18:15 Europe/Berlin] PHP Warning:  Undefined variable $match in C:\xampp\htdocs\api.alpha-code\Core\Container.php on line 66
