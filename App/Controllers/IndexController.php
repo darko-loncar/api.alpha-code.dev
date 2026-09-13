@@ -17,7 +17,7 @@ class IndexController
     // Typical old school route rendered by View Component 
     public function homepage()
     {
-        $q = Query::select("currency", ["id", Query::max("name"), "code"])
+        $q = Query::select("currency", ["id", "code"])
             ->whereIn("currency.id", [1, 52,43])
             ->limit(10)
             //->where("currency.id", "=", "43")
@@ -26,7 +26,7 @@ class IndexController
             ->leftJoin("outfit", "id", "id", ["id", "name"])
             ->leftJoin("fx_rate", "id", "id", ["id"]);
 
-        dd($q->getQuery(), $q);
+        //dd($q->getQuery(), $q);
         
         $results = $this->db->getAll(
             $q->getQuery(), 

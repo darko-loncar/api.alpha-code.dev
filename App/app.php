@@ -11,8 +11,8 @@ require_once __DIR__ . "/../App/helpers.php";
 // Register database service
 $container->registerAsSingleton(
     fn(): Db => 
-        //new Db('mysql', '192.168.1.102', 'alphacodedev_crystal', 'nyxx@localhost', 'Chronos_1', 3306),
-        new Db('mysql', 'localhost', 'alphacodedev_crystal', 'root', 'Chronos_1', 3306),
+        new Db('mysql', '192.168.1.102', 'alphacodedev_crystal', 'nyxx@localhost', 'Chronos_1', 3306),
+        //new Db('mysql', 'localhost', 'alphacodedev_crystal', 'root', 'Chronos_1', 3306),
         Db::class,
 );
 
@@ -26,12 +26,3 @@ $router->get("view-outfit/{id}/{slug}", [App\Controllers\IndexController::class,
 
 // API routes
 $router->get("api/fx", [App\Controllers\IndexController::class, 'fxRates']);
-
-// Legacy, test routes
-//$router->get("outfits", [App\Controllers\OutfitController::class, "viewAll"]);
-//$router->get("outfit/create", ["OutfitController", "create"]);
-//$router->post("outfit", ["OutfitController", "store"]);
-//$router->post("outfit/{id}", ["OutfitController", "update"]);
-//$router->get("work-orders", ["WorkOrderController", "workOrders"]);
-
-//dd($router);
