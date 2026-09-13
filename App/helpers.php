@@ -12,13 +12,20 @@ declare(strict_types=1);
   */
 function dd(mixed ...$variables){
     foreach($variables as $variable) {
-        echo "<pre style='background-color: #f7f7f7; color: #333; padding: 10px; border: 1px solid #ccc; font-size: 14px;overflow-wrap:break-word;white-space: pre-wrap;'>";
+        echo "<pre style='background-color: #f5f5f5; color: #333; padding: 10px; border: 1px solid #ccc; font-size: 12px;overflow-wrap:break-word;white-space: pre-wrap;'>";
+        ob_start();
         // Print variable in a readable format
         if (is_object($variable) || is_array($variable)) {
             print_r($variable);
         } else {
             var_dump($variable);
         }
+        $output = ob_get_clean();
+        echo htmlspecialchars(
+            $output,
+            ENT_QUOTES | ENT_SUBSTITUTE,
+            'UTF-8'
+        );
         echo "</pre>";
     }
     // Stop script execution

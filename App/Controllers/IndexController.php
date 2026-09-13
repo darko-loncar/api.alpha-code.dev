@@ -1,28 +1,43 @@
 <?php
 namespace App\Controllers;
 
-use Components\QueryBuilder;
+use Components\Query\Query;
+use Core\Db;
 use Core\Response;
-use Core\Container;
 use Components\View;
 use App\Services\ExchangeRateFetcher;
 
 class IndexController
 {
     public function __construct(
-        private ExchangeRateFetcher $fx, 
-        private QueryBuilder $q, 
-        private Container $c
+        private ExchangeRateFetcher $fx,
+        private Db $db, 
         ){}
 
     // Typical old school route rendered by View Component 
     public function homepage()
     {
-        // $this->c->get("reportingDb") in case we need another database from container with aux name instead of passing through constructor
-        // $this->q->select("users") in case we want to use query builder
+        $q = Query::select("currency", ["id", Query::max("name"), "code"])
+            ->whereIn("currency.id", [1, 52,43])
+            ->limit(10)
+            //->where("currency.id", "=", "43")
+            //->where("currency.id", "=", "52")
+            ->orderBy("id")
+            ->leftJoin("outfit", "id", "id", ["id", "name"])
+            ->leftJoin("fx_rate", "id", "id", ["id"]);
 
-        $html = (new View("Homepage", ['pageId' => 'index', 'data' => []]))->getHtml();
-        return Response::html($html);
+        dd($q->getQuery(), $q);
+        
+        $results = $this->db->getAll(
+            $q->getQuery(), 
+            $q->getBindings()
+            );
+
+
+        return Response::json($results);
+
+        //$html = (new View("Homepage", ['pageId' => 'index', 'data' => []]))->getHtml();
+        //return Response::html($html);
     }
 
     public function aboutUs()

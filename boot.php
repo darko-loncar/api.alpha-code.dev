@@ -5,12 +5,10 @@ use Core\Response;
 
 // Set error handling based on debug mode
 $debug = true;
-ini_set('expose_php', 'Off');
 ini_set('display_errors', $debug ? '1' : '0');
-ini_set('display_startup_errors', $debug ? '1' : '0');
 ini_set('log_errors', '1');
 ini_set('error_log', __DIR__ . '/error.log');
-error_reporting($debug ? E_ALL : 0);
+error_reporting(E_ALL);
 
 // Security headers
 header("X-Frame-Options: DENY");
@@ -38,6 +36,7 @@ spl_autoload_register(static function (string $class) use ($map) {
             return;
         }
     }
+
 });
 
 // Initialize the container and router
@@ -46,14 +45,13 @@ $container = new Container();
 $container->register(
     fn(): Container => $container,
     Container::class,
-    true // Register as singleton
 );
 
 // Load app init script
 require_once __DIR__ . "/App/app.php";
 
 // Match route
-$match = $router->matchRequest($_SERVER['REQUEST_URI'], $_SERVER['REQUEST_METHOD']);
+$match = $router->match($_SERVER['REQUEST_URI'], $_SERVER['REQUEST_METHOD']);
 if (null === $match) {
     http_response_code(404);
     exit;
@@ -63,7 +61,6 @@ $handler = $match["handler"];
 $params = $match["params"]; 
 [$class, $method] = $handler;
 $controller_instance = $container->make($class);
-
 $result = $controller_instance->$method(...$params);
 
 if ($result instanceof Response) {

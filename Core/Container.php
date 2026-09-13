@@ -1,5 +1,6 @@
 <?php
 declare(strict_types=1);
+
 namespace Core;
 
 use ReflectionClass;
@@ -9,39 +10,36 @@ final class Container
 {
     private array $services = [];
 
-    public function register(
-        callable $factory,
-        string $name,
-        bool $singleton = false
-    ): void {
-        $this->services[$name] = [
-            'factory' => $factory,
-            'singleton' => $singleton,
-            'resolved' => false,
-            'value' => null,
-        ];
+    public function register(callable $factory, string $name): void
+    {
+        $this->services[$name] = $factory;
+    }
+
+    public function registerAsSingleton(callable $factory, string $name): void
+    {
+        $instance = null;
+        $resolved = false;
+
+        $this->services[$name] = function () use ($factory, &$instance, &$resolved): mixed {
+            if (!$resolved) {
+                $instance = $factory();
+                $resolved = true;
+            }
+
+            return $instance;
+        };
     }
 
     public function get(string $name): mixed
     {
-        if (!array_key_exists($name, $this->services)) {
+        if (!isset($this->services[$name])) {
             return $this->make($name);
         }
 
-        $service = &$this->services[$name];
+        $service = $this->services[$name];
 
-        if (!$service['singleton']) {
-            return ($service['factory'])();
-        }
-
-        if (!$service['resolved']) {
-            $service['value'] = ($service['factory'])();
-            $service['resolved'] = true;
-        }
-
-        return $service['value'];
+        return ($service)();
     }
-
 
     public function make(string $class): object
     {
@@ -49,16 +47,13 @@ final class Container
 
         if (!$ref->isInstantiable()) {
             throw new RuntimeException(
-                "Cannot instantiate '{$class}'. "
-                . "It may be an interface or abstract class."
+                "Cannot instantiate '{$class}'. It may be an interface or abstract class."
             );
         }
 
-
         $constructor = $ref->getConstructor();
 
-
-        if (!$constructor) {
+        if ($constructor === null) {
             return new $class();
         }
 
@@ -66,6 +61,7 @@ final class Container
 
         foreach ($constructor->getParameters() as $param) {
             $type = $param->getType();
+
             if (!$type instanceof \ReflectionNamedType || $type->isBuiltin()) {
                 if ($param->isDefaultValueAvailable()) {
                     $params[] = $param->getDefaultValue();
@@ -73,15 +69,13 @@ final class Container
                 }
 
                 throw new RuntimeException(
-                    "Cannot resolve parameter '{$param->getName()}' "
-                    . "of '{$class}'."
+                    "Cannot resolve parameter '{$param->getName()}' of '{$class}'."
                 );
             }
 
-            $params[] = $this->get($type->getName());        }
+            $params[] = $this->get($type->getName());
+        }
 
         return $ref->newInstanceArgs($params);
     }
-
 }
-
