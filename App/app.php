@@ -20,9 +20,9 @@ $container->registerAsSingleton(
 $container->register(fn(): ExchangeRateFetcher => new ExchangeRateFetcher("https://api.frankfurter.dev/v1/latest"), ExchangeRateFetcher::class);
 
 // Page Routes
-$router->get("", [App\Controllers\IndexController::class, 'homepage']);
-$router->get("about-us", [App\Controllers\IndexController::class, 'aboutUs']);
+$router->get("", [App\Controllers\IndexController::class, 'dashboard']);
 $router->get("view-outfit/{id}/{slug}", [App\Controllers\IndexController::class, 'viewOutfit']);
 
-// API routes
-$router->get("api/fx", [App\Controllers\IndexController::class, 'fxRates']);
+// Auth Routes
+$router->get("login", [App\Controllers\AuthController::class, 'loginPage']);
+$router->post("login", [App\Controllers\AuthController::class, 'doWebAuth']);

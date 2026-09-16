@@ -634,3 +634,276 @@ Stack trace:
 #2 C:\xampp\htdocs\api.alpha-code\public\index.php(2): require_once('C:\\xampp\\htdocs...')
 #3 {main}
   thrown in C:\xampp\htdocs\api.alpha-code\Components\Query\Query.php on line 61
+[15-Sep-2026 12:26:15 Europe/Berlin] PHP Fatal error:  Uncaught PDOException: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'alphacodedev_crystal.outfit' doesn't exist in C:\xampp\htdocs\api.alpha-code\Core\Db.php:126
+Stack trace:
+#0 C:\xampp\htdocs\api.alpha-code\Core\Db.php(126): PDO->prepare('SELECT `currenc...')
+#1 C:\xampp\htdocs\api.alpha-code\Core\Db.php(153): Core\Db->execute('SELECT `currenc...', Array)
+#2 C:\xampp\htdocs\api.alpha-code\App\Controllers\IndexController.php(31): Core\Db->getAll('SELECT `currenc...', Array)
+#3 C:\xampp\htdocs\api.alpha-code\boot.php(64): App\Controllers\IndexController->homepage()
+#4 C:\xampp\htdocs\api.alpha-code\public\index.php(2): require_once('C:\\xampp\\htdocs...')
+#5 {main}
+  thrown in C:\xampp\htdocs\api.alpha-code\Core\Db.php on line 126
+[15-Sep-2026 12:26:52 Europe/Berlin] PHP Parse error:  syntax error, unexpected variable "$results" in C:\xampp\htdocs\api.alpha-code\App\Controllers\IndexController.php on line 28
+[15-Sep-2026 12:27:01 Europe/Berlin] PHP Fatal error:  Uncaught PDOException: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'user_auth.' in 'SELECT' in C:\xampp\htdocs\api.alpha-code\Core\Db.php:126
+Stack trace:
+#0 C:\xampp\htdocs\api.alpha-code\Core\Db.php(126): PDO->prepare('SELECT `user`.*...')
+#1 C:\xampp\htdocs\api.alpha-code\Core\Db.php(153): Core\Db->execute('SELECT `user`.*...', Array)
+#2 C:\xampp\htdocs\api.alpha-code\App\Controllers\IndexController.php(28): Core\Db->getAll('SELECT `user`.*...', Array)
+#3 C:\xampp\htdocs\api.alpha-code\boot.php(64): App\Controllers\IndexController->homepage()
+#4 C:\xampp\htdocs\api.alpha-code\public\index.php(2): require_once('C:\\xampp\\htdocs...')
+#5 {main}
+  thrown in C:\xampp\htdocs\api.alpha-code\Core\Db.php on line 126
+[15-Sep-2026 12:27:16 Europe/Berlin] PHP Fatal error:  Uncaught PDOException: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'currency.id' in 'WHERE' in C:\xampp\htdocs\api.alpha-code\Core\Db.php:126
+Stack trace:
+#0 C:\xampp\htdocs\api.alpha-code\Core\Db.php(126): PDO->prepare('SELECT `user`.*...')
+#1 C:\xampp\htdocs\api.alpha-code\Core\Db.php(153): Core\Db->execute('SELECT `user`.*...', Array)
+#2 C:\xampp\htdocs\api.alpha-code\App\Controllers\IndexController.php(28): Core\Db->getAll('SELECT `user`.*...', Array)
+#3 C:\xampp\htdocs\api.alpha-code\boot.php(64): App\Controllers\IndexController->homepage()
+#4 C:\xampp\htdocs\api.alpha-code\public\index.php(2): require_once('C:\\xampp\\htdocs...')
+#5 {main}
+  thrown in C:\xampp\htdocs\api.alpha-code\Core\Db.php on line 126
+[15-Sep-2026 12:27:18 Europe/Berlin] PHP Fatal error:  Uncaught PDOException: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'currency.id' in 'WHERE' in C:\xampp\htdocs\api.alpha-code\Core\Db.php:126
+Stack trace:
+#0 C:\xampp\htdocs\api.alpha-code\Core\Db.php(126): PDO->prepare('SELECT `user`.*...')
+#1 C:\xampp\htdocs\api.alpha-code\Core\Db.php(153): Core\Db->execute('SELECT `user`.*...', Array)
+#2 C:\xampp\htdocs\api.alpha-code\App\Controllers\IndexController.php(28): Core\Db->getAll('SELECT `user`.*...', Array)
+#3 C:\xampp\htdocs\api.alpha-code\boot.php(64): App\Controllers\IndexController->homepage()
+#4 C:\xampp\htdocs\api.alpha-code\public\index.php(2): require_once('C:\\xampp\\htdocs...')
+#5 {main}
+  thrown in C:\xampp\htdocs\api.alpha-code\Core\Db.php on line 126
+[15-Sep-2026 12:37:23 Europe/Berlin] PHP Fatal error:  Uncaught ArgumentCountError: Too few arguments to function App\Controllers\IndexController::login(), 0 passed in C:\xampp\htdocs\api.alpha-code\boot.php on line 64 and exactly 2 expected in C:\xampp\htdocs\api.alpha-code\App\Controllers\IndexController.php:17
+Stack trace:
+#0 C:\xampp\htdocs\api.alpha-code\boot.php(64): App\Controllers\IndexController->login()
+#1 C:\xampp\htdocs\api.alpha-code\public\index.php(2): require_once('C:\\xampp\\htdocs...')
+#2 {main}
+  thrown in C:\xampp\htdocs\api.alpha-code\App\Controllers\IndexController.php on line 17
+[15-Sep-2026 12:37:27 Europe/Berlin] PHP Fatal error:  Uncaught ArgumentCountError: Too few arguments to function App\Controllers\IndexController::login(), 0 passed in C:\xampp\htdocs\api.alpha-code\boot.php on line 64 and exactly 2 expected in C:\xampp\htdocs\api.alpha-code\App\Controllers\IndexController.php:17
+Stack trace:
+#0 C:\xampp\htdocs\api.alpha-code\boot.php(64): App\Controllers\IndexController->login()
+#1 C:\xampp\htdocs\api.alpha-code\public\index.php(2): require_once('C:\\xampp\\htdocs...')
+#2 {main}
+  thrown in C:\xampp\htdocs\api.alpha-code\App\Controllers\IndexController.php on line 17
+[15-Sep-2026 12:37:28 Europe/Berlin] PHP Fatal error:  Uncaught ArgumentCountError: Too few arguments to function App\Controllers\IndexController::login(), 0 passed in C:\xampp\htdocs\api.alpha-code\boot.php on line 64 and exactly 2 expected in C:\xampp\htdocs\api.alpha-code\App\Controllers\IndexController.php:17
+Stack trace:
+#0 C:\xampp\htdocs\api.alpha-code\boot.php(64): App\Controllers\IndexController->login()
+#1 C:\xampp\htdocs\api.alpha-code\public\index.php(2): require_once('C:\\xampp\\htdocs...')
+#2 {main}
+  thrown in C:\xampp\htdocs\api.alpha-code\App\Controllers\IndexController.php on line 17
+[15-Sep-2026 12:37:28 Europe/Berlin] PHP Fatal error:  Uncaught ArgumentCountError: Too few arguments to function App\Controllers\IndexController::login(), 0 passed in C:\xampp\htdocs\api.alpha-code\boot.php on line 64 and exactly 2 expected in C:\xampp\htdocs\api.alpha-code\App\Controllers\IndexController.php:17
+Stack trace:
+#0 C:\xampp\htdocs\api.alpha-code\boot.php(64): App\Controllers\IndexController->login()
+#1 C:\xampp\htdocs\api.alpha-code\public\index.php(2): require_once('C:\\xampp\\htdocs...')
+#2 {main}
+  thrown in C:\xampp\htdocs\api.alpha-code\App\Controllers\IndexController.php on line 17
+[15-Sep-2026 12:37:58 Europe/Berlin] PHP Fatal error:  Uncaught ArgumentCountError: Too few arguments to function App\Controllers\IndexController::login(), 0 passed in C:\xampp\htdocs\api.alpha-code\boot.php on line 64 and exactly 2 expected in C:\xampp\htdocs\api.alpha-code\App\Controllers\IndexController.php:39
+Stack trace:
+#0 C:\xampp\htdocs\api.alpha-code\boot.php(64): App\Controllers\IndexController->login()
+#1 C:\xampp\htdocs\api.alpha-code\public\index.php(2): require_once('C:\\xampp\\htdocs...')
+#2 {main}
+  thrown in C:\xampp\htdocs\api.alpha-code\App\Controllers\IndexController.php on line 39
+[15-Sep-2026 12:37:59 Europe/Berlin] PHP Fatal error:  Uncaught ArgumentCountError: Too few arguments to function App\Controllers\IndexController::login(), 0 passed in C:\xampp\htdocs\api.alpha-code\boot.php on line 64 and exactly 2 expected in C:\xampp\htdocs\api.alpha-code\App\Controllers\IndexController.php:39
+Stack trace:
+#0 C:\xampp\htdocs\api.alpha-code\boot.php(64): App\Controllers\IndexController->login()
+#1 C:\xampp\htdocs\api.alpha-code\public\index.php(2): require_once('C:\\xampp\\htdocs...')
+#2 {main}
+  thrown in C:\xampp\htdocs\api.alpha-code\App\Controllers\IndexController.php on line 39
+[15-Sep-2026 12:37:59 Europe/Berlin] PHP Fatal error:  Uncaught ArgumentCountError: Too few arguments to function App\Controllers\IndexController::login(), 0 passed in C:\xampp\htdocs\api.alpha-code\boot.php on line 64 and exactly 2 expected in C:\xampp\htdocs\api.alpha-code\App\Controllers\IndexController.php:39
+Stack trace:
+#0 C:\xampp\htdocs\api.alpha-code\boot.php(64): App\Controllers\IndexController->login()
+#1 C:\xampp\htdocs\api.alpha-code\public\index.php(2): require_once('C:\\xampp\\htdocs...')
+#2 {main}
+  thrown in C:\xampp\htdocs\api.alpha-code\App\Controllers\IndexController.php on line 39
+[15-Sep-2026 12:38:00 Europe/Berlin] PHP Fatal error:  Uncaught ArgumentCountError: Too few arguments to function App\Controllers\IndexController::login(), 0 passed in C:\xampp\htdocs\api.alpha-code\boot.php on line 64 and exactly 2 expected in C:\xampp\htdocs\api.alpha-code\App\Controllers\IndexController.php:39
+Stack trace:
+#0 C:\xampp\htdocs\api.alpha-code\boot.php(64): App\Controllers\IndexController->login()
+#1 C:\xampp\htdocs\api.alpha-code\public\index.php(2): require_once('C:\\xampp\\htdocs...')
+#2 {main}
+  thrown in C:\xampp\htdocs\api.alpha-code\App\Controllers\IndexController.php on line 39
+[15-Sep-2026 12:38:17 Europe/Berlin] PHP Fatal error:  Uncaught ArgumentCountError: Too few arguments to function App\Controllers\IndexController::login(), 0 passed in C:\xampp\htdocs\api.alpha-code\boot.php on line 64 and exactly 2 expected in C:\xampp\htdocs\api.alpha-code\App\Controllers\IndexController.php:39
+Stack trace:
+#0 C:\xampp\htdocs\api.alpha-code\boot.php(64): App\Controllers\IndexController->login()
+#1 C:\xampp\htdocs\api.alpha-code\public\index.php(2): require_once('C:\\xampp\\htdocs...')
+#2 {main}
+  thrown in C:\xampp\htdocs\api.alpha-code\App\Controllers\IndexController.php on line 39
+[15-Sep-2026 12:48:46 Europe/Berlin] PHP Fatal error:  Uncaught ArgumentCountError: Too few arguments to function App\Controllers\IndexController::login(), 0 passed in C:\xampp\htdocs\api.alpha-code\boot.php on line 64 and exactly 2 expected in C:\xampp\htdocs\api.alpha-code\App\Controllers\IndexController.php:39
+Stack trace:
+#0 C:\xampp\htdocs\api.alpha-code\boot.php(64): App\Controllers\IndexController->login()
+#1 C:\xampp\htdocs\api.alpha-code\public\index.php(2): require_once('C:\\xampp\\htdocs...')
+#2 {main}
+  thrown in C:\xampp\htdocs\api.alpha-code\App\Controllers\IndexController.php on line 39
+[15-Sep-2026 12:53:53 Europe/Berlin] PHP Warning:  Undefined variable $POST in C:\xampp\htdocs\api.alpha-code\App\app.php on line 11
+[15-Sep-2026 13:06:02 Europe/Berlin] PHP Fatal error:  Uncaught ArgumentCountError: Too few arguments to function Components\Query\Query::where(), 2 passed in C:\xampp\htdocs\api.alpha-code\App\Controllers\IndexController.php on line 49 and exactly 3 expected in C:\xampp\htdocs\api.alpha-code\Components\Query\Query.php:74
+Stack trace:
+#0 C:\xampp\htdocs\api.alpha-code\App\Controllers\IndexController.php(49): Components\Query\Query->where('identifier', 'darko')
+#1 C:\xampp\htdocs\api.alpha-code\boot.php(64): App\Controllers\IndexController->login()
+#2 C:\xampp\htdocs\api.alpha-code\public\index.php(2): require_once('C:\\xampp\\htdocs...')
+#3 {main}
+  thrown in C:\xampp\htdocs\api.alpha-code\Components\Query\Query.php on line 74
+[15-Sep-2026 13:06:31 Europe/Berlin] PHP Fatal error:  Uncaught PDOException: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'identifier' in 'WHERE' in C:\xampp\htdocs\api.alpha-code\Core\Db.php:126
+Stack trace:
+#0 C:\xampp\htdocs\api.alpha-code\Core\Db.php(126): PDO->prepare('SELECT `user`.*...')
+#1 C:\xampp\htdocs\api.alpha-code\Core\Db.php(153): Core\Db->execute('SELECT `user`.*...', Array)
+#2 C:\xampp\htdocs\api.alpha-code\App\Controllers\IndexController.php(51): Core\Db->getAll('SELECT `user`.*...', Array)
+#3 C:\xampp\htdocs\api.alpha-code\boot.php(64): App\Controllers\IndexController->login()
+#4 C:\xampp\htdocs\api.alpha-code\public\index.php(2): require_once('C:\\xampp\\htdocs...')
+#5 {main}
+  thrown in C:\xampp\htdocs\api.alpha-code\Core\Db.php on line 126
+[15-Sep-2026 13:12:18 Europe/Berlin] PHP Warning:  Undefined array key "password_hash" in C:\xampp\htdocs\api.alpha-code\App\Controllers\IndexController.php on line 57
+[15-Sep-2026 13:16:08 Europe/Berlin] PHP Warning:  Undefined variable $passwordBcrypt in C:\xampp\htdocs\api.alpha-code\App\Controllers\IndexController.php on line 59
+[15-Sep-2026 13:16:08 Europe/Berlin] PHP Warning:  Undefined variable $passwordBcryptDb in C:\xampp\htdocs\api.alpha-code\App\Controllers\IndexController.php on line 59
+[15-Sep-2026 13:25:53 Europe/Berlin] PHP Fatal error:  Uncaught Error: Call to undefined method Core\Db::get() in C:\xampp\htdocs\api.alpha-code\App\Controllers\IndexController.php:51
+Stack trace:
+#0 C:\xampp\htdocs\api.alpha-code\boot.php(64): App\Controllers\IndexController->login()
+#1 C:\xampp\htdocs\api.alpha-code\public\index.php(2): require_once('C:\\xampp\\htdocs...')
+#2 {main}
+  thrown in C:\xampp\htdocs\api.alpha-code\App\Controllers\IndexController.php on line 51
+[15-Sep-2026 13:26:26 Europe/Berlin] PHP Warning:  Undefined array key 0 in C:\xampp\htdocs\api.alpha-code\App\Controllers\IndexController.php on line 61
+[15-Sep-2026 13:26:26 Europe/Berlin] PHP Warning:  Trying to access array offset on value of type null in C:\xampp\htdocs\api.alpha-code\App\Controllers\IndexController.php on line 61
+[15-Sep-2026 13:26:26 Europe/Berlin] PHP Deprecated:  password_verify(): Passing null to parameter #2 ($hash) of type string is deprecated in C:\xampp\htdocs\api.alpha-code\App\Controllers\IndexController.php on line 62
+[15-Sep-2026 13:30:43 Europe/Berlin] PHP Warning:  session_regenerate_id(): Session ID cannot be regenerated when there is no active session in C:\xampp\htdocs\api.alpha-code\App\Controllers\IndexController.php on line 71
+[15-Sep-2026 13:33:11 Europe/Berlin] PHP Notice:  session_start(): Ignoring session_start() because a session is already active in C:\xampp\htdocs\api.alpha-code\App\Controllers\IndexController.php on line 70
+[15-Sep-2026 13:42:16 Europe/Berlin] PHP Fatal error:  Uncaught Error: Call to undefined method App\Controllers\IndexController::homepage() in C:\xampp\htdocs\api.alpha-code\boot.php:74
+Stack trace:
+#0 C:\xampp\htdocs\api.alpha-code\public\index.php(2): require_once()
+#1 {main}
+  thrown in C:\xampp\htdocs\api.alpha-code\boot.php on line 74
+[15-Sep-2026 14:36:24 Europe/Berlin] PHP Fatal error:  Uncaught RuntimeException: View file not found: C:\xampp\htdocs\api.alpha-code\Components/../views/auth\login.php in C:\xampp\htdocs\api.alpha-code\Components\View.php:123
+Stack trace:
+#0 C:\xampp\htdocs\api.alpha-code\Components\View.php(91): Components\View->resolveViewFile('auth.login')
+#1 C:\xampp\htdocs\api.alpha-code\Components\View.php(47): Components\View->renderFile('auth.login', Array)
+#2 C:\xampp\htdocs\api.alpha-code\App\Controllers\IndexController.php(41): Components\View->getHtml()
+#3 C:\xampp\htdocs\api.alpha-code\boot.php(77): App\Controllers\IndexController->loginPage()
+#4 C:\xampp\htdocs\api.alpha-code\public\index.php(2): require_once('C:\\xampp\\htdocs...')
+#5 {main}
+  thrown in C:\xampp\htdocs\api.alpha-code\Components\View.php on line 123
+[15-Sep-2026 14:37:26 Europe/Berlin] PHP Fatal error:  Uncaught RuntimeException: View file not found: C:\xampp\htdocs\api.alpha-code\Components/../views/auth\login.php in C:\xampp\htdocs\api.alpha-code\Components\View.php:123
+Stack trace:
+#0 C:\xampp\htdocs\api.alpha-code\Components\View.php(91): Components\View->resolveViewFile('auth.login')
+#1 C:\xampp\htdocs\api.alpha-code\Components\View.php(47): Components\View->renderFile('auth.login', Array)
+#2 C:\xampp\htdocs\api.alpha-code\App\Controllers\IndexController.php(41): Components\View->getHtml()
+#3 C:\xampp\htdocs\api.alpha-code\boot.php(77): App\Controllers\IndexController->loginPage()
+#4 C:\xampp\htdocs\api.alpha-code\public\index.php(2): require_once('C:\\xampp\\htdocs...')
+#5 {main}
+  thrown in C:\xampp\htdocs\api.alpha-code\Components\View.php on line 123
+[15-Sep-2026 14:37:27 Europe/Berlin] PHP Fatal error:  Uncaught RuntimeException: View file not found: C:\xampp\htdocs\api.alpha-code\Components/../views/auth\login.php in C:\xampp\htdocs\api.alpha-code\Components\View.php:123
+Stack trace:
+#0 C:\xampp\htdocs\api.alpha-code\Components\View.php(91): Components\View->resolveViewFile('auth.login')
+#1 C:\xampp\htdocs\api.alpha-code\Components\View.php(47): Components\View->renderFile('auth.login', Array)
+#2 C:\xampp\htdocs\api.alpha-code\App\Controllers\IndexController.php(41): Components\View->getHtml()
+#3 C:\xampp\htdocs\api.alpha-code\boot.php(77): App\Controllers\IndexController->loginPage()
+#4 C:\xampp\htdocs\api.alpha-code\public\index.php(2): require_once('C:\\xampp\\htdocs...')
+#5 {main}
+  thrown in C:\xampp\htdocs\api.alpha-code\Components\View.php on line 123
+[15-Sep-2026 14:38:03 Europe/Berlin] PHP Fatal error:  Uncaught RuntimeException: View file not found: C:\xampp\htdocs\api.alpha-code\Components/../views/login.php in C:\xampp\htdocs\api.alpha-code\Components\View.php:123
+Stack trace:
+#0 C:\xampp\htdocs\api.alpha-code\Components\View.php(91): Components\View->resolveViewFile('login')
+#1 C:\xampp\htdocs\api.alpha-code\Components\View.php(47): Components\View->renderFile('login', Array)
+#2 C:\xampp\htdocs\api.alpha-code\App\Controllers\IndexController.php(41): Components\View->getHtml()
+#3 C:\xampp\htdocs\api.alpha-code\boot.php(77): App\Controllers\IndexController->loginPage()
+#4 C:\xampp\htdocs\api.alpha-code\public\index.php(2): require_once('C:\\xampp\\htdocs...')
+#5 {main}
+  thrown in C:\xampp\htdocs\api.alpha-code\Components\View.php on line 123
+[15-Sep-2026 14:38:14 Europe/Berlin] PHP Fatal error:  Uncaught RuntimeException: View file not found: C:\xampp\htdocs\api.alpha-code\Components/../views/login.php in C:\xampp\htdocs\api.alpha-code\Components\View.php:123
+Stack trace:
+#0 C:\xampp\htdocs\api.alpha-code\Components\View.php(91): Components\View->resolveViewFile('login')
+#1 C:\xampp\htdocs\api.alpha-code\Components\View.php(47): Components\View->renderFile('login', Array)
+#2 C:\xampp\htdocs\api.alpha-code\App\Controllers\IndexController.php(41): Components\View->getHtml()
+#3 C:\xampp\htdocs\api.alpha-code\boot.php(77): App\Controllers\IndexController->loginPage()
+#4 C:\xampp\htdocs\api.alpha-code\public\index.php(2): require_once('C:\\xampp\\htdocs...')
+#5 {main}
+  thrown in C:\xampp\htdocs\api.alpha-code\Components\View.php on line 123
+[15-Sep-2026 14:38:15 Europe/Berlin] PHP Fatal error:  Uncaught RuntimeException: View file not found: C:\xampp\htdocs\api.alpha-code\Components/../views/login.php in C:\xampp\htdocs\api.alpha-code\Components\View.php:123
+Stack trace:
+#0 C:\xampp\htdocs\api.alpha-code\Components\View.php(91): Components\View->resolveViewFile('login')
+#1 C:\xampp\htdocs\api.alpha-code\Components\View.php(47): Components\View->renderFile('login', Array)
+#2 C:\xampp\htdocs\api.alpha-code\App\Controllers\IndexController.php(41): Components\View->getHtml()
+#3 C:\xampp\htdocs\api.alpha-code\boot.php(77): App\Controllers\IndexController->loginPage()
+#4 C:\xampp\htdocs\api.alpha-code\public\index.php(2): require_once('C:\\xampp\\htdocs...')
+#5 {main}
+  thrown in C:\xampp\htdocs\api.alpha-code\Components\View.php on line 123
+[15-Sep-2026 14:38:39 Europe/Berlin] PHP Fatal error:  Uncaught RuntimeException: View file not found: C:\xampp\htdocs\api.alpha-code\Components/views/login.php in C:\xampp\htdocs\api.alpha-code\Components\View.php:123
+Stack trace:
+#0 C:\xampp\htdocs\api.alpha-code\Components\View.php(91): Components\View->resolveViewFile('login')
+#1 C:\xampp\htdocs\api.alpha-code\Components\View.php(47): Components\View->renderFile('login', Array)
+#2 C:\xampp\htdocs\api.alpha-code\App\Controllers\IndexController.php(41): Components\View->getHtml()
+#3 C:\xampp\htdocs\api.alpha-code\boot.php(77): App\Controllers\IndexController->loginPage()
+#4 C:\xampp\htdocs\api.alpha-code\public\index.php(2): require_once('C:\\xampp\\htdocs...')
+#5 {main}
+  thrown in C:\xampp\htdocs\api.alpha-code\Components\View.php on line 123
+[15-Sep-2026 14:39:14 Europe/Berlin] PHP Fatal error:  Uncaught RuntimeException: View file not found: C:\xampp\htdocs\api.alpha-code\Components/views/login.php in C:\xampp\htdocs\api.alpha-code\Components\View.php:123
+Stack trace:
+#0 C:\xampp\htdocs\api.alpha-code\Components\View.php(91): Components\View->resolveViewFile('login')
+#1 C:\xampp\htdocs\api.alpha-code\Components\View.php(47): Components\View->renderFile('login', Array)
+#2 C:\xampp\htdocs\api.alpha-code\App\Controllers\IndexController.php(41): Components\View->getHtml()
+#3 C:\xampp\htdocs\api.alpha-code\boot.php(77): App\Controllers\IndexController->loginPage()
+#4 C:\xampp\htdocs\api.alpha-code\public\index.php(2): require_once('C:\\xampp\\htdocs...')
+#5 {main}
+  thrown in C:\xampp\htdocs\api.alpha-code\Components\View.php on line 123
+[15-Sep-2026 14:39:15 Europe/Berlin] PHP Fatal error:  Uncaught RuntimeException: View file not found: C:\xampp\htdocs\api.alpha-code\Components/views/login.php in C:\xampp\htdocs\api.alpha-code\Components\View.php:123
+Stack trace:
+#0 C:\xampp\htdocs\api.alpha-code\Components\View.php(91): Components\View->resolveViewFile('login')
+#1 C:\xampp\htdocs\api.alpha-code\Components\View.php(47): Components\View->renderFile('login', Array)
+#2 C:\xampp\htdocs\api.alpha-code\App\Controllers\IndexController.php(41): Components\View->getHtml()
+#3 C:\xampp\htdocs\api.alpha-code\boot.php(77): App\Controllers\IndexController->loginPage()
+#4 C:\xampp\htdocs\api.alpha-code\public\index.php(2): require_once('C:\\xampp\\htdocs...')
+#5 {main}
+  thrown in C:\xampp\htdocs\api.alpha-code\Components\View.php on line 123
+[15-Sep-2026 14:39:40 Europe/Berlin] PHP Fatal error:  Uncaught RuntimeException: View file not found: C:\xampp\htdocs\api.alpha-code\Components../App/Views/login.php in C:\xampp\htdocs\api.alpha-code\Components\View.php:123
+Stack trace:
+#0 C:\xampp\htdocs\api.alpha-code\Components\View.php(91): Components\View->resolveViewFile('login')
+#1 C:\xampp\htdocs\api.alpha-code\Components\View.php(47): Components\View->renderFile('login', Array)
+#2 C:\xampp\htdocs\api.alpha-code\App\Controllers\IndexController.php(41): Components\View->getHtml()
+#3 C:\xampp\htdocs\api.alpha-code\boot.php(77): App\Controllers\IndexController->loginPage()
+#4 C:\xampp\htdocs\api.alpha-code\public\index.php(2): require_once('C:\\xampp\\htdocs...')
+#5 {main}
+  thrown in C:\xampp\htdocs\api.alpha-code\Components\View.php on line 123
+[15-Sep-2026 14:46:14 Europe/Berlin] PHP Warning:  Undefined variable $pageId in C:\xampp\htdocs\api.alpha-code\App\Views\Header.php on line 39
+[15-Sep-2026 14:46:14 Europe/Berlin] PHP Warning:  Undefined variable $pageId in C:\xampp\htdocs\api.alpha-code\App\Views\Header.php on line 40
+[15-Sep-2026 14:46:14 Europe/Berlin] PHP Warning:  Undefined variable $pageId in C:\xampp\htdocs\api.alpha-code\App\Views\Header.php on line 41
+[15-Sep-2026 14:46:14 Europe/Berlin] PHP Warning:  Undefined variable $pageId in C:\xampp\htdocs\api.alpha-code\App\Views\Header.php on line 42
+[15-Sep-2026 19:41:19 Europe/Berlin] PHP Fatal error:  Uncaught RuntimeException: View file not found: C:\xampp\htdocs\api.alpha-code\Components/../App/Views/header\php.php in C:\xampp\htdocs\api.alpha-code\Components\View.php:123
+Stack trace:
+#0 C:\xampp\htdocs\api.alpha-code\Components\View.php(91): Components\View->resolveViewFile('header.php')
+#1 C:\xampp\htdocs\api.alpha-code\Components\View.php(75): Components\View->renderFile('header.php', Array)
+#2 C:\xampp\htdocs\api.alpha-code\App\Views\login.php(1): Components\View->partial('header.php')
+#3 C:\xampp\htdocs\api.alpha-code\Components\View.php(98): require('C:\\xampp\\htdocs...')
+#4 C:\xampp\htdocs\api.alpha-code\Components\View.php(47): Components\View->renderFile('login', Array)
+#5 C:\xampp\htdocs\api.alpha-code\App\Controllers\IndexController.php(41): Components\View->getHtml()
+#6 C:\xampp\htdocs\api.alpha-code\boot.php(77): App\Controllers\IndexController->loginPage()
+#7 C:\xampp\htdocs\api.alpha-code\public\index.php(2): require_once('C:\\xampp\\htdocs...')
+#8 {main}
+  thrown in C:\xampp\htdocs\api.alpha-code\Components\View.php on line 123
+[15-Sep-2026 19:42:12 Europe/Berlin] PHP Fatal error:  Uncaught RuntimeException: View file not found: C:\xampp\htdocs\api.alpha-code\Components/../App/Views/header\php.php in C:\xampp\htdocs\api.alpha-code\Components\View.php:123
+Stack trace:
+#0 C:\xampp\htdocs\api.alpha-code\Components\View.php(91): Components\View->resolveViewFile('header.php')
+#1 C:\xampp\htdocs\api.alpha-code\Components\View.php(75): Components\View->renderFile('header.php', Array)
+#2 C:\xampp\htdocs\api.alpha-code\App\Views\login.php(1): Components\View->partial('header.php', Array)
+#3 C:\xampp\htdocs\api.alpha-code\Components\View.php(98): require('C:\\xampp\\htdocs...')
+#4 C:\xampp\htdocs\api.alpha-code\Components\View.php(47): Components\View->renderFile('login', Array)
+#5 C:\xampp\htdocs\api.alpha-code\App\Controllers\IndexController.php(41): Components\View->getHtml()
+#6 C:\xampp\htdocs\api.alpha-code\boot.php(77): App\Controllers\IndexController->loginPage()
+#7 C:\xampp\htdocs\api.alpha-code\public\index.php(2): require_once('C:\\xampp\\htdocs...')
+#8 {main}
+  thrown in C:\xampp\htdocs\api.alpha-code\Components\View.php on line 123
+[15-Sep-2026 19:44:08 Europe/Berlin] PHP Fatal error:  Uncaught Error: Call to undefined method App\Controllers\IndexController::aboutUs() in C:\xampp\htdocs\api.alpha-code\boot.php:77
+Stack trace:
+#0 C:\xampp\htdocs\api.alpha-code\public\index.php(2): require_once()
+#1 {main}
+  thrown in C:\xampp\htdocs\api.alpha-code\boot.php on line 77
+[15-Sep-2026 19:44:16 Europe/Berlin] PHP Fatal error:  Uncaught Error: Call to undefined method App\Controllers\IndexController::aboutUs() in C:\xampp\htdocs\api.alpha-code\boot.php:77
+Stack trace:
+#0 C:\xampp\htdocs\api.alpha-code\public\index.php(2): require_once()
+#1 {main}
+  thrown in C:\xampp\htdocs\api.alpha-code\boot.php on line 77
+[15-Sep-2026 20:26:58 Europe/Berlin] PHP Fatal error:  Uncaught Error: Call to undefined method App\Controllers\AuthController::doWeblogin() in C:\xampp\htdocs\api.alpha-code\boot.php:77
+Stack trace:
+#0 C:\xampp\htdocs\api.alpha-code\public\index.php(2): require_once()
+#1 {main}
+  thrown in C:\xampp\htdocs\api.alpha-code\boot.php on line 77
+[15-Sep-2026 20:27:23 Europe/Berlin] PHP Fatal error:  Uncaught Error: Class "App\Controllers\View" not found in C:\xampp\htdocs\api.alpha-code\App\Controllers\AuthController.php:14
+Stack trace:
+#0 C:\xampp\htdocs\api.alpha-code\boot.php(77): App\Controllers\AuthController->loginPage()
+#1 C:\xampp\htdocs\api.alpha-code\public\index.php(2): require_once('C:\\xampp\\htdocs...')
+#2 {main}
+  thrown in C:\xampp\htdocs\api.alpha-code\App\Controllers\AuthController.php on line 14
+[15-Sep-2026 20:39:38 Europe/Berlin] PHP Parse error:  syntax error, unexpected variable "$router" in C:\xampp\htdocs\api.alpha-code\App\app.php on line 24

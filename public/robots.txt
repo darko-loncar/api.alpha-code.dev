@@ -1,0 +1,17 @@
+User-agent: *
+Allow: /
+
+# Public pages
+Allow: /about
+Allow: /contact
+Allow: /password-generator
+Allow: /users
+
+# Do not index private or non-public areas
+Disallow: /css/
+Disallow: /gfx/
+Disallow: /js/
+Disallow: /vendor/
+Disallow: /*?*
+
+Sitemap: https://alpha-code.dev/sitemap.xml

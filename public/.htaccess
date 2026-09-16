@@ -1,5 +1,68 @@
+# Disable directory browsing and expose fewer server details
+Options -MultiViews
+Options -Indexes
+ServerSignature Off
+DirectoryIndex index.php
+
+# Rewrite
 RewriteEngine On
 RewriteCond %{REQUEST_FILENAME} -f [OR]
 RewriteCond %{REQUEST_FILENAME} -d
 RewriteRule ^ - [L]
 RewriteRule ^ index.php [QSA,L]
+
+# Friendly 404 for missing routes.
+# ErrorDocument 404 /404.php
+
+# Disable access to hidden files (except .well-known)
+RedirectMatch 403 /(\.(?!well-known).*)$
+
+# Disable ETags
+FileETag None
+
+# Cacheing
+<IfModule mod_headers.c>
+
+  # Long cache for static assets
+  <FilesMatch "\.(css|js|png|jpg|jpeg|webp|svg|ico)$">
+    Header set Cache-Control "public, max-age=31536000, immutable"
+  </FilesMatch>
+
+  # No cache for dynamic content
+  <FilesMatch "\.(php|html)$">
+    Header set Cache-Control "no-store, no-cache, must-revalidate, max-age=0"
+  </FilesMatch>
+  Header append Vary Accept-Encoding
+</IfModule>
+
+# Security
+Header always set X-Content-Type-Options "nosniff"
+Header always set X-Frame-Options "DENY"
+Header always set Referrer-Policy "strict-origin-when-cross-origin"
+Header always set Permissions-Policy "geolocation=(), microphone=(), camera=()"
+
+# Block common sensitive file requests
+<FilesMatch "^(\.env|\.git|\.htaccess|\.htpasswd|.*\.bak|.*\.sql|.*\.zip|.*\.tar|.*\.tar\.gz)$">
+  Require all denied
+</FilesMatch>
+
+# Compression
+<IfModule mod_deflate.c>
+  AddOutputFilterByType DEFLATE text/html text/plain text/css
+  AddOutputFilterByType DEFLATE application/javascript application/json
+  AddOutputFilterByType DEFLATE image/svg+xml
+</IfModule>
+
+# First-pass blocklist for obvious scanning tools only
+<IfModule mod_rewrite.c>
+  RewriteCond %{HTTP_USER_AGENT} (sqlmap|masscan|nmap|zgrab|nikto|acunetix|nessus|dirbuster|gobuster|w3af|whatweb|jmeter|metasploit) [NC]
+  RewriteRule ^ - [F,L]
+</IfModule>
+
+# Common anti-probing blocks
+<IfModule mod_rewrite.c>
+  RewriteCond %{REQUEST_URI} (^|/)(\.env|\.git|\.htaccess|\.htpasswd|wp-admin|wp-login|phpmyadmin|xmlrpc\.php|cgi-bin)(/|$) [NC]
+  RewriteRule ^ - [F,L]
+  RewriteCond %{QUERY_STRING} (author=|/wp-admin|/wp-login|phpmyadmin|xmlrpc) [NC]
+  RewriteRule ^ - [F,L]
+</IfModule>

@@ -62,3 +62,4 @@ phpunit.xml
 # Framework Specific
 .env
 /storage/*
+error.log

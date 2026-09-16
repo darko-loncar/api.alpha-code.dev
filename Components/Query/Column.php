@@ -9,6 +9,6 @@ use Components\Query\Query;
 final class Column
 {
 
-    public function __construct(string $table, string $columnName, string $alias)
+    public function __construct(string $table, string $columnName, string $alias){}
 
 }

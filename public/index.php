@@ -1,2 +1,3 @@
 <?php
+// Boot Crystal machine...
 require_once __DIR__ . '/../boot.php';

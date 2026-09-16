@@ -44,15 +44,13 @@ php -S localhost:8000 -t public
 
 ## What this repo contains
 
-- `app_init.php` — main bootstrap for the app; prefers Composer autoload, but falls back to a tiny PSR-4 loader.
-- `public/index.php` — recommended webroot file (tiny front controller).
-- `AppCore/` — framework core (Router, Request, Response, Controller base, Env, Db, QueryBuilder, exceptions, helpers).
-- `Controllers/` — application controllers.
-- `Entities/` — Active-record-like entity classes.
-- `Renderers/` — optional rendering helpers and templates.
+- `boot.php` — main bootstrap for the app.
+- `public/index.php` — webroot file (tiny front controller).
+- `Core/` — framework core (Router, Request, Response, Controller base, Env, Db, QueryBuilder, exceptions, helpers).
+- `Components/` — application controllers.
 - `Storage/` — static data like `currencies.csv` and other storage files.
 
-The framework is intentionally minimal: core features are kept inside `AppCore/` so the app can run without installing any Composer packages.
+The framework is intentionally minimal: core features are kept inside `Core/`. App can run without installing any Composer packages.
 
 ---
 
@@ -137,4 +135,3 @@ Compress-Archive -Path * -DestinationPath dist\crystal-core.zip -Force
 ```
 
 ---
-
