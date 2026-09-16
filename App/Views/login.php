@@ -24,4 +24,3 @@
 </section>
 </body>
 <?php echo $this->partial("footer") ?>
-</html>

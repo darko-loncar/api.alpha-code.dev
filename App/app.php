@@ -10,7 +10,7 @@ require_once __DIR__ . "/../App/helpers.php";
 
 // Register database service
 $container->registerAsSingleton(
-    fn(): Db => 
+    fn(): Db =>
         new Db('mysql', '192.168.1.102', 'alphacodedev_crystal', 'nyxx@localhost', 'Chronos_1', 3306),
         //new Db('mysql', 'localhost', 'alphacodedev_crystal', 'root', 'Chronos_1', 3306),
         Db::class,
@@ -26,3 +26,4 @@ $router->get("view-outfit/{id}/{slug}", [App\Controllers\IndexController::class,
 // Auth Routes
 $router->get("login", [App\Controllers\AuthController::class, 'loginPage']);
 $router->post("login", [App\Controllers\AuthController::class, 'doWebAuth']);
+$router->get("logout", [App\Controllers\AuthController::class, 'doLogout']);

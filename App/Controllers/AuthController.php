@@ -8,13 +8,11 @@ use Components\View;
 class AuthController
 {
     public function __construct(
-        private Db $db, 
+        private Db $db,
         ){}
-    
+
     public function loginPage() {
-        return (new View('login', [
-            'pageId' => 'index'
-        ]))->getHtml();
+        return (new View('login', []))->getHtml();
     }
 
     public function doWebAuth(){
@@ -32,7 +30,7 @@ class AuthController
             ->leftJoin("user","user_id","id", ["uuid"]);
 
         $user_auth = $this->db->first(
-            $q->getQuery(), 
+            $q->getQuery(),
             $q->getBindings()
             );
 
@@ -53,6 +51,33 @@ class AuthController
         $_SESSION['user_uuid'] = $user_auth['user__uuid'];
 
         header("Location:/");
+        exit();
+    }
+
+    public function doLogout(): void
+    {
+        if (session_status() !== PHP_SESSION_ACTIVE) {
+            session_start();
+        }
+
+        $_SESSION = [];
+
+        if (ini_get('session.use_cookies')) {
+            $params = session_get_cookie_params();
+
+            setcookie(
+                session_name(),
+                '',
+                time() - 42000,
+                $params['path'],
+                $params['domain'],
+                $params['secure'],
+                $params['httponly']
+            );
+        }
+
+        session_destroy();
+        header("Location:/login");
         exit();
     }
 

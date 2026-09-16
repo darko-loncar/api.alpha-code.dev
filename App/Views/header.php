@@ -30,6 +30,7 @@
     <li><a href=about-us>About Us</a>
     <li><a href=users>Users</a>
     <li><a href=contact>Contact</a>
+    <li><a href=logout>Logout</a>
 </ul>
 </nav>
 </header>

@@ -907,3 +907,10 @@ Stack trace:
 #2 {main}
   thrown in C:\xampp\htdocs\api.alpha-code\App\Controllers\AuthController.php on line 14
 [15-Sep-2026 20:39:38 Europe/Berlin] PHP Parse error:  syntax error, unexpected variable "$router" in C:\xampp\htdocs\api.alpha-code\App\app.php on line 24
+[16-Sep-2026 11:36:33 Europe/Berlin] PHP Warning:  Undefined property: Components\View::$userData in C:\xampp\htdocs\api.alpha-code\App\Views\dashboard.php on line 8
+[16-Sep-2026 11:41:58 Europe/Berlin] PHP Parse error:  Unmatched ')' in C:\xampp\htdocs\api.alpha-code\App\Views\dashboard.php on line 8
+[16-Sep-2026 11:52:40 Europe/Berlin] PHP Fatal error:  Uncaught Error: Call to undefined method App\Controllers\AuthController::logout() in C:\xampp\htdocs\api.alpha-code\boot.php:75
+Stack trace:
+#0 C:\xampp\htdocs\api.alpha-code\public\index.php(3): require_once()
+#1 {main}
+  thrown in C:\xampp\htdocs\api.alpha-code\boot.php on line 75

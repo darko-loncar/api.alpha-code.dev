@@ -10,10 +10,10 @@ use App\Services\ExchangeRateFetcher;
 class IndexController
 {
     public function __construct(
-        private Db $db, 
+        private Db $db,
         ){}
-    
-    // Typical old school route rendered by View Component 
+
+    // Typical old school route rendered by View Component
     public function dashboard()
     {
 
@@ -26,11 +26,16 @@ class IndexController
             ->limit(10)
             ->orderBy("id")
             ->leftJoin("user_auth", "id", "id", ["id"]);
-        
-        $results = $this->db->first(
-            $q->getQuery(), 
+
+        $userData = $this->db->first(
+            $q->getQuery(),
             $q->getBindings()
             );
+
+        return (new View('dashboard', [
+            'pageId' => 'index',
+            'userData' => $userData
+        ]))->getHtml();
 
         return Response::json($results);
     }

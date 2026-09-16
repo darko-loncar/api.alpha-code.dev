@@ -63,6 +63,21 @@ class View
     }
 
     /**
+     * Retrieve a variable passed to the view.
+     *
+     * @template T
+     *
+     * @param string $key
+     * @param T|null $default
+     *
+     * @return mixed|T
+     */
+    public function get(string $key, mixed $default = null): mixed
+    {
+        return $this->variables[$key] ?? $default;
+    }
+
+    /**
      * Render another view/partial from within a template.
      *
      * Example:
