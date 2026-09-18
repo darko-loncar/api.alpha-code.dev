@@ -1,12 +1,9 @@
 <?php echo $this->partial("head") ?>
-<?php echo $this->partial("header") ?>
+<?php echo $this->partial("main-menu") ?>
 <main>
 <body>
 <section class="ct-center">
 <h1>Dashboard</h1>
-
-<?= print_r($_SESSION); ?>
-<?= print_r($this->get("userData")); ?>
 
 <h2>The standard Lorem Ipsum passage, used since 1966</h2>
 <p>"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."</p>

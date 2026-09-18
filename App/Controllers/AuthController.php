@@ -1,18 +1,16 @@
 <?php
 namespace App\Controllers;
 
-use Core\Db;
-use Components\Query\Query;
-use Components\View;
+use Crystal\Components\Query\Query;
+use Crystal\Components\View;
+use App\Databases\MainDb;
 
 class AuthController
 {
-    public function __construct(
-        private Db $db,
-        ){}
+    public function __construct(private MainDb $db){}
 
     public function loginPage() {
-        return (new View('login', []))->getHtml();
+        return View::response('login');
     }
 
     public function doWebAuth(){
@@ -25,22 +23,18 @@ class AuthController
             return;
         }
 
-        $q = Query::select("user_auth")
+        $user = Query::select("user_auth")
             ->where("identifier", "=", $username)
-            ->leftJoin("user","user_id","id", ["uuid"]);
+            ->leftJoin("user","user_id","id", ["uuid"])
+            ->first($this->db->getConnection());
 
-        $user_auth = $this->db->first(
-            $q->getQuery(),
-            $q->getBindings()
-            );
-
-        if (empty($user_auth)) {
+        if (empty($user)) {
             echo "User not found";
             // Non existing user identifier
             return;
         }
 
-        $storedHash = $user_auth["password_hash"];
+        $storedHash = $user["password_hash"];
         if(!password_verify($password, $storedHash)) {
             echo "Invalid credentials";
             // Invalid credentials
@@ -48,7 +42,7 @@ class AuthController
         }
 
         session_regenerate_id(true);
-        $_SESSION['user_uuid'] = $user_auth['user__uuid'];
+        $_SESSION['user_uuid'] = $user['user__uuid'];
 
         header("Location:/");
         exit();

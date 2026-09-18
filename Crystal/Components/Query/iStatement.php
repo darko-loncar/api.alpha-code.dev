@@ -1,6 +1,6 @@
 <?php
 declare(strict_types=1);
-namespace Components\Query;
+namespace Crystal\Components\Query;
 
 interface iStatement
 {

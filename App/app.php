@@ -1,29 +1,31 @@
 <?php
 declare(strict_types=1);
-
-use Core\Db;
-use Components\QueryBuilder;
-use App\Services\ExchangeRateFetcher;
+use Crystal\Components\View;
+use App\Databases\CommonDb;
+use App\Databases\MainDb;
 
 // Load custom helpers
 require_once __DIR__ . "/../App/helpers.php";
 
-// Register database service
+// Set base path for views
+View::setBaseViewPath(__DIR__ . '/../App/Views/');
+
+// Register common database service
 $container->registerAsSingleton(
-    fn(): Db =>
-        new Db('mysql', '192.168.1.102', 'alphacodedev_crystal', 'nyxx@localhost', 'Chronos_1', 3306),
-        //new Db('mysql', 'localhost', 'alphacodedev_crystal', 'root', 'Chronos_1', 3306),
-        Db::class,
-);
+    fn(): CommonDb => new CommonDb('192.168.1.102', 'common', 'nyxx@localhost', 'Chronos_1', 3306)
+    );
 
-// Register exchange rate fetcher
-$container->register(fn(): ExchangeRateFetcher => new ExchangeRateFetcher("https://api.frankfurter.dev/v1/latest"), ExchangeRateFetcher::class);
+// Register main database service
+$container->registerAsSingleton(
+    fn(): MainDb => new MainDb('192.168.1.102', 'alphacodedev_crystal', 'nyxx@localhost', 'Chronos_1', 3306)
+    );
 
-// Page Routes
-$router->get("", [App\Controllers\IndexController::class, 'dashboard']);
-$router->get("view-outfit/{id}/{slug}", [App\Controllers\IndexController::class, 'viewOutfit']);
+// Dashboard Routes
+$router->get("", App\Controllers\IndexController::class, 'dashboard');
+$router->get("my-profile", App\Controllers\IndexController::class, 'myProfile');
+$router->get("page/{id}/{slug}", App\Controllers\IndexController::class, 'page');
 
 // Auth Routes
-$router->get("login", [App\Controllers\AuthController::class, 'loginPage']);
-$router->post("login", [App\Controllers\AuthController::class, 'doWebAuth']);
-$router->get("logout", [App\Controllers\AuthController::class, 'doLogout']);
+$router->get("login", App\Controllers\AuthController::class, 'loginPage');
+$router->post("login", App\Controllers\AuthController::class, 'doWebAuth');
+$router->get("logout", App\Controllers\AuthController::class, 'doLogout');

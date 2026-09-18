@@ -1,10 +1,8 @@
 <?php
 declare(strict_types=1);
 
-namespace Components\Query;
-
+namespace Crystal\Components\Query;
 use PDO;
-use Components\Query\Select;
 
 /**
  * Direction used for ORDER BY clauses.
@@ -23,6 +21,9 @@ enum OrderDirection: string
  */
 abstract class Query
 {
+
+    // Child classes like Select, Insert, Update handle their own query generation
+    abstract public function getQuery(): string;
 
     // Base table for the query
     protected string $table;
@@ -58,7 +59,7 @@ abstract class Query
      * Select statement columns.
      * @return $this
      */
-    public static function select(string $table, array $columns = [])
+    public static function select(string $table, array $columns = []) : Select
     {
         return new Select($table, ...$columns);
     }
@@ -71,7 +72,7 @@ abstract class Query
      * @param mixed $value
      * @return $this
      */
-    public function where(string $column, string $operator, mixed $value): static 
+    public function where(string $column, string $operator, mixed $value): static
     {
         $paramKey = $this->createBinding(
             "where_" . str_replace('.', '_', $column),
@@ -186,20 +187,6 @@ abstract class Query
         return $this;
     }
 
-    public function max(){
-        
-    }
-
-    /**
-     * Return query bindings.
-     *
-     * @return array<string, array{value: mixed, type: int}>
-     */
-    public function getBindings(): array
-    {
-        return $this->bindings;
-    }
-
     /**
      * Process array of columns, prefix them with table name, add alias and sql ticks
      * @param string $table
@@ -222,7 +209,7 @@ abstract class Query
      *
      * @return string Placeholder including the leading colon.
      */
-    protected function createBinding(string $name, mixed $value, ?int $type = null): string 
+    protected function createBinding(string $name, mixed $value, ?int $type = null): string
     {
         $baseName = ':' . $name;
         $paramKey = $baseName;
@@ -256,6 +243,55 @@ abstract class Query
             is_int($value) => PDO::PARAM_INT,
             default => PDO::PARAM_STR,
         };
+    }
+
+    /**
+     * Prepare and execute a query.
+     *
+     * @param PDO $connection
+     * @param array<string, array{value: mixed, type: int}> $bindings
+     */
+    protected function execute(PDO $connection): \PDOStatement
+    {
+        $statement = $connection->prepare($this->getQuery());
+
+        foreach ($this->bindings as $parameter => $binding) {
+            $statement->bindValue(
+                $parameter,
+                $binding['value'],
+                $binding['type']
+            );
+        }
+
+        $statement->execute();
+        return $statement;
+    }
+
+    /**
+     * Execute a query and return all rows.
+     *
+     * @param PDO $connection
+     * @return array<int, array<string, mixed>>
+     */
+    public function getAll(PDO $connection): array {
+        return $this
+            ->execute($connection)
+            ->fetchAll(PDO::FETCH_ASSOC);
+    }
+
+    /**
+     * Execute a query and return the first row.
+     * Returns null when no rows are found.
+     *
+     * @param PDO $connection
+     * @return array<string, mixed>|null
+     */
+    public function first(PDO $connection): ?array {
+        $row = $this
+            ->execute($connection)
+            ->fetch(PDO::FETCH_ASSOC);
+
+        return $row === false ? null : $row;
     }
 
 }

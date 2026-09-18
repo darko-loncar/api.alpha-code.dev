@@ -1,42 +1,20 @@
 <?php
 declare(strict_types=1);
-
 namespace App\Services;
+use Components\HttpClient;
 
-class ExchangeRateFetcher 
+class ExchangeRateFetcher
 {
+    private HttpClient $http;
     private string $apiUrl;
 
-    public function __construct(string $apiUrl) {
+    public function __construct(HttpClient $http, string $apiUrl) {
         $this->apiUrl = $apiUrl;
+        $this->http = $http;
     }
 
     public function fetch() {
+        return $this->http->get($this->apiUrl);
 
-        // Set API URL
-        $apiUrl = $this->apiUrl;
-        
-        // Initialize cURL
-        $ch = curl_init($apiUrl);
-        
-        // Set cURL options
-        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true); // Get response as a string
-        curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false); // Disable SSL verification (optional)
-        
-        // Execute request and store response
-        $response = curl_exec($ch);
-        
-        // Check for errors
-        if (curl_errno($ch)) {
-            echo 'cURL error: ' . curl_error($ch);
-        } else {
-            // Decode JSON response
-            $data = json_decode($response, true);
-        }
-        
-        // Close cURL session
-        curl_close($ch);
-
-        return $data;
     }
 }

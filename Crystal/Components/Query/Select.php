@@ -1,13 +1,14 @@
 <?php
 declare(strict_types=1);
-namespace Components\Query;
-use Components\Query\Query;
+namespace Crystal\Components\Query;
+use Crystal\Components\Query\Query;
 
 /**
  * Select statement.
  */
 final class Select extends Query implements iStatement
 {
+
     /**
      * Constructor
      */
@@ -24,7 +25,7 @@ final class Select extends Query implements iStatement
     {
         // Base columns
         $columns = [];
-        
+
         // Normalize base columns
         if(empty($this->baseColumns)) {
             $columns[] = "`{$this->table}`.*";
@@ -33,10 +34,10 @@ final class Select extends Query implements iStatement
                 $columns[] = $this->normalizeColumnName($this->table, $column);
             }
         }
-        
+
         // Loop through joined tables and add their columns
         foreach($this->joinedColumns as $table => $joinedColumns){
-            foreach($joinedColumns as $column) {       
+            foreach($joinedColumns as $column) {
                 $columns[] = $this->normalizeColumnName($table, $column, true);
             }
         }

@@ -1,43 +1,42 @@
 <?php
 namespace App\Controllers;
 
-use Components\Query\Query;
-use Core\Db;
-use Core\Response;
-use Components\View;
-use App\Services\ExchangeRateFetcher;
+use Crystal\Components\Query\Query;
+use Crystal\Components\View;
+use App\Databases\MainDb;
 
 class IndexController
 {
-    public function __construct(
-        private Db $db,
-        ){}
+    public function __construct(private MainDb $mainDb){}
 
-    // Typical old school route rendered by View Component
-    public function dashboard()
+    public function dashboard(): callable
     {
-
         if (!isset($_SESSION['user_uuid'])) {
             header('Location: /login');
             exit;
         }
 
-        $q = Query::select("user", [])
-            ->limit(10)
-            ->orderBy("id")
-            ->leftJoin("user_auth", "id", "id", ["id"]);
-
-        $userData = $this->db->first(
-            $q->getQuery(),
-            $q->getBindings()
-            );
-
-        return (new View('dashboard', [
-            'pageId' => 'index',
-            'userData' => $userData
-        ]))->getHtml();
-
-        return Response::json($results);
+        return View::response('dashboard', ['pageId' => 'dashboard']);
     }
 
+    public function myProfile(): callable
+    {
+        if (!isset($_SESSION['user_uuid'])) {
+            header('Location: /login');
+            exit;
+        }
+
+        $conn = $this->mainDb->getConnection();
+        $userData = Query::select("user")
+            ->where("user.uuid", "=", $_SESSION["user_uuid"])
+            ->leftJoin("user_auth", "id", "id", ["id", "identifier", "last_login_at"])
+            ->first($conn);
+
+        return View::response('profile', ['pageId' => 'dashboard', 'userData' => $userData]);
+    }
+
+    public function page(int $id, string $slug)
+    {
+        dd($id,$slug,$_GET);
+    }
 }

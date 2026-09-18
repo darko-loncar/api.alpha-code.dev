@@ -1,7 +1,7 @@
 <?php
 declare(strict_types=1);
-namespace Components\Query;
-use Components\Query\Query;
+namespace Crystal\Components\Query;
+use Crystal\Components\Query\Query;
 
 /**
  * Select statement.
