@@ -5,7 +5,7 @@ use AdminWeb\Databases\CommonDb;
 use AdminWeb\Databases\MainDb;
 
 // Load custom helpers
-require_once __DIR__ . "/../AdminWeb/helpers.php";
+require_once __DIR__ . "/../AdminWeb/utils.php";
 
 // Set base path for views
 View::setBaseViewPath($appRoot.'/../AdminWeb/Views/');
