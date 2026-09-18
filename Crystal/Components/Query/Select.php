@@ -12,7 +12,7 @@ final class Select extends Query implements iStatement
     /**
      * Constructor
      */
-    public function __construct(string $table, callable|string ...$columns)
+    public function __construct(string $table, string ...$columns)
     {
         $this->table = $table;
         $this->baseColumns = $columns;

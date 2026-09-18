@@ -8,7 +8,7 @@ use App\Databases\MainDb;
 require_once __DIR__ . "/../App/helpers.php";
 
 // Set base path for views
-View::setBaseViewPath(__DIR__ . '/../App/Views/');
+View::setBaseViewPath($appRoot.'/../App/Views/');
 
 // Register common database service
 $container->registerAsSingleton(

@@ -6,7 +6,7 @@ use Throwable;
 
 class View
 {
-    private static string $baseViewPath = "/";
+    private static string $baseViewPath = __DIR__;
     private function __construct(private readonly string $viewName, private readonly array $variables = []) {}
 
     /**

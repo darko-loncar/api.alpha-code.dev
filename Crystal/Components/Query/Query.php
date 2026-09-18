@@ -21,7 +21,6 @@ enum OrderDirection: string
  */
 abstract class Query
 {
-
     // Child classes like Select, Insert, Update handle their own query generation
     abstract public function getQuery(): string;
 
@@ -59,7 +58,7 @@ abstract class Query
      * Select statement columns.
      * @return $this
      */
-    public static function select(string $table, array $columns = []) : Select
+    public static function select(string $table, string ...$columns) : Select
     {
         return new Select($table, ...$columns);
     }
