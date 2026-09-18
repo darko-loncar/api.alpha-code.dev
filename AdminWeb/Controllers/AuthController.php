@@ -9,11 +9,13 @@ class AuthController
 {
     public function __construct(private MainDb $db){}
 
-    public function loginPage() {
+    public function loginPage(): callable
+    {
         return View::response('login');
     }
 
-    public function doWebAuth(){
+    public function doWebAuth(): void
+    {
 
         $username = trim($_POST['username'] ?? '');
         $password = $_POST['password'] ?? '';

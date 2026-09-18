@@ -7,16 +7,17 @@ use Throwable;
 class View
 {
     private static string $baseViewPath = __DIR__;
-    private function __construct(private readonly string $viewName, private readonly array $variables = []) {}
 
     /**
      * Factory method
+     * @param string $viewName
+     * @param array $variables
      */
     public static function response(string $viewName, array $variables = []): callable
     {
         $instance = new self($viewName, $variables);
         $html = $instance->renderFile($instance->viewName, $instance->variables);
-        return function() use ($html) {
+        return function () use ($html) {
             http_response_code(200);
             header("Content-Type: text/html; charset=UTF-8");
             echo $html;
@@ -25,11 +26,22 @@ class View
 
     /**
      * Factory method
+     * @param string $viewName
+     * @param array $variables
      */
     public static function getHtml(string $viewName, array $variables = []): string
     {
         $instance = new self($viewName, $variables);
         return $instance->renderFile($instance->viewName, $instance->variables);
+    }
+
+    /**
+     * Constructor
+     * @param string $viewName
+     * @param array $variables
+     */
+    private function __construct(private readonly string $viewName, private readonly array $variables = [])
+    {
     }
 
     /**

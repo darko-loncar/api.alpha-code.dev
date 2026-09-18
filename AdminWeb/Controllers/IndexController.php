@@ -7,7 +7,12 @@ use AdminWeb\Databases\MainDb;
 
 class IndexController
 {
-    public function __construct(private MainDb $mainDb){}
+    /**
+     * @param MainDb $mainDb
+     */
+    public function __construct(private MainDb $mainDb)
+    {
+    }
 
     public function dashboard(): callable
     {
@@ -35,8 +40,8 @@ class IndexController
         return View::response('profile', ['pageId' => 'dashboard', 'userData' => $userData]);
     }
 
-    public function page(int $id, string $slug)
+    public function page(int $id, string $slug): void
     {
-        dd($id,$slug,$_GET);
+        dd($id, $slug, $_GET);
     }
 }
