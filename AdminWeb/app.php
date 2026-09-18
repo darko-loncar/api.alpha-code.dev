@@ -23,6 +23,7 @@ $container->registerAsSingleton(
 // Dashboard Routes
 $router->get("", AdminWeb\Controllers\IndexController::class, 'dashboard');
 $router->get("my-profile", AdminWeb\Controllers\IndexController::class, 'myProfile');
+$router->get("image-library", AdminWeb\Controllers\IndexController::class, 'imageLibrary');
 $router->get("page/{id}/{slug}", AdminWeb\Controllers\IndexController::class, 'page');
 
 // Auth Routes

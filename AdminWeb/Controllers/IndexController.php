@@ -40,6 +40,11 @@ class IndexController
         return View::response('profile', ['pageId' => 'dashboard', 'userData' => $userData]);
     }
 
+    public function imageLibrary(): callable
+    {
+        return View::response('image-library', ['pageId' => 'image-library']);
+    }
+
     public function page(int $id, string $slug): void
     {
         dd($id, $slug, $_GET);

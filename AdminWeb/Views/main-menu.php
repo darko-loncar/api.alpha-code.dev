@@ -27,6 +27,7 @@
             <li><a href=/>Statistics</a>
         </ul>
     </li>-->
+    <li><a href=image-library>Image Library</a>
     <li><a href=users>Users</a>
     <li><a href=my-profile>My Profile</a>
     <li><a href=logout>Logout</a>
