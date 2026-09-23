@@ -25,10 +25,15 @@ class AuthController
             return;
         }
 
-        $user = Query::select("user_auth")
-            ->where("identifier", "=", $username)
-            ->leftJoin("user","user_id","id", ["uuid"])
-            ->first($this->db->getConnection());
+        $userQ = Query::select("user_auth")
+            ->where("identifier", $username)
+            ->where("is_active", true)
+            ->leftJoin("user","user_id","id", ["uuid"]);
+
+        $user = $this->db->first(
+            $userQ->getQuery(),
+            $userQ->getBindings()
+            );
 
         if (empty($user)) {
             echo "User not found";

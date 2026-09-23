@@ -1,21 +1,19 @@
 <?php
 declare(strict_types=1);
 namespace Crystal\Components\Query;
-use Crystal\Components\Query\Query;
 
 /**
  * Select statement.
  */
-final class Select extends Query implements iStatement
+final class Select extends Statement
 {
-
     /**
      * Constructor
      */
-    public function __construct(string $table, string ...$columns)
+    public function __construct(string $table, array $columns = [])
     {
         $this->table = $table;
-        $this->baseColumns = $columns;
+        $this->columns[$table] = array_fill_keys($columns, "");
     }
 
     /**
@@ -23,28 +21,23 @@ final class Select extends Query implements iStatement
      */
     public function getQuery(): string
     {
-        // Base columns
-        $columns = [];
+        // Compile columns SQL fragment
+        $columnSql = [];
 
-        // Normalize base columns
-        if(empty($this->baseColumns)) {
-            $columns[] = "`{$this->table}`.*";
-        } else {
-            foreach($this->baseColumns as $column) {
-                $columns[] = $this->normalizeColumnName($this->table, $column);
+        // Loop through tables
+        foreach($this->columns as $table => $columns){
+            if($columns === []) {
+                $columnSql[] = "`{$table}`.*";
+                continue;
+            }
+
+            foreach($columns as $column => $processors) {
+                $columnSql[] = $this->normalizeColumnName($table, $column, true);
             }
         }
 
-        // Loop through joined tables and add their columns
-        foreach($this->joinedColumns as $table => $joinedColumns){
-            foreach($joinedColumns as $column) {
-                $columns[] = $this->normalizeColumnName($table, $column, true);
-            }
-        }
-
-        $columnsSqlFragment = implode(", ", $columns);
-
-        $sql = "SELECT {$columnsSqlFragment} FROM `{$this->table}`";
+        $columnSqlFragment = implode(", ", $columnSql);
+        $sql = "SELECT {$columnSqlFragment} FROM `{$this->table}`";
 
         if ($this->joins !== []) {
             $sql .= ' ' . implode(' ', $this->joins);
@@ -59,11 +52,11 @@ final class Select extends Query implements iStatement
         }
 
         if ($this->limit !== null) {
-            $sql .= ' ' . $this->limit;
+            $sql .= ' LIMIT ?';
         }
 
         if ($this->offset !== null) {
-            $sql .= ' ' . $this->offset;
+            $sql .= ' OFFSET ?';
         }
 
         return $sql;

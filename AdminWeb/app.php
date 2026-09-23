@@ -3,12 +3,17 @@ declare(strict_types=1);
 use Crystal\Components\View;
 use AdminWeb\Databases\CommonDb;
 use AdminWeb\Databases\MainDb;
+use AdminWeb\Services\AuthService;
 
 // Load custom helpers
-require_once __DIR__ . "/../AdminWeb/utils.php";
+require_once __DIR__ . "/utils.php";
 
 // Set base path for views
-View::setBaseViewPath($appRoot.'/../AdminWeb/Views/');
+View::setBaseViewPath(__DIR__.'/Views');
+
+$container->register(
+    fn(): AuthService => new AuthService()
+    );
 
 // Register common database service
 $container->registerAsSingleton(
@@ -22,9 +27,13 @@ $container->registerAsSingleton(
 
 // Dashboard Routes
 $router->get("", AdminWeb\Controllers\IndexController::class, 'dashboard');
-$router->get("my-profile", AdminWeb\Controllers\IndexController::class, 'myProfile');
-$router->get("image-library", AdminWeb\Controllers\IndexController::class, 'imageLibrary');
 $router->get("page/{id}/{slug}", AdminWeb\Controllers\IndexController::class, 'page');
+$router->get("image-library", AdminWeb\Controllers\IndexController::class, 'imageLibrary');
+$router->get("make-thumbnails", AdminWeb\Controllers\IndexController::class, 'makeThumbnails');
+
+// Users routes
+$router->get("users", AdminWeb\Controllers\UserController::class, 'users');
+$router->get("user-profile/{uuid}", AdminWeb\Controllers\UserController::class, 'user');
 
 // Auth Routes
 $router->get("login", AdminWeb\Controllers\AuthController::class, 'loginPage');

@@ -6,7 +6,7 @@ use Throwable;
 
 class View
 {
-    private static string $baseViewPath = __DIR__;
+    private static string $baseViewPath = __DIR__."/Views";
 
     /**
      * Factory method
@@ -76,8 +76,8 @@ class View
 
     /**
      * Escape value
-     */
-    public function escape(mixed $value): string
+     */g
+    public function e(mixed $value): string
     {
         return htmlspecialchars((string) $value, ENT_QUOTES | ENT_SUBSTITUTE, 'UTF-8');
     }

@@ -12,7 +12,7 @@
 <body>
 <section class="ct-center ct-center--50">
 <h1>Login</h1>
-<form class="" method=post action="/login">
+<form method=post action="/login">
 <label for=username>Username
 <input type=text id=username name=username autocomplete=username required>
 </label>

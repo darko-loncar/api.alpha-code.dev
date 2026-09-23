@@ -50,4 +50,50 @@ abstract class Db
 
         return $this->pdo;
     }
+
+    /**
+     * Prepare and execute a query.
+     *
+     * @param string $query
+     * @param array $bindings
+     * @param array<string, array{value: mixed, type: int}> $bindings
+     */
+    protected function execute(string $query, array $bindings): \PDOStatement
+    {
+        if ($this->pdo === null) $this->getConnection();
+        $statement = $this->pdo->prepare($query);
+        $statement->execute($bindings);
+        return $statement;
+    }
+
+    /**
+     * Execute a query and return all rows.
+     *
+     * @param string $query
+     * @param array $bindings
+     * @return array<int, array<string, mixed>>
+     */
+    public function getAll(string $query, array $bindings): array
+    {
+        return $this
+            ->execute($query, $bindings)
+            ->fetchAll(PDO::FETCH_ASSOC);
+    }
+
+    /**
+     * Execute a query and return the first row.
+     * Returns null when no rows are found.
+     *
+     * @param string $query
+     * @param array $bindings
+     * @return array<string, mixed>|null
+     */
+    public function first(string $query, array $bindings): ?array {
+        $row = $this
+            ->execute($query, $bindings)
+            ->fetch(PDO::FETCH_ASSOC);
+
+        return $row === false ? null : $row;
+    }
+
 }

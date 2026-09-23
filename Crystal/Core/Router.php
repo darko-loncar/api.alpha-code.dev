@@ -77,7 +77,7 @@ final class Router
      */
     private function compileRegex(string $routePattern): string
     {
-        if(!str_contains($routePattern, '{')) return ""; // Route without tokens is fixed and we return empty regex
+        if(!str_contains($routePattern, '{')) return ""; // Route without tokens is static and we return empty regex
 
         // Split the route pattern into parts by slashes
         $parts = explode("/", $routePattern);
@@ -143,7 +143,7 @@ final class Router
             // Cleanup numerical indexes from $params array
             foreach ($params as $key => $value) {
                 // Unset numeric indexes
-                if (\is_int($key)) {
+                if (is_int($key)) {
                     unset($params[$key]);
                     continue;
                     }
@@ -158,7 +158,6 @@ final class Router
                 "method" => $route["method"],
                 "params" => $params
                 ];
-
         }
 
         // If no routes matched...

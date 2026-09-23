@@ -4,40 +4,21 @@ namespace AdminWeb\Controllers;
 use Crystal\Components\Query\Query;
 use Crystal\Components\View;
 use AdminWeb\Databases\MainDb;
+use AdminWeb\Services\AuthService;
 
 class IndexController
 {
     /**
      * @param MainDb $mainDb
      */
-    public function __construct(private MainDb $mainDb)
+    public function __construct(private MainDb $mainDb, private AuthService $auth)
     {
     }
 
     public function dashboard(): callable
     {
-        if (!isset($_SESSION['user_uuid'])) {
-            header('Location: /login');
-            exit;
-        }
-
+        $this->auth->requireLogin();
         return View::response('dashboard', ['pageId' => 'dashboard']);
-    }
-
-    public function myProfile(): callable
-    {
-        if (!isset($_SESSION['user_uuid'])) {
-            header('Location: /login');
-            exit;
-        }
-
-        $conn = $this->mainDb->getConnection();
-        $userData = Query::select("user")
-            ->where("user.uuid", "=", $_SESSION["user_uuid"])
-            ->leftJoin("user_auth", "id", "id", ["id", "identifier", "last_login_at"])
-            ->first($conn);
-
-        return View::response('profile', ['pageId' => 'dashboard', 'userData' => $userData]);
     }
 
     public function imageLibrary(): callable
@@ -45,8 +26,57 @@ class IndexController
         return View::response('image-library', ['pageId' => 'image-library']);
     }
 
-    public function page(int $id, string $slug): void
-    {
-        dd($id, $slug, $_GET);
+
+    public function makeThumbnails(){
+
+        $sourceDir = __DIR__ . '/../public/Uploads';
+        $thumbDir  = __DIR__ . '/../public/Uploads/thumbs';
+
+        $width  = 200;
+        $height = 200;
+        $quality = 40;
+
+        if (!is_dir($thumbDir)) {
+            mkdir($thumbDir, 0755, true);
+        }
+
+        foreach (glob($sourceDir . '/*.{jpg,jpeg,JPG,JPEG}', GLOB_BRACE) as $file) {
+            $image = imagecreatefromjpeg($file);
+
+            if (!$image) {
+                echo "Failed: $file\n";
+                continue;
+            }
+
+            $srcWidth  = imagesx($image);
+            $srcHeight = imagesy($image);
+
+            // Keep aspect ratio, fit inside 200x200
+            $scale = min($width / $srcWidth, $height / $srcHeight);
+
+            $newWidth  = max(1, (int)($srcWidth * $scale));
+            $newHeight = max(1, (int)($srcHeight * $scale));
+
+            $thumb = imagecreatetruecolor($newWidth, $newHeight);
+
+            imagecopyresampled(
+                $thumb,
+                $image,
+                0, 0, 0, 0,
+                $newWidth, $newHeight,
+                $srcWidth, $srcHeight
+            );
+
+            $output = $thumbDir . '/' .
+                      pathinfo($file, PATHINFO_FILENAME) . '.avif';
+
+            imageavif($thumb, $output, $quality);
+
+            imagedestroy($image);
+            imagedestroy($thumb);
+
+            echo "Created: $output\n";
+        }
+
     }
 }

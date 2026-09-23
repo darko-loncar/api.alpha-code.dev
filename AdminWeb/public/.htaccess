@@ -5,6 +5,7 @@ ServerSignature Off
 DirectoryIndex index.php
 
 # Rewrite
+# Rewrite
 RewriteEngine On
 RewriteCond %{REQUEST_FILENAME} -f [OR]
 RewriteCond %{REQUEST_FILENAME} -d

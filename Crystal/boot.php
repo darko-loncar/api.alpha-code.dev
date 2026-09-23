@@ -6,7 +6,7 @@ use Crystal\Core\Router;
 
 return function(string $appFolder = "App", bool $debug = false) {
 
-    $start = hrtime(true);
+    //$start = hrtime(true);
 
     // Application Context
     $appRoot = __DIR__ . "/../".$appFolder;

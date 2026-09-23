@@ -1,7 +1,7 @@
 <header>
 <div class="ct-center top-bar">
 <a href="/" id=logo>
-<img src=gfx/logo.svg alt="Alpha Code" width="120" height="120" loading="eager" decoding="async" fetchpriority="high">
+<img src=/gfx/logo.svg alt="Alpha Code" width="120" height="120" loading="eager" decoding="async" fetchpriority="high">
 <span>Alpha Code</span>
 </a>
 <button class=mobile-nav-toggle aria-label="Open menu">
@@ -28,9 +28,9 @@
         </ul>
     </li>-->
     <li><a href=image-library>Image Library</a>
-    <li><a href=users>Users</a>
-    <li><a href=my-profile>My Profile</a>
-    <li><a href=logout>Logout</a>
+    <li><a href=/users>Users</a>
+    <li><a href=/my-profile>My Profile</a>
+    <li><a href=/logout>Logout</a>
 </ul>
 </nav>
 </header>
