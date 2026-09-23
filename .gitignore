@@ -1,6 +1,7 @@
 # App Specific
-/AdminWeb/public/Uploads
-/AdminWeb/config.php
+/admin.alpha-code.dev/public/Uploads
+/admin.alpha-code.dev/config.php
+/admin.alpha-code.dev/config.php.prod
 error.log
 
 # PhpUnit
