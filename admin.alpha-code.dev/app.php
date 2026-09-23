@@ -41,6 +41,14 @@ $router->get("", App\Controllers\IndexController::class, 'dashboard');
 $router->get("users", App\Controllers\UserController::class, 'users');
 $router->get("user-profile/{uuid}", App\Controllers\UserController::class, 'user');
 
+// Article routes
+$router->get("articles", App\Controllers\ArticleController::class, 'index');
+$router->get("article/{id}", App\Controllers\ArticleController::class, 'article');
+$router->post("article", App\Controllers\ArticleController::class, 'create');
+$router->post("article/{id}", App\Controllers\ArticleController::class, 'update');
+$router->post("article/delete/{id}", App\Controllers\ArticleController::class, 'delete');
+
+
 // Auth Routes
 $router->get("login", App\Controllers\AuthController::class, 'login');
 $router->post("login", App\Controllers\AuthController::class, 'authenticate');

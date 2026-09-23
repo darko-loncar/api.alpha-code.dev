@@ -11,6 +11,7 @@
 <nav id=menu aria-label="Main navigation">
 <ul class=ct-center>
     <li><a href=/>Dashboard</a>
+    <li><a href=/articles>Articles</a>
     <li><a href=/users>Users</a>
     <li><a href=/my-profile>My Profile</a>
     <li><a href=/logout>Logout</a>
