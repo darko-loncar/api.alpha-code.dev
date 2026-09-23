@@ -29,7 +29,7 @@ final class QueryTest extends TestCase
         );
 
         $this->assertSame(
-            'SELECT `user`.`id` AS __user__id, `user`.`uuid` AS __user__uuid, `user`.`email` AS __user__email FROM `user`',
+            'SELECT `user`.`id` AS user__id, `user`.`uuid` AS user__uuid, `user`.`email` AS user__email FROM `user`',
             $query->getQuery()
         );
 
@@ -101,7 +101,7 @@ final class QueryTest extends TestCase
     public function testOrderByDefaultsToAscending(): void
     {
         $query = Query::select('user')
-            ->orderBy('id');
+            ->orderBy('user.id');
 
         $this->assertSame(
             'SELECT `user`.* FROM `user` ORDER BY user.id ASC',
@@ -114,7 +114,7 @@ final class QueryTest extends TestCase
     public function testOrderByDescending(): void
     {
         $query = Query::select('user')
-            ->orderBy('id', 'DESC');
+            ->orderBy('user.id', 'DESC');
 
         $this->assertSame(
             'SELECT `user`.* FROM `user` ORDER BY user.id DESC',
@@ -205,7 +205,7 @@ final class QueryTest extends TestCase
             );
 
         $this->assertSame(
-            'SELECT `user`.*, `user_auth`.`id` AS __user_auth__id, `user_auth`.`identifier` AS __user_auth__identifier, `user_auth`.`last_login_at` AS __user_auth__last_login_at FROM `user` LEFT JOIN `user_auth` AS user_auth ON user.id = user_auth.id',
+            'SELECT `user`.*, `user_auth`.`id` AS user_auth__id, `user_auth`.`identifier` AS user_auth__identifier, `user_auth`.`last_login_at` AS user_auth__last_login_at FROM `user` LEFT JOIN `user_auth` AS user_auth ON user.id = user_auth.id',
             $query->getQuery()
         );
 
@@ -226,7 +226,7 @@ final class QueryTest extends TestCase
             ->limit(25, 0);
 
         $this->assertSame(
-            'SELECT `user`.*, `user_auth`.`id` AS __user_auth__id, `user_auth`.`identifier` AS __user_auth__identifier, `user_auth`.`last_login_at` AS __user_auth__last_login_at FROM `user` LEFT JOIN `user_auth` AS user_auth ON user.id = user_auth.id WHERE user.is_active = ? ORDER BY user.id ASC LIMIT ? OFFSET ?',
+            'SELECT `user`.*, `user_auth`.`id` AS user_auth__id, `user_auth`.`identifier` AS user_auth__identifier, `user_auth`.`last_login_at` AS user_auth__last_login_at FROM `user` LEFT JOIN `user_auth` AS user_auth ON user.id = user_auth.id WHERE user.is_active = ? ORDER BY user.id ASC LIMIT ? OFFSET ?',
             $query->getQuery()
         );
 
