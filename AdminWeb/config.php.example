@@ -1,0 +1,11 @@
+<?php
+
+return [
+    "mainDb" => [
+        "host" => "localhost",
+        "database" => "database_name",
+        "user" => "user_name",
+        "password" => "user_password",
+        "port" => 3306
+    ]
+];

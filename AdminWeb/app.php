@@ -11,8 +11,21 @@ require_once __DIR__ . "/utils.php";
 // Set base path for views
 View::setBaseViewPath(__DIR__.'/Views');
 
+$config = require_once __DIR__ . "/config.php";
+
 $container->register(
     fn(): AuthService => new AuthService()
+    );
+
+// Register main database service
+$container->registerAsSingleton(
+    fn(): MainDb => new MainDb(
+        $config["mainDb"]["host"],
+        $config["mainDb"]["database"],
+        $config["mainDb"]["user"],
+        $config["mainDb"]["password"],
+        $config["mainDb"]["port"],
+        )
     );
 
 // Register common database service
@@ -20,11 +33,6 @@ $container->register(
     //fn(): CommonDb => new CommonDb('192.168.1.102', 'common', 'nyxx@localhost', 'Chronos_1', 3306)
     //);
 
-// Register main database service
-$container->registerAsSingleton(
-    fn(): MainDb => new MainDb('192.168.1.102', 'alphacodedev_crystal', 'nyxx@localhost', 'Chronos_1', 3306)
-    //fn(): MainDb => new MainDb('localhost', 'alphacodedev_crystal', 'alphacodedev_crystal', 'ChronosPlant_25', 3306)
-    );
 
 // Dashboard Routes
 $router->get("", AdminWeb\Controllers\IndexController::class, 'dashboard');
