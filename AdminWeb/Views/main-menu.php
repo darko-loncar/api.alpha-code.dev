@@ -11,23 +11,6 @@
 <nav id=menu aria-label="Main navigation">
 <ul class=ct-center>
     <li><a href=/>Dashboard</a>
-    <!--
-    <li><a href=/>Tools</a>
-        <ul>
-            <li><a href=password-generator>Password Generator</a>
-            <li><a href=/>View all posts</a>
-            <li><a href=/>Categories & Other Stuff</a>
-            <li><a href=/>Add category</a>
-                <ul>
-                    <li><a href=/>Website Statistics</a>
-                    <li><a href=/>Plugins</a>
-                    <li><a href=/>Available Modules</a>
-                </ul>
-            <li><a href=/>View Categories</a>
-            <li><a href=/>Statistics</a>
-        </ul>
-    </li>-->
-    <li><a href=image-library>Image Library</a>
     <li><a href=/users>Users</a>
     <li><a href=/my-profile>My Profile</a>
     <li><a href=/logout>Logout</a>

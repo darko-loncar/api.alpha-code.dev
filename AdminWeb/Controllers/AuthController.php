@@ -3,18 +3,20 @@ namespace App\Controllers;
 
 use Crystal\Components\Query\Query;
 use Crystal\Components\View;
-use Databases\MainDb;
+use App\Databases\MainDb;
 
 class AuthController
 {
-    public function __construct(private MainDb $db){}
+    public function __construct(private MainDb $db)
+    {
+    }
 
-    public function loginPage(): callable
+    public function login(): callable
     {
         return View::response('login');
     }
 
-    public function doWebAuth(): void
+    public function authenticate(): void
     {
 
         $username = trim($_POST['username'] ?? '');
@@ -55,7 +57,7 @@ class AuthController
         exit();
     }
 
-    public function doLogout(): void
+    public function logout(): void
     {
         if (session_status() !== PHP_SESSION_ACTIVE) {
             session_start();

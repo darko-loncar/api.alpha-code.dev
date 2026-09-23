@@ -42,6 +42,6 @@ $router->get("users", App\Controllers\UserController::class, 'users');
 $router->get("user-profile/{uuid}", App\Controllers\UserController::class, 'user');
 
 // Auth Routes
-$router->get("login", App\Controllers\AuthController::class, 'loginPage');
-$router->post("login", App\Controllers\AuthController::class, 'doWebAuth');
-$router->get("logout", App\Controllers\AuthController::class, 'doLogout');
+$router->get("login", App\Controllers\AuthController::class, 'login');
+$router->post("login", App\Controllers\AuthController::class, 'authenticate');
+$router->get("logout", App\Controllers\AuthController::class, 'logout');
