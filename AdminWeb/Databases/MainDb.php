@@ -1,5 +1,5 @@
 <?php
-namespace AdminWeb\Databases;
+namespace App\Databases;
 use Crystal\Components\Db;
 
 final class MainDb extends Db {

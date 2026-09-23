@@ -1,10 +1,10 @@
 <?php
-namespace AdminWeb\Controllers;
+namespace App\Controllers;
 
 use Crystal\Components\Query\Query;
 use Crystal\Components\View;
-use AdminWeb\Databases\MainDb;
-use AdminWeb\Services\AuthService;
+use App\Databases\MainDb;
+use App\Services\AuthService;
 
 class IndexController
 {

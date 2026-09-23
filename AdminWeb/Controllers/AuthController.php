@@ -1,9 +1,9 @@
 <?php
-namespace AdminWeb\Controllers;
+namespace App\Controllers;
 
 use Crystal\Components\Query\Query;
 use Crystal\Components\View;
-use AdminWeb\Databases\MainDb;
+use Databases\MainDb;
 
 class AuthController
 {

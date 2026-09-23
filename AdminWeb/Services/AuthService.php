@@ -1,6 +1,6 @@
 <?php
 declare(strict_types=1);
-namespace AdminWeb\Services;
+namespace App\Services;
 
 class AuthService
 {

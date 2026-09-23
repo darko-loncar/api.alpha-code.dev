@@ -1,9 +1,9 @@
 <?php
 declare(strict_types=1);
 use Crystal\Components\View;
-use AdminWeb\Databases\CommonDb;
-use AdminWeb\Databases\MainDb;
-use AdminWeb\Services\AuthService;
+use App\Databases\CommonDb;
+use App\Databases\MainDb;
+use App\Services\AuthService;
 
 // Load custom helpers
 require_once __DIR__ . "/utils.php";
@@ -35,13 +35,13 @@ $container->registerAsSingleton(
 
 
 // Dashboard Routes
-$router->get("", AdminWeb\Controllers\IndexController::class, 'dashboard');
+$router->get("", App\Controllers\IndexController::class, 'dashboard');
 
 // Users routes
-$router->get("users", AdminWeb\Controllers\UserController::class, 'users');
-$router->get("user-profile/{uuid}", AdminWeb\Controllers\UserController::class, 'user');
+$router->get("users", App\Controllers\UserController::class, 'users');
+$router->get("user-profile/{uuid}", App\Controllers\UserController::class, 'user');
 
 // Auth Routes
-$router->get("login", AdminWeb\Controllers\AuthController::class, 'loginPage');
-$router->post("login", AdminWeb\Controllers\AuthController::class, 'doWebAuth');
-$router->get("logout", AdminWeb\Controllers\AuthController::class, 'doLogout');
+$router->get("login", App\Controllers\AuthController::class, 'loginPage');
+$router->post("login", App\Controllers\AuthController::class, 'doWebAuth');
+$router->get("logout", App\Controllers\AuthController::class, 'doLogout');

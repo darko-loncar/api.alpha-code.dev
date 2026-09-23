@@ -10,7 +10,6 @@ return function(string $appFolder = "App", bool $debug = false) {
 
     // Application Context
     $appRoot = __DIR__ . "/../".$appFolder;
-    $appNamespace = $appFolder . '\\';
 
     // Error handling
     ini_set('display_errors', $debug ? '1' : '0');
@@ -42,7 +41,8 @@ return function(string $appFolder = "App", bool $debug = false) {
     // Register class autoloader.
     $map = [
         'Crystal\\' => __DIR__ . '/',
-        $appNamespace => $appRoot."/",
+        //$appNamespace => $appRoot."/",
+        "App\\" => $appRoot."/",
     ];
 
     spl_autoload_register(static function (string $class) use ($map) {

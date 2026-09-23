@@ -1,10 +1,10 @@
 <?php
-namespace AdminWeb\Controllers;
+namespace App\Controllers;
 
 use Crystal\Components\Query\Query;
 use Crystal\Components\View;
-use AdminWeb\Services\AuthService;
-use AdminWeb\Databases\MainDb;
+use App\Services\AuthService;
+use App\Databases\MainDb;
 
 class UserController
 {
