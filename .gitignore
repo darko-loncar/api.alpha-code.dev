@@ -1,4 +1,6 @@
+# App Specific
 /AdminWeb/public/Uploads
+error.log
 
 # IDE Junk files
 ## VS Code
@@ -10,57 +12,3 @@
 *.code-workspace
 .history/
 .favorites.json
-
-## PhpStorm
-.idea
-/_ide_helper.php
-
-## Netbeans
-nbproject
-
-# Operating Systems Junk files
-## Mac OS junk files
-.DS_Store
-.DS_Store?
-*.DS_Store
-._*
-.Spotlight-V100
-.Trashes
-ehthumbs.db
-ehthumbs_vista.db
-
-## Windows junk files
-[Tt]humbs.db
-Thumbs.db:encryptable
-*.lnk
-[Dd]esktop.ini
-
-# Node
-/node_modules
-
-# Yarn
-yarn-debug.log*
-yarn-error.log*
-.yarn-integrity
-.yarn/cache
-.yarn/unplugged
-.yarn/build-state.yml
-.pnp.*
-
-# Npm
-npm-debug.log*
-
-# Composer
-composer.phar
-#composer.lock
-/vendor/
-
-# PHP Unit
-phpunit.xml
-.phpunit.result.cache
-/.phpunit
-
-# Framework Specific
-.env
-/storage/*
-error.log
