@@ -13,15 +13,15 @@ $user = $this->getVar("userData");
 
     <div class="user-card-header">
         <div class="user-avatar">
-            <?= $this->escape(mb_substr($user["first_name"], 0, 1) . mb_substr($user["last_name"], 0, 1)); ?>
+            <?= $this->e(mb_substr($user["first_name"], 0, 1) . mb_substr($user["last_name"], 0, 1)); ?>
         </div>
 
         <div>
             <h2>
-                <?= $this->escape($user["first_name"] . " " . $user["last_name"]); ?>
+                <?= $this->e($user["first_name"] . " " . $user["last_name"]); ?>
             </h2>
             <div class="user-card-email">
-                <?= $this->escape($user["email"]); ?>
+                <?= $this->e($user["email"]); ?>
             </div>
         </div>
     </div>
@@ -31,28 +31,28 @@ $user = $this->getVar("userData");
         <div class="user-detail">
             <span class="user-detail-label">Phone</span>
             <span class="user-detail-value">
-                <?= $this->escape($user["phone"]); ?>
+                <?= $this->e($user["phone"]); ?>
             </span>
         </div>
 
         <div class="user-detail">
             <span class="user-detail-label">User ID</span>
             <span class="user-detail-value">
-                <?= $this->escape($user["id"]); ?>
+                <?= $this->e($user["id"]); ?>
             </span>
         </div>
 
         <div class="user-detail user-detail-full">
             <span class="user-detail-label">UUID</span>
             <span class="user-detail-value user-uuid">
-                <?= $this->escape($user["uuid"]); ?>
+                <?= $this->e($user["uuid"]); ?>
             </span>
         </div>
 
     </div>
 
     <div class="user-card-actions">
-        <a href="/users/<?= $this->escape($user["uuid"]); ?>/edit">Edit user</a>
+        <a href="/users/<?= $this->e($user["uuid"]); ?>/edit">Edit user</a>
     </div>
 
 </div>
