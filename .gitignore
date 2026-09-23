@@ -4,6 +4,7 @@
 error.log
 
 # PhpUnit
+.phpunit.cache
 .phpunit.result.cache
 
 # VS Code
