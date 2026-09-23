@@ -16,20 +16,18 @@ $container->register(
     );
 
 // Register common database service
-$container->registerAsSingleton(
-    fn(): CommonDb => new CommonDb('192.168.1.102', 'common', 'nyxx@localhost', 'Chronos_1', 3306)
-    );
+//$container->registerAsSingleton(
+    //fn(): CommonDb => new CommonDb('192.168.1.102', 'common', 'nyxx@localhost', 'Chronos_1', 3306)
+    //);
 
 // Register main database service
 $container->registerAsSingleton(
     fn(): MainDb => new MainDb('192.168.1.102', 'alphacodedev_crystal', 'nyxx@localhost', 'Chronos_1', 3306)
+    //fn(): MainDb => new MainDb('localhost', 'alphacodedev_crystal', 'alphacodedev_crystal', 'ChronosPlant_25', 3306)
     );
 
 // Dashboard Routes
 $router->get("", AdminWeb\Controllers\IndexController::class, 'dashboard');
-$router->get("page/{id}/{slug}", AdminWeb\Controllers\IndexController::class, 'page');
-$router->get("image-library", AdminWeb\Controllers\IndexController::class, 'imageLibrary');
-$router->get("make-thumbnails", AdminWeb\Controllers\IndexController::class, 'makeThumbnails');
 
 // Users routes
 $router->get("users", AdminWeb\Controllers\UserController::class, 'users');
