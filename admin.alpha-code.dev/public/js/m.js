@@ -1,5 +1,5 @@
+/**
 
-// Navigation
 function initMenu() {
 const menu = document.querySelector("#menu");
 const items = menu.querySelectorAll("li");
@@ -24,9 +24,10 @@ menu.addEventListener("click", (event) => {
 });
 }
 
-// Boot App
+
 async function initApp() {
   initMenu();
 }
 
 document.addEventListener("DOMContentLoaded", initApp);
+ */

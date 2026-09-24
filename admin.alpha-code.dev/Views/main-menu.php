@@ -1,6 +1,6 @@
-<header class="ct-center top-bar">
+<header>
 
-<nav id="menu" aria-label="Main navigation">
+<nav id="menu" class="ct-center" aria-label="Main navigation">
 <ul class="ct-center">
     <li id="dashboard-link">
         <a href="/"">
@@ -47,7 +47,7 @@
 </nav>
 
 <button class="mobile-nav-toggle" aria-label="Open menu">
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill=none stroke=#fff stroke-width=2 stroke-linecap=round><line x1=3 y1=6 x2=21 y2=6/><line x1=3 y1=12 x2=21 y2=12/><line x1=3 y1=18 x2=21 y2=18/></svg>
+<!--<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill=none stroke=#fff stroke-width=2 stroke-linecap=round><line x1=3 y1=6 x2=21 y2=6/><line x1=3 y1=12 x2=21 y2=12/><line x1=3 y1=18 x2=21 y2=18/></svg>-->
 </button>
 
 </header>
