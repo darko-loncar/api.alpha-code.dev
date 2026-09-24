@@ -84,7 +84,7 @@ tinymce.init({
     content_css: 'dark',
     plugins: ['lists','link','table','image', 'code'],
     toolbar: 'undo redo | blocks | fontfamily fontsize bold italic underline | bullist numlist table code | link image | crystalmore',
-
+    branding: false,
     //content_style:'body {font-family: 'System=system-ui,-apple-system,"Segoe UI",Roboto,Arial,sans-serif;}'',
 
     block_formats:
