@@ -1,0 +1,17 @@
+/* Righteous Regular */
+@font-face {
+  font-display: swap;
+  font-family: 'Righteous';
+  font-style: normal;
+  font-weight: 400;
+  src: url('/fonts/righteous-latin-ext-regular.woff2') format('woff2');
+}
+
+/* Roboto Regular */
+@font-face {
+  font-display: swap;
+  font-family: 'Roboto';
+  font-style: normal;
+  font-weight: 400;
+  src: url('/fonts/roboto-latin-regular.woff2') format('woff2'); /* Chrome 36+, Opera 23+, Firefox 39+, Safari 12+, iOS 10+ */
+}
