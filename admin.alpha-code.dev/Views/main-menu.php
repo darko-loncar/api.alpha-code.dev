@@ -1,21 +1,54 @@
-<header>
-<div class="ct-center top-bar">
-<a href="/" id=logo>
-<img src=/gfx/logo.svg alt="Alpha Code" width="120" height="120" loading="eager" decoding="async" fetchpriority="high">
-<span>Alpha Code</span>
-</a>
-<button class=mobile-nav-toggle aria-label="Open menu">
-<svg xmlns=http://www.w3.org/2000/svg viewBox="0 0 24 24" fill=none stroke=#fff stroke-width=2 stroke-linecap=round><line x1=3 y1=6 x2=21 y2=6/><line x1=3 y1=12 x2=21 y2=12/><line x1=3 y1=18 x2=21 y2=18/></svg>
-</button>
-</div><!--/.ct-center-->
-<nav id=menu aria-label="Main navigation">
-<ul class=ct-center>
-    <li><a href=/>Dashboard</a>
-    <li><a href=/articles>Articles</a>
-    <li><a href=/users>Users</a>
-    <li><a href=/my-profile>My Profile</a>
-    <li><a href=/logout>Logout</a>
+<header class="ct-center top-bar">
+
+<nav id="menu" aria-label="Main navigation">
+<ul class="ct-center">
+    <li id="dashboard-link">
+        <a href="/"">
+            <img id="logo" src="/gfx/logo.svg" alt="Alpha Code" width="36" height="36" loading="eager" decoding="async" fetchpriority="high">
+            <span>Dashboard</span>
+        </a>
+    </li>
+    <li><a href="/articles">Articles</a>
+        <ul>
+        <li><a href="/pages">All articles</a></li>
+        <li><a href="/pages">Add new article</a></li>
+        <li><a href="/pages">Categories</a></li>
+        </ul>
+    </li>
+
+    <li><a href="/pages">Pages</a>
+        <ul>
+        <li><a href="/pages">All pages</a></li>
+        <li><a href="/pages">Add new page</a></li>
+        <li><a href="/pages">Page templates</a></li>
+        </ul>
+    </li>
+    <li><a href="/media">Media</a></li>
+    <li><a href="/media">Menus</a></li>
+    <li><a href="/pages">Site settings</a>
+        <ul>
+        <li><a href="/pages">General</a></li>
+        <li><a href="/pages">SEO / Social</a></li>
+        <li><a href="/pages">Copyright / Footer</a></li>
+        <li><a href="/pages">Maintenance Mode</a></li>
+        </ul>
+    </li>
+
+    <li><a href="/users">Users</a></li>
+    <li><a href="/pages">My profile</a>
+        <ul>
+        <li><a href="/pages">Edit my profile info</a></li>
+        <li><a href="/pages">Password & Security</a></li>
+        <li><a href="/logout">Logout</a>
+        </ul>
+    </li>
+
 </ul>
 </nav>
+
+<button class="mobile-nav-toggle" aria-label="Open menu">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill=none stroke=#fff stroke-width=2 stroke-linecap=round><line x1=3 y1=6 x2=21 y2=6/><line x1=3 y1=12 x2=21 y2=12/><line x1=3 y1=18 x2=21 y2=18/></svg>
+</button>
+
 </header>
 <main>

@@ -19,16 +19,19 @@ class ArticleController
     {
         $this->auth->requireLogin();
 
+        // Query article
         $userQ = Query::select("article")
             ->leftJoin("user", "id", "id", ["first_name", "last_name"])
             ->orderBy("article.id", "desc")
             ->limit(25, 0);
 
+        // Get data
         $data = $this->mainDb->getAll(
             $userQ->getQuery(),
             $userQ->getBindings()
             );
 
+        // Return View
         return View::response('articles', ['pageId' => 'dashboard', 'articleData' => $data]);
 
     }

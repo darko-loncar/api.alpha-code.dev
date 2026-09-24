@@ -8,24 +8,44 @@
 /*Global*/
 *,*::before,*::after{box-sizing:border-box;outline:var(--debug-outline)}
 html{font-size:16px;scroll-behavior:smooth}
-body{margin:0;font:normal clamp(1.2rem,0.95rem + 0.3vw,1.6rem)/1.6 var(--font);-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;overflow-wrap:break-word;background:#000;color:#fff}
+body{margin:0;padding-top:2rem;font:normal clamp(1.2rem,0.95rem + 0.3vw,1.6rem)/1.6 var(--font);-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;overflow-wrap:break-word;background:#13171a;color:#fff}
 a{color:#0f0}
 section{padding-block:clamp(5px,1.5vh,1.5rem)}
-header{background:#1A211D}
+header{position:fixed;top:0;left:0;right:0;background:#272d35;display:flex;align-items:left;z-index:9999;box-shadow:0 0px 12px 0 rgba(30, 30, 30, 0.3);}
 footer{text-align:center}
 h1,h2,h3{color:#fff;font-weight:700}
+
+/*Nav*/
+#menu{padding:0;border-bottom:2px solid #21262f}
+#menu ul{list-style:none;margin:0;display:flex;align-items:center;flex-wrap:nowrap;padding:0}
+#menu li{position:relative}
+#menu li ul{display:none;position:absolute;top:100%;left:0;min-width:200px;background:#222;z-index:10000;padding-left:0}
+#menu li li ul{top:0;left:100%}
+#menu li:has(ul)>a::after{content:"▾";margin-left:0.5rem}
+#menu li ul li:has(ul)>a::after{content:"▸";margin-left:1rem}
+#menu a{border-radius:3px;position:relative;display:flex;align-items:center;padding:0.3rem clamp(5px,2vw,1.25rem);color:#fff;white-space:nowrap;text-decoration:none;transition:background .2s ease}
+#menu a:hover{background:#8a2}
+#menu a:focus-visible{outline:2px solid #fff;outline-offset:-2px}
+
+li#dashboard-link{font-weight:bold;border-right:2px solid #21262f;margin-right:2px;padding-right:2px}
+#logo{display:inline;padding:0;margin:0}
+
+.mobile-nav-toggle{display:none;margin-left:auto;padding:1rem;background:none;height:clamp(80px,10vw,120px);border:none;border-radius:0}
+.mobile-nav-toggle img{width:100%;height:100%}
+
 
 /*Struct*/
 .ct-center{max-width:var(--site-width);margin-inline:auto;padding-inline:clamp(0.2rem,3vw,2rem)}
 .ct-center--70{max-width:70rem}
 .ct-center--50{max-width:50rem}
 
-.full,.gr-2,.gr-3,.gr-4,.gr-5{display:grid;gap:clamp(2rem,2vw,4rem);contain:layout}
+.full,.gr-2,.gr-3,.gr-4,.gr-5,.gr-7-3{display:grid;gap:clamp(2rem,2vw,4rem);contain:layout}
 .full{grid-column:1/-1}
 .gr-2{grid-template-columns:repeat(2,1fr)}
 .gr-3{grid-template-columns:repeat(3,1fr)}
 .gr-4{grid-template-columns:repeat(4,1fr)}
 .gr-5{grid-template-columns:repeat(5,1fr)}
+.gr-7-3{grid-template-columns:7fr 3fr}
 
 /*Table*/
 table{width:100%;border-collapse:collapse;background:#0f0f0f;border:1px solid #222;border-radius:8px;contain:content}
@@ -45,25 +65,6 @@ button{margin:1rem 0;font-size:1.4rem;background:#1d7a46;color:#fff;border:none;
 button:hover{background:#246f45}
 input::placeholder,textarea::placeholder{color:#666;opacity:1}
 
-/* Top bar */
-.top-bar{display:flex;align-items:center;justify-content:space-between}
-#logo{display:flex;align-items:center;gap:0.5rem;text-decoration:none}
-#logo img{display:block;height:clamp(60px,10vw,100px)}
-#logo span{line-height:1;color:#fff;font-size:3rem}
-.mobile-nav-toggle{display:none;margin-left:auto;padding:1rem;background:none;height:clamp(80px,10vw,120px);border:none;border-radius:0}
-.mobile-nav-toggle img{width:100%;height:100%}
-
-/*Nav*/
-#menu{background:#8a2e0d;border-top:1px solid #791d0c}
-#menu ul{list-style:none;margin-block:0;display:flex;flex-wrap:nowrap}
-#menu li{position:relative}
-#menu li ul{display:none;position:absolute;top:100%;left:0;min-width:200px;background:#222;z-index:10000;padding-left:0}
-#menu li li ul{top:0;left:100%}
-#menu li:has(ul)>a::after{content:"▾";margin-left:0.5rem}
-#menu li ul li:has(ul)>a::after{content:"▸";margin-left:1rem}
-#menu a{position:relative;display:block;padding:0.7rem clamp(5px,2vw,1.25rem);color:#fff;white-space:nowrap;font-weight:bold;text-decoration:none;transition:background .2s ease}
-#menu a:hover{background:#B3471F}
-#menu a:focus-visible{outline:2px solid #fff;outline-offset:-2px}
 
 @media (hover:hover) and (pointer:fine) {
 #menu li:hover > ul,#menu li:focus-within > ul {display:block}
