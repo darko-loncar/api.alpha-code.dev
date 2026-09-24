@@ -1,8 +1,6 @@
 <?php echo $this->partial("head") ?>
 <?php echo $this->partial("main-menu") ?>
-<main>
-<body>
-<section class="ct-center">
+<main class="ct-center">
 <h1>User Profile</h1>
 
 <?php
@@ -10,7 +8,6 @@ $user = $this->getVar("userData");
 ?>
 
 <div class="user-card">
-
     <div class="user-card-header">
         <div class="user-avatar">
             <?= $this->e(mb_substr($user["first_name"], 0, 1) . mb_substr($user["last_name"], 0, 1)); ?>
@@ -57,6 +54,5 @@ $user = $this->getVar("userData");
 
 </div>
 
-</section>
-</body>
+</main>
 <?php echo $this->partial("footer") ?>

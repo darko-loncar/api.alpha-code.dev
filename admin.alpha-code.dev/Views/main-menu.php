@@ -10,21 +10,21 @@
     </li>
     <li><a href="/articles">Articles</a>
         <ul>
-        <li><a href="/pages">All articles</a></li>
-        <li><a href="/pages">Add new article</a></li>
-        <li><a href="/pages">Categories</a></li>
+        <li><a href="/articles">All articles</a></li>
+        <li><a href="/new-article">Add new article</a></li>
+        <li><a href="/categories">Categories</a></li>
         </ul>
     </li>
 
     <li><a href="/pages">Pages</a>
         <ul>
         <li><a href="/pages">All pages</a></li>
-        <li><a href="/pages">Add new page</a></li>
-        <li><a href="/pages">Page templates</a></li>
+        <li><a href="/new-page">Add new page</a></li>
+        <li><a href="/page-templates">Page templates</a></li>
         </ul>
     </li>
     <li><a href="/media">Media</a></li>
-    <li><a href="/media">Menus</a></li>
+    <li><a href="/media">Menu editor</a></li>
     <li><a href="/pages">Site settings</a>
         <ul>
         <li><a href="/pages">General</a></li>
@@ -51,4 +51,3 @@
 </button>
 
 </header>
-<main>

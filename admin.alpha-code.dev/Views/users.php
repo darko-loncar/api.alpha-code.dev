@@ -1,8 +1,6 @@
 <?php echo $this->partial("head") ?>
 <?php echo $this->partial("main-menu") ?>
-<main>
-<body>
-<section class="ct-center">
+<main class="ct-center">
 <h1>Users</h1>
 
 <table>
@@ -23,6 +21,5 @@
     </tbody>
 </table>
 
-</section>
-</body>
+</main>
 <?php echo $this->partial("footer") ?>

@@ -1,8 +1,6 @@
 <?php echo $this->partial("head") ?>
 <?php echo $this->partial("main-menu") ?>
-
-
-<section class="ct-center gr-7-3">
+<main class="ct-center">
 
 <?php
 // Sanitize HTML coming from db
@@ -12,11 +10,16 @@ $article["content"] = strip_tags(
     ');
 ?>
 
-<div>
-    <h1>Article editor</h1>
-    <textarea id="editor" rows="50"><?= $article["content"] ?></textarea>
-</div>
-<div>
+<h1>Article editor</h1>
+<form class="gr-7-3">
+<section class="editor">
+    <label>Article title</label>
+    <input value="<?= $article["title"] ?>">
+
+    <label>Main text</label>
+    <textarea rows="50"><?= $article["content"] ?></textarea>
+</section>
+<aside class="context-bar">
     <?= $this->e($article["id"]) ?>
     <?= $this->e($article["is_published"]) ?>
     <?= $this->e($article["title"]) ?>
@@ -25,7 +28,7 @@ $article["content"] = strip_tags(
     <?= $this->e($article["created_at"]) ?>
     <?= $this->e($article["published_at"]) ?>
     <?= $this->e($article["updated_at"]) ?>
-</div>
-
-</section>
+</aside>
+</form>
+</main>
 <?php echo $this->partial("footer") ?>
