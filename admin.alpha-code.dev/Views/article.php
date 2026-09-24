@@ -61,7 +61,7 @@
             <input placeholder="Subtitle" value="">
 
 
-
+                <!-- --
             <?= $this->e($article["id"]) ?>
             <?= $this->e($article["is_published"]) ?>
             <?= $this->e($article["title"]) ?>
@@ -69,7 +69,7 @@
             <?= $this->e($article["user__first_name"]." ".$article["user__last_name"]) ?>
             <?= $this->e($article["created_at"]) ?>
             <?= $this->e($article["published_at"]) ?>
-            <?= $this->e($article["updated_at"]) ?>
+            <?= $this->e($article["updated_at"]) ?>-->
         </aside>
     </form>
 </main>
