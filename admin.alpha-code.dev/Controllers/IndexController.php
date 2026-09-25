@@ -1,7 +1,6 @@
 <?php
 namespace App\Controllers;
 
-use Crystal\Components\Query\Query;
 use Crystal\Components\View;
 use App\Databases\MainDb;
 use App\Services\AuthService;

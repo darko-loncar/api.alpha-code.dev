@@ -58,9 +58,11 @@ thead{background:#8A2E0D;color:#fff}
 th,td{text-align:left;padding:0.6rem clamp(5px,2vw,1.2rem)}
 th{font-weight:bold}
 td{border-bottom:1px solid #1e1e1e;color:#e6e6e6}
-tbody tr:nth-child(even){background:#121212}
-tbody tr:hover{background:#1a211d}
-tbody th{border-bottom:1px solid #1e1e1e;color:#e6e6e6}
+tbody {
+    tr:nth-child(even){background:#121212}
+    tr:hover{background:#1a211d}
+    th{border-bottom:1px solid #1e1e1e;color:#e6e6e6}
+}
 
 /*Forms*/
 label{display:block;margin:1rem 0;color:#ccc}

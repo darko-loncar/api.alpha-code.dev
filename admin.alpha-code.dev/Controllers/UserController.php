@@ -3,6 +3,7 @@ namespace App\Controllers;
 
 use Crystal\Components\Query\Query;
 use Crystal\Components\View;
+use Crystal\Components\Pager;
 use App\Services\AuthService;
 use App\Databases\MainDb;
 
@@ -31,7 +32,10 @@ class UserController
             $userQ->getBindings()
             );
 
-        return View::response('users', ['pageId' => 'dashboard', 'userData' => $userData]);
+            $pager = new Pager(0, 20, 102);
+
+
+        return View::response('users', ['pageId' => 'dashboard', 'userData' => $userData, 'pager' => $pager]);
     }
 
     public function user(string $uuid): callable

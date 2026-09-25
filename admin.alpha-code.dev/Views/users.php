@@ -3,6 +3,36 @@
 <main class="ct-center">
 <h1>Users</h1>
 
+<?php
+
+$scheme = $_SERVER['REQUEST_SCHEME'];
+$host = $_SERVER['HTTP_HOST'] ?? $_SERVER['SERVER_NAME'];
+$uri = strtok($_SERVER['REQUEST_URI'], '?');
+$query = $_GET;
+$url = $scheme . '://' . $host . $uri;
+
+
+$pagerHtml = "";
+foreach ($this->getVar("pager")->pagerItems as $page) {
+
+    $pager_query = http_build_query([
+        'page' => $page,
+        'display_records' => 10,
+    ]);
+
+    if ($query) {
+        $query = '?' . http_build_query($query);
+        }
+
+        dd($query, $pager_query);
+
+
+    $pagerHtml .= "<a href='$url'>$page</a>";
+}
+
+echo $pagerHtml;
+?>
+
 <table>
     <thead>
         <tr><th>ID</th><th>First name</th><th>Last name</th><th>Email</th><th>Phone</th><th>Actions</th></tr>
