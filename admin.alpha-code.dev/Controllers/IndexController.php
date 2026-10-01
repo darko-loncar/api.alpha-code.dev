@@ -16,7 +16,23 @@ class IndexController
 
     public function dashboard(): callable
     {
+        /**
         $this->auth->requireLogin();
+
+        $to = 'nyxx@192.168.1.102';
+        $subject = 'PHP mail test';
+        $message = 'This is a test email sent using PHP mail().';
+
+        $headers = [
+            'From: webserver@your-local-domain',
+            'Content-Type: text/plain; charset=UTF-8'
+        ];
+
+        $result = mail($to, $subject, $message, implode("\r\n", $headers));
+
+        echo $result ? 'mail() accepted the message' : 'mail() failed';
+        */
+
         return View::response('dashboard', ['pageId' => 'dashboard']);
     }
 

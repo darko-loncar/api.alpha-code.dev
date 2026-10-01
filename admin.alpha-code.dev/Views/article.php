@@ -73,6 +73,7 @@
         </aside>
     </form>
 </main>
+<script src="/vendor/tinymce/tinymce.min.js"></script>
 
 <script>
 tinymce.init({

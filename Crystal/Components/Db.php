@@ -73,7 +73,7 @@ abstract class Db
      * @param array $bindings
      * @return array<int, array<string, mixed>>
      */
-    public function getAll(string $query, array $bindings): array
+    public function getAll(string $query, array $bindings = []): array
     {
         return $this
             ->execute($query, $bindings)
@@ -88,7 +88,7 @@ abstract class Db
      * @param array $bindings
      * @return array<string, mixed>|null
      */
-    public function first(string $query, array $bindings): ?array {
+    public function first(string $query, array $bindings = []): ?array {
         $row = $this
             ->execute($query, $bindings)
             ->fetch(PDO::FETCH_ASSOC);

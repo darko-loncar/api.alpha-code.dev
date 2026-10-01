@@ -18,23 +18,33 @@ class UserController
 
     public function users(): callable
     {
+        // Require login
         $this->auth->requireLogin();
 
+        // Get pagination state
+        $currentPage = $_GET["page"] ?? 1;
+        $itemsPerPage = 2;
+
+        // Count users and create pager
+        $userCountQ = Query::select("user", ["id"]);
+        $countData = $this->mainDb->getAll($userCountQ->getQuery(),[]);
+        $userCount = count($countData);
+        $pager = new Pager($currentPage, $itemsPerPage, $userCount);
+
+        // Load users page data
         $userQ = Query::select("user")
             ->where("user.is_active", true)
             ->leftJoin("user_auth", "id", "id", ["id", "identifier", "last_login_at"])
             ->orderBy("user.id", "desc")
             ->orderBy("user_auth.id", "desc")
-            ->limit(25, 0);
+            ->limit(2, ($currentPage - 1) * 2);
 
         $userData = $this->mainDb->getAll(
             $userQ->getQuery(),
             $userQ->getBindings()
             );
 
-            $pager = new Pager(0, 20, 102);
-
-
+        // Return view
         return View::response('users', ['pageId' => 'dashboard', 'userData' => $userData, 'pager' => $pager]);
     }
 
