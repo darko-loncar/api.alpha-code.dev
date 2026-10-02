@@ -29,7 +29,6 @@ class UserController
         $userCountQ = Query::select("user", ["id"]);
         $countData = $this->mainDb->getAll($userCountQ->getQuery(),[]);
         $userCount = count($countData);
-        $userCount = 0;
         $pager = new Pager($_SERVER['REQUEST_URI'], $currentPage, $itemsPerPage, $userCount);
 
         // Load users page data

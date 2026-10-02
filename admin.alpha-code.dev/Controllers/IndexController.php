@@ -16,8 +16,9 @@ class IndexController
 
     public function dashboard(): callable
     {
-        /**
         $this->auth->requireLogin();
+        /**
+
 
         $to = 'nyxx@192.168.1.102';
         $subject = 'PHP mail test';

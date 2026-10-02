@@ -21,7 +21,7 @@
     </tbody>
 </table>
 
-<?php echo $this->partial("partials.pager") ?>
+<?php echo $this->partial("Partials.pager") ?>
 
 </main>
 <?php echo $this->partial("footer") ?>
