@@ -15,7 +15,7 @@
             <td><?= $this->e($user["last_name"]) ?></td>
             <td><?= $this->e($user["email"]) ?></td>
             <td><?= $this->e($user["phone"]) ?></td>
-            <td><a href=/user-profile/<?= $this->e($user["uuid"]) ?>>Edit</td>
+            <td><a href="/user-profile/<?= $this->e($user["uuid"]) ?>">Edit</a></td>
         </tr>
     <?php endforeach; ?>
     </tbody>

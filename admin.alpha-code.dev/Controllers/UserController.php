@@ -35,9 +35,8 @@ class UserController
         $userQ = Query::select("user")
             ->where("user.is_active", true)
             ->leftJoin("user_auth", "id", "id", ["id", "identifier", "last_login_at"])
-            ->orderBy("user.id", "desc")
-            ->orderBy("user_auth.id", "desc")
-            ->limit(2, ($currentPage - 1) * 2);
+            //->orderBy("user.id", "desc")
+            ->limit($itemsPerPage, ($currentPage - 1) * $itemsPerPage);
 
         $userData = $this->mainDb->getAll(
             $userQ->getQuery(),
@@ -45,7 +44,7 @@ class UserController
             );
 
         // Return view
-        return View::response('users', ['pageId' => 'dashboard', 'userData' => $userData, 'pager' => $pager]);
+        return View::response('users', ['pageId' => 'dashboard', 'userData' => $userData, 'pager_object' => $pager]);
     }
 
     public function user(string $uuid): callable

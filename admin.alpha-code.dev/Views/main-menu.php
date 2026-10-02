@@ -3,7 +3,7 @@
 <nav id="menu" class="ct-center" aria-label="Main navigation">
 <ul class="ct-center">
     <li id="dashboard-link">
-        <a href="/"">
+        <a href="/">
             <img id="logo" src="/gfx/logo.svg" alt="Alpha Code" width="36" height="36" loading="eager" decoding="async" fetchpriority="high">
             <span>Dashboard</span>
         </a>
