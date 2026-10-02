@@ -25,12 +25,12 @@ final class Pager
 
         $baseUrl = strtok($baseUrl, '?');
         $query = $_GET;
-        $pagesShownUpDown = 5;
+        $pagesShownUpDown = 3;
         $maxPage = (int) ceil($totalItemsCount / $itemsPerPage);
         $this->totalPages = $maxPage;
 
         // Clamp activePage to maxPage if overshoot
-        $activePage = min($activePage, $maxPage);
+        $activePage = min($maxPage, $activePage);
 
         $firstPage = $activePage - $pagesShownUpDown;
         $lastPage = $activePage + $pagesShownUpDown;
@@ -49,22 +49,22 @@ final class Pager
         }
 
         // Safety clamps
-        $firstPage = max(0, $firstPage);
+        $firstPage = max(1, $firstPage);
         $lastPage = min($maxPage, $lastPage);
 
         $pager = $maxPage > 0
-            ? range($firstPage, $lastPage - 1)
+            ? range($firstPage, $lastPage)
             : [];
 
         $pagerItems = [];
         foreach ($pager as $key => $page) {
-            $pageNumber = $key + 1;
+            $pageNumber = $page;
             $url = $this->resolveQueryUrl($baseUrl, $query, $pageNumber, $itemsPerPage);
 
             $pagerItems[] = [
                 "page_number" => $pageNumber,
                 "url" => $url,
-                "is_active" => ($key === $activePage - 1) ? 1 : 0,
+                "is_active" => ($page === $activePage) ? 1 : 0,
             ];
         }
 

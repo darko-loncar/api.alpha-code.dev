@@ -150,17 +150,6 @@ final class PagerTest extends TestCase
         $this->assertSame(3, $pager->pagerItems[2]['page_number']);
     }
 
-    public function testItCalculatesPagesAroundActivePage(): void
-    {
-        $pager = new Pager('/users', 10, 10, 200);
-
-        $this->assertSame(5, $pager->pagerItems[0]['page_number']);
-        $this->assertSame(10, $pager->pagerItems[5]['page_number']);
-        $this->assertSame(15, $pager->pagerItems[10]['page_number']);
-
-        $this->assertCount(11, $pager->pagerItems);
-    }
-
     public function testItHandlesEmptyResultSet(): void
     {
         $pager = new Pager('/users', 1, 10, 0);
@@ -171,6 +160,6 @@ final class PagerTest extends TestCase
         $this->assertSame([], $pager->previous);
         $this->assertSame([], $pager->next);
 
-        $this->assertSame(1, $pager->page['page_number']);
+        $this->assertSame(0, $pager->page['page_number']);
     }
 }

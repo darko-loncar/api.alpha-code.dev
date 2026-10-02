@@ -23,13 +23,15 @@ class UserController
 
         // Get pagination state
         $currentPage = $_GET["page"] ?? 1;
-        $itemsPerPage = 2;
+        $itemsPerPage = 10;
 
         // Count users and create pager
         $userCountQ = Query::select("user", ["id"]);
-        $countData = $this->mainDb->getAll($userCountQ->getQuery(),[]);
+        $countData = $this->mainDb->getAll($userCountQ->getQuery());
         $userCount = count($countData);
+        //$userCount = 200;
         $pager = new Pager($_SERVER['REQUEST_URI'], $currentPage, $itemsPerPage, $userCount);
+        //$pager = new Pager('/users', $currentPage, 10, 200);
 
         // Load users page data
         $userQ = Query::select("user")

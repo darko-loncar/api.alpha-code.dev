@@ -58,7 +58,7 @@ abstract class Db
      * @param array $bindings
      * @param array<string, array{value: mixed, type: int}> $bindings
      */
-    protected function execute(string $query, array $bindings): \PDOStatement
+    protected function execute(string $query, array $bindings = []): \PDOStatement
     {
         if ($this->pdo === null) $this->getConnection();
         $statement = $this->pdo->prepare($query);
