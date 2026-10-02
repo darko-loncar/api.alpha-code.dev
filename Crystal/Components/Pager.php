@@ -17,7 +17,7 @@ final class Pager
     public array $page = [];
     public int $totalPages = 0;
 
-    public function __construct(string $baseUrl = '/users', int $activePage = 1, int $itemsPerPage = 10, int $totalItemsCount = 10)
+    public function __construct(string $baseUrl = '/', int $activePage = 1, int $itemsPerPage = 10, int $totalItemsCount = 10)
     {
         if ($activePage < 1) throw new \InvalidArgumentException('Active page must be greater than 0.');
         if ($itemsPerPage < 1) throw new \InvalidArgumentException('Items per page must be greater than 0.');

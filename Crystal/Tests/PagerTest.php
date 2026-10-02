@@ -13,20 +13,18 @@ final class PagerTest extends TestCase
         parent::setUp();
 
         $_GET = [];
-        $_SERVER['REQUEST_URI'] = '/users';
     }
 
     protected function tearDown(): void
     {
         $_GET = [];
-        unset($_SERVER['REQUEST_URI']);
 
         parent::tearDown();
     }
 
     public function testItCreatesPagerItems(): void
     {
-        $pager = new Pager(1, 10, 100);
+        $pager = new Pager('/users', 1, 10, 100);
 
         $this->assertCount(10, $pager->pagerItems);
 
@@ -40,7 +38,7 @@ final class PagerTest extends TestCase
 
     public function testItMarksActivePage(): void
     {
-        $pager = new Pager(5, 10, 100);
+        $pager = new Pager('/users', 5, 10, 100);
 
         $this->assertFalse((bool) $pager->pagerItems[3]['is_active']);
         $this->assertTrue((bool) $pager->pagerItems[4]['is_active']);
@@ -49,7 +47,7 @@ final class PagerTest extends TestCase
 
     public function testItCreatesFirstPage(): void
     {
-        $pager = new Pager(5, 10, 100);
+        $pager = new Pager('/users', 5, 10, 100);
 
         $this->assertSame(1, $pager->first['page_number']);
         $this->assertSame(
@@ -60,7 +58,7 @@ final class PagerTest extends TestCase
 
     public function testItCreatesLastPage(): void
     {
-        $pager = new Pager(5, 10, 100);
+        $pager = new Pager('/users', 5, 10, 100);
 
         $this->assertSame(10, $pager->last['page_number']);
         $this->assertSame(
@@ -71,7 +69,7 @@ final class PagerTest extends TestCase
 
     public function testItCreatesPreviousPage(): void
     {
-        $pager = new Pager(5, 10, 100);
+        $pager = new Pager('/users', 5, 10, 100);
 
         $this->assertSame(4, $pager->previous['page_number']);
         $this->assertSame(
@@ -82,7 +80,7 @@ final class PagerTest extends TestCase
 
     public function testItCreatesNextPage(): void
     {
-        $pager = new Pager(5, 10, 100);
+        $pager = new Pager('/users', 5, 10, 100);
 
         $this->assertSame(6, $pager->next['page_number']);
         $this->assertSame(
@@ -93,7 +91,7 @@ final class PagerTest extends TestCase
 
     public function testItCreatesCurrentPage(): void
     {
-        $pager = new Pager(5, 10, 100);
+        $pager = new Pager('/users', 5, 10, 100);
 
         $this->assertSame(5, $pager->page['page_number']);
         $this->assertSame(
@@ -104,14 +102,14 @@ final class PagerTest extends TestCase
 
     public function testItDoesNotCreatePreviousPageOnFirstPage(): void
     {
-        $pager = new Pager(1, 10, 100);
+        $pager = new Pager('/users', 1, 10, 100);
 
         $this->assertSame([], $pager->previous);
     }
 
     public function testItDoesNotCreateNextPageOnLastPage(): void
     {
-        $pager = new Pager(10, 10, 100);
+        $pager = new Pager('/users', 10, 10, 100);
 
         $this->assertSame([], $pager->next);
     }
@@ -123,9 +121,7 @@ final class PagerTest extends TestCase
             'status' => 'active',
         ];
 
-        $_SERVER['REQUEST_URI'] = '/users?search=john&status=active';
-
-        $pager = new Pager(2, 10, 100);
+        $pager = new Pager('/users', 2, 10, 100);
 
         $this->assertSame(
             '/users?search=john&status=active&page=2&display_records=10',
@@ -133,9 +129,19 @@ final class PagerTest extends TestCase
         );
     }
 
+    public function testItUsesProvidedBaseUrl(): void
+    {
+        $pager = new Pager('/admin/users', 2, 10, 100);
+
+        $this->assertSame(
+            '/admin/users?page=2&display_records=10',
+            $pager->page['url']
+        );
+    }
+
     public function testItLimitsPagerItemsToAvailablePages(): void
     {
-        $pager = new Pager(1, 10, 25);
+        $pager = new Pager('/users', 1, 10, 25);
 
         $this->assertCount(3, $pager->pagerItems);
 
@@ -146,7 +152,7 @@ final class PagerTest extends TestCase
 
     public function testItCalculatesPagesAroundActivePage(): void
     {
-        $pager = new Pager(10, 10, 200);
+        $pager = new Pager('/users', 10, 10, 200);
 
         $this->assertSame(5, $pager->pagerItems[0]['page_number']);
         $this->assertSame(10, $pager->pagerItems[5]['page_number']);
@@ -157,7 +163,7 @@ final class PagerTest extends TestCase
 
     public function testItHandlesEmptyResultSet(): void
     {
-        $pager = new Pager(1, 10, 0);
+        $pager = new Pager('/users', 1, 10, 0);
 
         $this->assertSame([], $pager->pagerItems);
         $this->assertSame([], $pager->first);
