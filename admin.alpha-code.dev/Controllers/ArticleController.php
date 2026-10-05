@@ -15,7 +15,7 @@ class ArticleController
     {
     }
 
-    public function index(): callable
+    public function index()
     {
         $this->auth->requireLogin();
 
@@ -32,11 +32,11 @@ class ArticleController
             );
 
         // Return View
-        return View::response('articles', ['pageId' => 'dashboard', 'articleData' => $data]);
+        return View::render('articles', ['pageId' => 'dashboard', 'articleData' => $data]);
 
     }
 
-    public function article(int $id): callable
+    public function article(int $id)
     {
         $this->auth->requireLogin();
 
@@ -51,7 +51,7 @@ class ArticleController
             $userQ->getBindings()
             );
 
-        return View::response('article', ['pageId' => 'dashboard', 'article' => $data]);
+        return View::render('article', ['pageId' => 'dashboard', 'article' => $data]);
 
     }
 }

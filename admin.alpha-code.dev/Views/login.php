@@ -1,17 +1,14 @@
 <?php echo $this->partial("head") ?>
-<header>
-<div class="ct-center top-bar">
-<a href="/" id=logo>
+
+<div class="ct-center ct-center--50">
 <img src=gfx/logo.svg alt="Alpha Code" width="120" height="120" loading="eager" decoding="async" fetchpriority="high">
-<span>Alpha Code</span>
-</a>
-</button>
+<h1>Admin panel</h1>
 </div><!--/.ct-center-->
-</header>
+
 <main>
 <body>
 <section class="ct-center ct-center--50">
-<h1>Login</h1>
+<h2>Login</h2>
 <form method=post action="/login">
 <label for=username>Username
 <input type=text id=username name=username autocomplete=username required>

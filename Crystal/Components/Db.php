@@ -8,9 +8,6 @@ use PDO;
  */
 abstract class Db
 {
-    // Default ports for supported database drivers
-    private const DEFAULT_PORT = 3306;
-
     // PDO instance
     private ?PDO $pdo = null;
 
@@ -37,16 +34,20 @@ abstract class Db
     public function getConnection(): PDO
     {
         if ($this->pdo !== null) return $this->pdo;
+        $port = $this->port ?? 3306;
 
-        $port = $this->port ?? self::DEFAULT_PORT;
-        $dsn = "mysql:host={$this->hostname};port={$port};dbname={$this->dbName};charset=utf8mb4";
-        $options = [
-            PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
-            PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC,
-            PDO::ATTR_EMULATE_PREPARES => false,
-        ];
+        $this->pdo = new PDO(
+            "mysql:host={$this->hostname};port={$port};dbname={$this->dbName};charset=utf8mb4",
+            $this->dbUser,
+            $this->dbPassword,
+            [
+                PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
+                PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC,
+                PDO::ATTR_EMULATE_PREPARES => false,
+                PDO::ATTR_PERSISTENT => true,
 
-        $this->pdo = new PDO($dsn, $this->dbUser, $this->dbPassword, $options);
+            ]
+        );
 
         return $this->pdo;
     }
@@ -75,9 +76,21 @@ abstract class Db
      */
     public function getAll(string $query, array $bindings = []): array
     {
-        return $this
+        /*
+        $cacheKey = md5($query.serialize($bindings));
+
+        if(isset($_SESSION["db"]["tableResultsCache"][$cacheKey])) {
+            error_log("Results from cache");
+            return $_SESSION["db"]["tableResultsCache"][$cacheKey];
+            }
+        */
+        $results = $this
             ->execute($query, $bindings)
             ->fetchAll(PDO::FETCH_ASSOC);
+
+        //$_SESSION["db"]["tableResultsCache"][$cacheKey] = $results;
+
+        return $results;
     }
 
     /**
@@ -88,10 +101,37 @@ abstract class Db
      * @param array $bindings
      * @return array<string, mixed>|null
      */
-    public function first(string $query, array $bindings = []): ?array {
+    public function first(string $query, array $bindings = []): ?array
+    {
         $row = $this
             ->execute($query, $bindings)
             ->fetch(PDO::FETCH_ASSOC);
+
+        return $row === false ? null : $row;
+    }
+
+    /**
+     * Execute a query and return the first value of row.
+     * Returns null when no rows are found.
+     *
+     * @param string $query
+     * @param array $bindings
+     * @return mixed|null
+     */
+    public function firstValue(string $query, array $bindings = []): mixed
+    {
+        /*
+        if(isset($_SESSION["db"]["tableCountCache"][md5($query.serialize($bindings))])) {
+            error_log("Count from cache");
+            return $_SESSION["db"]["tableCountCache"][md5($query.serialize($bindings))];
+            }
+        */
+
+        $row = $this
+            ->execute($query, $bindings)
+            ->fetchColumn();
+
+        //$_SESSION["db"]["tableCountCache"][md5($query.serialize($bindings))] = $row;
 
         return $row === false ? null : $row;
     }

@@ -1,6 +1,7 @@
 <?php
 declare(strict_types=1);
 namespace Crystal\Components\Query;
+use Crystal\Components\Query\Statement;
 
 /**
  * Select statement.
@@ -61,5 +62,24 @@ final class Select extends Statement
 
         return $sql;
     }
+
+    /**
+     * Build SQL query string.
+     */
+    public function getCountQuery(): string
+    {
+        $sql = "SELECT COUNT(*) FROM `{$this->table}`";
+
+        if ($this->joins !== []) {
+            $sql .= ' ' . implode(' ', $this->joins);
+        }
+
+        if ($this->where !== []) {
+            $sql .= ' WHERE ' . implode(' AND ', $this->where);
+        }
+
+        return $sql;
+    }
+
 
 }

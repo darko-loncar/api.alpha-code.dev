@@ -21,7 +21,6 @@ final class HttpClient
 
         if ($response === false) {
             $error = curl_error($ch);
-            curl_close($ch);
 
             throw new RuntimeException(
                 "HTTP request failed: {$error}"

@@ -10,12 +10,11 @@ abstract class Query
 
     /**
      * Factory method: Select statement.
-     * @return $this
+     * @return Select
      */
     public static function select(string $table, array $columns = []) : Select
     {
         return new Select($table, $columns);
     }
-
 
 }

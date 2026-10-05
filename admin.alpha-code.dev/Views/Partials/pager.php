@@ -1,22 +1,15 @@
 <?php
-$pager = $this->getVar('pager_object');
-
+$pager = $pager_object;
 $pagerLinks = '';
 
 // First
-if (!empty($pager->first)) {
-    $pagerLinks .= sprintf(
-        '<li><a href="%s" aria-label="First page">First</a></li>',
-        htmlspecialchars($pager->first['url'], ENT_QUOTES, 'UTF-8')
-    );
+if ($pager->first !== null) {
+    $pagerLinks .= '<li><a href="'.$this->e($pager->first).'" aria-label="First page">First</a></li>';
 }
 
 // Previous
-if (!empty($pager->previous)) {
-    $pagerLinks .= sprintf(
-        '<li><a href="%s" aria-label="Previous page">Previous</a></li>',
-        htmlspecialchars($pager->previous['url'], ENT_QUOTES, 'UTF-8')
-    );
+if ($pager->previous !== null) {
+    $pagerLinks .= '<li><a href="'.$this->e($pager->previous).'" aria-label="Previous page">Previous</a></li>';
 }
 
 // Page numbers
@@ -25,37 +18,22 @@ foreach ($pager->pagerItems as $page) {
         ? 'aria-current="page"'
         : '';
 
-    $url = htmlspecialchars(
-        $page['url'],
-        ENT_QUOTES,
-        'UTF-8'
-    );
-
-    $pageNumber = htmlspecialchars(
-        (string) $page['page_number'],
-        ENT_QUOTES,
-        'UTF-8'
-    );
+    $url = $this->e($page['url']);
+    $pageNumber = $page['page_number'];
 
     $pagerLinks .= ($ariaActiveAttr)
-        ? "<li $ariaActiveAttr><a $ariaActiveAttr href='$url'>$pageNumber</a></li>"
+        ? "<li><a $ariaActiveAttr href='$url'>$pageNumber</a></li>"
         : "<li><a href='$url'>$pageNumber</a></li>";
 }
 
 // Next
-if (!empty($pager->next)) {
-    $pagerLinks .= sprintf(
-        '<li><a href="%s" aria-label="Next page">Next</a></li>',
-        htmlspecialchars($pager->next['url'], ENT_QUOTES, 'UTF-8')
-    );
+if ($pager->next !== null) {
+    $pagerLinks .= '<li><a href="'.$this->e($pager->next).'" aria-label="Next page">Next</a></li>';
 }
 
 // Last
-if (!empty($pager->last)) {
-    $pagerLinks .= sprintf(
-        '<li><a href="%s" aria-label="Last page">Last</a></li>',
-        htmlspecialchars($pager->last['url'], ENT_QUOTES, 'UTF-8')
-    );
+if ($pager->last !== null) {
+    $pagerLinks .= '<li><a href="'.$this->e($pager->last).'" aria-label="Last page">Last</a></li>';
 }
 ?>
 

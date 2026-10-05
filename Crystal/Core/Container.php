@@ -50,8 +50,8 @@ final class Container
         if ($constructor === null) return new $class();
 
         $params = [];
-
-        foreach ($constructor->getParameters() as $param) {
+        $constructorParams = $constructor->getParameters();
+        foreach ($constructorParams as $param) {
             $type = $param->getType();
 
             if (!$type instanceof ReflectionNamedType || $type->isBuiltin()) {

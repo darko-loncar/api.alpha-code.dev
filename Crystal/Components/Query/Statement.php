@@ -101,6 +101,8 @@ abstract class Statement
      */
     public function limit(int $limit, ?int $offset = null): static
     {
+        if(isset($this->limit)) throw new \LogicException('Query limit has already been set.');
+
         $this->bindings[] = $limit;
         $this->limit = $limit;
 
@@ -111,6 +113,32 @@ abstract class Statement
 
         return $this;
     }
+
+    /**
+     * Limit and optionally offset results.
+     *
+     * LIMIT and OFFSET are SQL values, so they are represented as
+     * bindings just like WHERE values.
+     *
+     * @param int $limit
+     * @param int|null $offset
+     * @return $this
+     */
+    public function page(int $page, ?int $itemsPerPage = null): static
+    {
+        if(isset($this->limit)) throw new \LogicException('Query limit has already been set.');
+
+        $offset = ($page - 1) * $itemsPerPage;
+
+        $this->bindings[] = $itemsPerPage;
+        $this->limit = $itemsPerPage;
+
+        $this->bindings[] = $offset;
+        $this->offset = $offset;
+
+        return $this;
+    }
+
 
     /**
      * Add a LEFT JOIN with optional field selection.

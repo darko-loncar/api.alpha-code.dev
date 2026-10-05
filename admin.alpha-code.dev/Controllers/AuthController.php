@@ -3,6 +3,7 @@ namespace App\Controllers;
 
 use Crystal\Components\Query\Query;
 use Crystal\Components\View;
+use Crystal\Components\Response;
 use App\Databases\MainDb;
 
 class AuthController
@@ -11,9 +12,9 @@ class AuthController
     {
     }
 
-    public function login(): callable
+    public function login()
     {
-        return View::response('login');
+        return View::render('login');
     }
 
     public function authenticate(): void
@@ -53,8 +54,7 @@ class AuthController
         session_regenerate_id(true);
         $_SESSION['user_uuid'] = $user['user__uuid'];
 
-        header("Location:/");
-        exit();
+        Response::redirect("/");
     }
 
     public function logout(): void
@@ -80,8 +80,6 @@ class AuthController
         }
 
         session_destroy();
-        header("Location:/login");
-        exit();
+        Response::redirect("/login");
     }
-
 }
