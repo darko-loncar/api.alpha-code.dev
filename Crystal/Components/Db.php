@@ -44,7 +44,7 @@ abstract class Db
                 PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
                 PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC,
                 PDO::ATTR_EMULATE_PREPARES => false,
-                PDO::ATTR_PERSISTENT => true,
+                //PDO::ATTR_PERSISTENT => true,
             ]
         );
 
@@ -58,7 +58,7 @@ abstract class Db
      * @param array $bindings
      * @param array<string, array{value: mixed, type: int}> $bindings
      */
-    protected function execute(string $query, array $bindings = []): PDOStatement
+    public function execute(string $query, array $bindings = []): PDOStatement
     {
         if ($this->pdo === null) $this->getConnection();
         $statement = $this->pdo->prepare($query);
@@ -75,20 +75,15 @@ abstract class Db
      */
     public function getAll(string $query, array $bindings = []): array
     {
-        /*
         $cacheKey = md5($query.serialize($bindings));
+        $cacheData = $this->queryCache($cacheKey);
+        if($cacheData) return $cacheData;
 
-        if(isset($_SESSION["db"]["tableResultsCache"][$cacheKey])) {
-            error_log("Results from cache");
-            return $_SESSION["db"]["tableResultsCache"][$cacheKey];
-            }
-        */
         $results = $this
             ->execute($query, $bindings)
             ->fetchAll(PDO::FETCH_ASSOC);
 
-        //$_SESSION["db"]["tableResultsCache"][$cacheKey] = $results;
-
+        file_put_contents(__DIR__ . '/../Cache/'.$cacheKey, serialize($results), LOCK_EX);
         return $results;
     }
 
@@ -102,9 +97,15 @@ abstract class Db
      */
     public function first(string $query, array $bindings = []): ?array
     {
+        $cacheKey = md5($query.serialize($bindings));
+        $cacheData = $this->queryCache($cacheKey);
+        if($cacheData) return $cacheData;
+
         $row = $this
             ->execute($query, $bindings)
             ->fetch(PDO::FETCH_ASSOC);
+
+        file_put_contents(__DIR__ . '/../Cache/'.$cacheKey, serialize($row), LOCK_EX);
 
         return $row === false ? null : $row;
     }
@@ -119,20 +120,34 @@ abstract class Db
      */
     public function firstValue(string $query, array $bindings = []): mixed
     {
-        /*
-        if(isset($_SESSION["db"]["tableCountCache"][md5($query.serialize($bindings))])) {
-            error_log("Count from cache");
-            return $_SESSION["db"]["tableCountCache"][md5($query.serialize($bindings))];
-            }
-        */
+        $cacheKey = md5($query.serialize($bindings));
+        $cacheData = $this->queryCache($cacheKey);
+        if($cacheData) return $cacheData;
 
         $row = $this
             ->execute($query, $bindings)
             ->fetchColumn();
 
-        //$_SESSION["db"]["tableCountCache"][md5($query.serialize($bindings))] = $row;
+        file_put_contents(__DIR__ . '/../Cache/'.$cacheKey, serialize($row), LOCK_EX);
 
         return $row === false ? null : $row;
+    }
+
+    private function queryCache(string $cacheKey)
+    {
+        $cacheFile = __DIR__ . '/../Cache/' . $cacheKey;
+
+        if (is_file($cacheFile)) {
+            $data = file_get_contents($cacheFile);
+            $created = filemtime($cacheFile);
+
+            if ($data !== false && time() - $created < 60 * 30) {
+                error_log("Reusing cache");
+                return unserialize($data);
+            }
+        error_log("Cache stale, query db...");
+        }
+        return false;
     }
 
 }

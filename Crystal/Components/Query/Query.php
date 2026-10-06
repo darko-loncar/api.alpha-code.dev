@@ -12,9 +12,19 @@ abstract class Query
      * Factory method: Select statement.
      * @return Select
      */
-    public static function select(string $table, array $columns = []) : Select
+    public static function select(string $table, array $columns = []) : Statement
     {
         return new Select($table, $columns);
     }
+
+    /**
+     * Factory method: Insert statement.
+     * @return Select
+     */
+    public static function insert(string $table) : Statement
+    {
+        return new Insert($table);
+    }
+
 
 }

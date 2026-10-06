@@ -51,6 +51,9 @@ return function(string $appFolder, bool $debug = false) {
         'Crystal\Components\Query\Query' => __DIR__ . '/Components/Query/Query.php',
         'Crystal\Components\Query\Statement' => __DIR__ . '/Components/Query/Statement.php',
         'Crystal\Components\Query\Select' => __DIR__ . '/Components/Query/Select.php',
+        'Crystal\Components\Query\Insert' => __DIR__ . '/Components/Query/Insert.php',
+        'Crystal\Support\UUID' => __DIR__ . '/Support/UUID.php',
+
     ];
     spl_autoload_register(static function (string $class) use ($crystalClasses): void {
         if (isset($crystalClasses[$class])) {

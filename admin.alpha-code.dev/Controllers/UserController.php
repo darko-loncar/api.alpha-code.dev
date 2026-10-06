@@ -4,6 +4,7 @@ namespace App\Controllers;
 use Crystal\Components\Query\Query;
 use Crystal\Components\View;
 use Crystal\Components\Pager;
+use Crystal\Support\UUID;
 use App\Services\AuthService;
 use App\Databases\MainDb;
 
@@ -42,6 +43,16 @@ class UserController
 
         // Create pager
         $pager = new Pager($currentPage, $itemsPerPage, $userCount, 5, $_SERVER['REQUEST_URI']);
+
+        // Insert user query
+        $insertUserQ = Query::insert("user")
+            ->set("uuid", UUID::generate())
+            ->set("first_name", "John")
+            ->set("last_name", "Doe")
+            ->set("email", "john.doe@email1.com");
+
+        // Insert user
+        //$this->mainDb->first($insertUserQ->getQuery(), $insertUserQ->getBindings());
 
         // Return view
         return View::render('users', [
