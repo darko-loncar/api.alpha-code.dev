@@ -6,6 +6,7 @@
 
 # Crystal
 Cache/*
+!Cache/.gitkeep
 
 # PhpUnit
 .phpunit.cache
