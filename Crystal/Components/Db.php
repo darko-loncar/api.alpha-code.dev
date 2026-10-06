@@ -75,7 +75,21 @@ abstract class Db
      */
     public function getAll(string $query, array $bindings = []): array
     {
-        $cacheKey = md5($query.serialize($bindings));
+        // Bump table versions on INSERT, UPDATE, DELETE etc..
+        $query_tables = $this->getQueryTableDependencies($query);
+        if($this->isBumpableQuery($query)){
+            $table_versions = $this->getTableVersions();
+            foreach($query_tables as $key => $table){
+                if(isset($table_versions[$table])){
+                    $table_versions[$table] += 1;
+                } else {
+                    $table_versions[$table] = 0;;
+                }
+            }
+            file_put_contents(__DIR__ . '/../Cache/.tableVersions', json_encode($table_versions), LOCK_EX);
+        }
+
+        $cacheKey = $this->generateCacheKey($query, $bindings);
         $cacheData = $this->queryCache($cacheKey);
         if($cacheData) return $cacheData;
 
@@ -97,7 +111,22 @@ abstract class Db
      */
     public function first(string $query, array $bindings = []): ?array
     {
-        $cacheKey = md5($query.serialize($bindings));
+        // Bump table versions on INSERT, UPDATE, DELETE etc..
+        $query_tables = $this->getQueryTableDependencies($query);
+        if($this->isBumpableQuery($query)){
+            $table_versions = $this->getTableVersions();
+            foreach($query_tables as $key => $table){
+                if(isset($table_versions[$table])){
+                    $table_versions[$table] += 1;
+                } else {
+                    $table_versions[$table] = 0;;
+                }
+            }
+            file_put_contents(__DIR__ . '/../Cache/.tableVersions', json_encode($table_versions), LOCK_EX);
+        }
+
+
+        $cacheKey = $this->generateCacheKey($query, $bindings);
         $cacheData = $this->queryCache($cacheKey);
         if($cacheData) return $cacheData;
 
@@ -120,7 +149,21 @@ abstract class Db
      */
     public function firstValue(string $query, array $bindings = []): mixed
     {
-        $cacheKey = md5($query.serialize($bindings));
+        // Bump table versions on INSERT, UPDATE, DELETE etc..
+        $query_tables = $this->getQueryTableDependencies($query);
+        if($this->isBumpableQuery($query)){
+            $table_versions = $this->getTableVersions();
+            foreach($query_tables as $key => $table){
+                if(isset($table_versions[$table])){
+                    $table_versions[$table] += 1;
+                } else {
+                    $table_versions[$table] = 0;;
+                }
+            }
+            file_put_contents(__DIR__ . '/../Cache/.tableVersions', json_encode($table_versions), LOCK_EX);
+        }
+
+        $cacheKey = $this->generateCacheKey($query, $bindings);
         $cacheData = $this->queryCache($cacheKey);
         if($cacheData) return $cacheData;
 
@@ -141,11 +184,61 @@ abstract class Db
             $data = file_get_contents($cacheFile);
             $created = filemtime($cacheFile);
 
-            if ($data !== false && time() - $created < 60 * 30) {
+            if ($data !== false && time() - $created < 60 * 60 * 24) {
                 error_log("Reusing cache");
                 return unserialize($data);
             }
         error_log("Cache stale, query db...");
+        }
+        return false;
+    }
+
+    private function generateCacheKey(string $query, array $bindings)
+    {
+        $query_tables = $this->getQueryTableDependencies($query);
+        $table_versions = $this->getTableVersions();
+
+        $table_key_fragment = "";
+        foreach($query_tables as $table) {
+            if(isset($table_versions[$table])){
+                $table_key_fragment .= $table.$table_versions[$table];
+            } else {
+                $table_key_fragment .= $table."0";
+
+                // Update table versions array with new table and set version to 0
+                $table_versions[$table] = 0;
+            }
+        }
+
+        // Update table tracker file
+        file_put_contents(__DIR__ . '/../Cache/.tableVersions', json_encode($table_versions), LOCK_EX);
+
+        return $table_key_fragment."_".md5($query.serialize($bindings));
+    }
+
+    private function getQueryTableDependencies(string $query)
+    {
+        // Get query table dependencies by parsing query
+        preg_match_all('/\b(?:FROM|JOIN|UPDATE|INSERT\s+INTO|DELETE\s+FROM)\s+`?([a-zA-Z_][a-zA-Z0-9_]*)`?/i', $query, $matches);
+        return array_values(array_unique($matches[1]));
+    }
+
+    private function getTableVersions()
+    {
+        $tableTrackerFile = __DIR__ . '/../Cache/.tableVersions';
+
+        // Check if we have table tracker file, if not create empty
+        if(!is_file($tableTrackerFile))
+            file_put_contents($tableTrackerFile, '');
+
+        // Get table versions from tracker file
+        return json_decode(file_get_contents($tableTrackerFile), true) ?: "";
+    }
+
+    private function isBumpableQuery($query){
+        $queryType = strtoupper(strtok(ltrim($query), " \t\n\r"));
+        if($queryType == "INSERT" || $queryType == "UPDATE" || $queryType == "DELETE" ){
+            return true;
         }
         return false;
     }

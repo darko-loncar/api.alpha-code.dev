@@ -46,12 +46,12 @@ class UserController
 
         // Insert user query
         $insertUserQ = Query::insert("user")
-            ->set("first_name", "John")
+            ->set("first_name", "John22122")
             ->set("last_name", "Doe")
-            ->set("email", "john.doe@email2.com");
+            ->set("email", "john.doe@email25.com");
 
         // Insert user
-        //$this->mainDb->first($insertUserQ->getQuery(), $insertUserQ->getBindings());
+        //$this->mainDb->getAll($insertUserQ->getQuery(), $insertUserQ->getBindings());
 
         // Return view
         return View::render('users', [
@@ -67,8 +67,7 @@ class UserController
 
         $userQ = Query::select("user")
             ->where("user.uuid", $uuid)
-            ->where("user.is_active", true)
-            ->leftJoin("user_auth", "id", "id", ["id", "identifier", "last_login_at"]);
+            ->where("user.is_active", true);
 
         $userData = $this->mainDb->first(
             $userQ->getQuery(),

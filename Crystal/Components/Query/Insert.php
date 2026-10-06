@@ -8,9 +8,6 @@ use Crystal\Components\Query\Statement;
  */
 final class Insert extends Statement
 {
-
-    // INSERT INTO user (username, email, status, created_at) VALUES (?, ?, ?, ?)
-
     /**
      * Constructor
      */
@@ -40,7 +37,6 @@ final class Insert extends Statement
         }
 
         $placeholdersSqlFragment = implode(', ', array_fill(0, count($this->columns[$this->table]), '?'));
-
         $columnSqlFragment = implode(", ", $columnSql);
         $sql = "INSERT INTO `{$this->table}` ({$columnSqlFragment}) VALUES ({$placeholdersSqlFragment})";
 
