@@ -2,7 +2,10 @@
 /admin.alpha-code.dev/public/Uploads
 /admin.alpha-code.dev/config.php
 /admin.alpha-code.dev/config.php.prod
-error.log
+/admin.alpha-code.dev/error.log
+
+# Crystal
+Cache/
 
 # PhpUnit
 .phpunit.cache
