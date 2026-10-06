@@ -36,7 +36,7 @@ final class Container
 
     public function make(string $class): object
     {
-        if (array_key_exists($class, $this->services)) {
+        if (isset($this->services[$class])) {
             return ($this->services[$class])();
         }
 
@@ -75,7 +75,6 @@ final class Container
     {
         $reflection = new ReflectionFunction($factory);
         $returnType = $reflection->getReturnType();
-
         if (!$returnType instanceof ReflectionNamedType || $returnType->isBuiltin()) {
             throw new InvalidArgumentException('Factory must have a class return type.');
             }

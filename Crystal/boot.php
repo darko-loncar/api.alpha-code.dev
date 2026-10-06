@@ -59,24 +59,13 @@ return function(string $appFolder, bool $debug = false) {
     });
 
     // Register App class autoloader.
-    $map = ["App\\" => $appRoot."/"];
-
-    spl_autoload_register(static function (string $class) use ($map) {
-        foreach ($map as $prefix => $dir) {
-            if (str_starts_with($class, $prefix)) {
-                $relative = substr($class, strlen($prefix));
-                $file = $dir . str_replace('\\', '/', $relative) . '.php';
-                if (is_file($file)) {
-                    require $file;
-                }
-                return;
-            }
+    spl_autoload_register(
+        static function (string $class) use ($appRoot): void {
+            if (!str_starts_with($class, 'App\\')) return;
+            $file = $appRoot . '/' . str_replace('\\', '/', substr($class, strlen('App\\'))) . '.php';
+            if (is_file($file)) require $file;
         }
-    });
-
-    $elapsed = (hrtime(true) - $start) / 1_000_000;
-    error_log("--------------");
-    error_log("Autoloader processed at: {$elapsed} ms");
+    );
 
     // Initialize the container and router
     $container = new Container();
@@ -84,9 +73,6 @@ return function(string $appFolder, bool $debug = false) {
 
     // Load app init script
     require_once $appRoot."/app.php";
-
-    $elapsed = (hrtime(true) - $start) / 1_000_000;
-    error_log("App.php processed at: {$elapsed} ms");
 
     // Match route
     $match = $router->match($_SERVER['REQUEST_URI'], $_SERVER['REQUEST_METHOD']);
@@ -100,21 +86,11 @@ return function(string $appFolder, bool $debug = false) {
     $method = $match["method"];
     $params = $match["params"];
 
-    $elapsed = (hrtime(true) - $start) / 1_000_000;
-    error_log("Route matched at: {$elapsed} ms");
-
-
     // Make controller instance. Container will resolve and instantiate all constructor dependencies
     $controller_instance = $container->make($class);
 
-    $elapsed = (hrtime(true) - $start) / 1_000_000;
-    error_log("Controller create completed at: {$elapsed} ms");
-
     // Fire controller method and get response...
     $response = $controller_instance->$method(...$params);
-
-    $elapsed = (hrtime(true) - $start) / 1_000_000;
-    error_log("Controller fire completed at: {$elapsed} ms");
 
     // Emit depending on type of response
     match(true){

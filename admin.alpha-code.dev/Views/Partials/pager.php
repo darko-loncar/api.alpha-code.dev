@@ -1,44 +1,34 @@
 <?php
+/** @var \Crystal\Components\Pager $pager_object */
 $pager = $pager_object;
-$pagerLinks = '';
-
-// First
-if ($pager->first !== null) {
-    $pagerLinks .= '<li><a href="'.$this->e($pager->first).'" aria-label="First page">First</a></li>';
-}
-
-// Previous
-if ($pager->previous !== null) {
-    $pagerLinks .= '<li><a href="'.$this->e($pager->previous).'" aria-label="Previous page">Previous</a></li>';
-}
-
-// Page numbers
-foreach ($pager->pagerItems as $page) {
-    $ariaActiveAttr = ($page['is_active'])
-        ? 'aria-current="page"'
-        : '';
-
-    $url = $this->e($page['url']);
-    $pageNumber = $page['page_number'];
-
-    $pagerLinks .= ($ariaActiveAttr)
-        ? "<li><a $ariaActiveAttr href='$url'>$pageNumber</a></li>"
-        : "<li><a href='$url'>$pageNumber</a></li>";
-}
-
-// Next
-if ($pager->next !== null) {
-    $pagerLinks .= '<li><a href="'.$this->e($pager->next).'" aria-label="Next page">Next</a></li>';
-}
-
-// Last
-if ($pager->last !== null) {
-    $pagerLinks .= '<li><a href="'.$this->e($pager->last).'" aria-label="Last page">Last</a></li>';
-}
 ?>
 
 <nav aria-label="Pagination">
-    <ul class="pagination">
-        <?= $pagerLinks ?>
-    </ul>
+<ul class="pagination">
+
+<?php if ($pager->first !== null): ?>
+    <li><a href="<?= $pager->first ?>" aria-label="First page">First</a></li>
+<?php endif; ?>
+
+<?php if ($pager->previous !== null): ?>
+    <li><a href="<?= $pager->previous ?>" aria-label="Previous page">Previous</a></li>
+<?php endif; ?>
+
+<?php foreach ($pager->pagerItems as $page): ?>
+    <li>
+        <a href="<?= $this->e($page['url']) ?>"<?= $page['is_active'] ? ' aria-current="page"' : '' ?>>
+            <?= $page['page_number'] ?>
+        </a>
+    </li>
+<?php endforeach; ?>
+
+<?php if ($pager->next !== null): ?>
+    <li><a href="<?= $pager->next ?>" aria-label="Next page">Next</a></li>
+<?php endif; ?>
+
+<?php if ($pager->last !== null): ?>
+    <li><a href="<?= $pager->last ?>" aria-label="Last page">Last</a></li>
+<?php endif; ?>
+
+</ul>
 </nav>

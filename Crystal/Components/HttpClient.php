@@ -29,8 +29,6 @@ final class HttpClient
 
         $status = curl_getinfo($ch, CURLINFO_RESPONSE_CODE);
 
-        curl_close($ch);
-
         if ($status < 200 || $status >= 300) {
             throw new RuntimeException(
                 "HTTP request returned status {$status}"

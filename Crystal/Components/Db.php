@@ -2,6 +2,7 @@
 declare(strict_types=1);
 namespace Crystal\Components;
 use PDO;
+use PDOStatement;
 
 /**
  * PDO-based database connector
@@ -18,26 +19,25 @@ abstract class Db
      * @param string   $dbName     Database name.
      * @param string   $dbUser     Database username.
      * @param string   $dbPassword Database password.
-     * @param int|null $port       Optional database port.
+     * @param int      $port       Optional database port. Defaults 3306.
      */
     public function __construct(
         private string $hostname,
         private string $dbName,
         private string $dbUser,
         private string $dbPassword,
-        private ?int $port = null
+        private int $port = 3306
         ) {}
 
     /**
      * Returns the PDO connection. The connection is created lazily on first access.
      */
-    public function getConnection(): PDO
+    public function getConnection()
     {
         if ($this->pdo !== null) return $this->pdo;
-        $port = $this->port ?? 3306;
 
         $this->pdo = new PDO(
-            "mysql:host={$this->hostname};port={$port};dbname={$this->dbName};charset=utf8mb4",
+            "mysql:host={$this->hostname};port={$this->port};dbname={$this->dbName};charset=utf8mb4",
             $this->dbUser,
             $this->dbPassword,
             [
@@ -45,7 +45,6 @@ abstract class Db
                 PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC,
                 PDO::ATTR_EMULATE_PREPARES => false,
                 PDO::ATTR_PERSISTENT => true,
-
             ]
         );
 
@@ -59,7 +58,7 @@ abstract class Db
      * @param array $bindings
      * @param array<string, array{value: mixed, type: int}> $bindings
      */
-    protected function execute(string $query, array $bindings = []): \PDOStatement
+    protected function execute(string $query, array $bindings = []): PDOStatement
     {
         if ($this->pdo === null) $this->getConnection();
         $statement = $this->pdo->prepare($query);

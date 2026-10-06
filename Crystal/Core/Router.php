@@ -141,12 +141,15 @@ final class Router
                 }
 
             // Cleanup numerical indexes from $params array
+            array_shift($params); // remove first one cheaply
             foreach ($params as $key => $value) {
+
                 // Unset numeric indexes
                 if (is_int($key)) {
                     unset($params[$key]);
                     continue;
                     }
+
                 // Cast numeric params to int
                 if (ctype_digit($value)) {
                     $params[$key] = (int) $value;

@@ -25,6 +25,10 @@ class IndexController
         return View::render('image-library', ['pageId' => 'image-library']);
     }
 
+    public function pages(int $id, int $aux){
+        return "AAAA";
+    }
+
 
     public function makeThumbnails(){
 

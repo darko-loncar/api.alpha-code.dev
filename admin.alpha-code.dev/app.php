@@ -5,6 +5,11 @@ use App\Databases\CommonDb;
 use App\Databases\MainDb;
 use App\Services\AuthService;
 
+/**
+@var \Crystal\Core\Container $container
+@var \Crystal\Core\Router $router
+*/
+
 // Load custom helpers
 require_once __DIR__ . "/utils.php";
 
@@ -29,13 +34,13 @@ $container->registerAsSingleton(
     );
 
 // Register common database service
-//$container->registerAsSingleton(
-    //fn(): CommonDb => new CommonDb('192.168.1.102', 'common', 'nyxx@localhost', 'Chronos_1', 3306)
-    //);
-
+$container->registerAsSingleton(
+    fn(): CommonDb => new CommonDb('192.168.1.102', 'common', 'nyxx@localhost', 'Chronos_1', 3306)
+    );
 
 // Dashboard Routes
 $router->get("", App\Controllers\IndexController::class, 'dashboard');
+$router->get("pages/{id}/{aux}", App\Controllers\IndexController::class, 'pages');
 
 // Users routes
 $router->get("users", App\Controllers\UserController::class, 'users');
@@ -47,7 +52,6 @@ $router->get("article/{id}", App\Controllers\ArticleController::class, 'article'
 $router->post("article", App\Controllers\ArticleController::class, 'create');
 $router->post("article/{id}", App\Controllers\ArticleController::class, 'update');
 $router->post("article/delete/{id}", App\Controllers\ArticleController::class, 'delete');
-
 
 // Auth Routes
 $router->get("login", App\Controllers\AuthController::class, 'login');
