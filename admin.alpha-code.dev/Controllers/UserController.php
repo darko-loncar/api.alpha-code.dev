@@ -25,7 +25,7 @@ class UserController
 
         // Get pagination state
         $currentPage = isset($_GET["page"]) ? $_GET["page"] : 1;
-        $itemsPerPage = 5;
+        $itemsPerPage = 12;
 
         // Users query
         $userQ = Query::select("user")
@@ -37,7 +37,7 @@ class UserController
         $userData = $this->mainDb->getAll(
             $userQ->getQuery(),
             $userQ->getBindings()
-            );
+        );
 
         $userCount = (int)$this->mainDb->firstValue($userQ->getCountQuery());
 
@@ -46,10 +46,9 @@ class UserController
 
         // Insert user query
         $insertUserQ = Query::insert("user")
-            ->set("uuid", UUID::generate())
             ->set("first_name", "John")
             ->set("last_name", "Doe")
-            ->set("email", "john.doe@email1.com");
+            ->set("email", "john.doe@email2.com");
 
         // Insert user
         //$this->mainDb->first($insertUserQ->getQuery(), $insertUserQ->getBindings());
