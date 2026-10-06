@@ -5,7 +5,7 @@
 /admin.alpha-code.dev/error.log
 
 # Crystal
-Cache/
+Cache/*
 
 # PhpUnit
 .phpunit.cache
