@@ -62,11 +62,8 @@ DirectoryIndex index.php
         Header set Cache-Control "public, max-age=31536000, immutable"
     </FilesMatch>
 
-    # Never cache dynamic pages
     <FilesMatch "\.(?:php|html)$">
-        Header set Cache-Control "no-store, no-cache, must-revalidate, max-age=0"
-        Header set Pragma "no-cache"
-        Header set Expires "0"
+        Header set Cache-Control "no-cache"
     </FilesMatch>
 
     # Tell caches that responses may vary by encoding
@@ -76,14 +73,14 @@ DirectoryIndex index.php
 
 # Compression
 <IfModule mod_deflate.c>
-    AddOutputFilterByType DEFLATE text/html
-    AddOutputFilterByType DEFLATE text/plain
-    AddOutputFilterByType DEFLATE text/css
-    AddOutputFilterByType DEFLATE text/javascript
-    AddOutputFilterByType DEFLATE application/javascript
-    AddOutputFilterByType DEFLATE application/json
-    AddOutputFilterByType DEFLATE application/xml
-    AddOutputFilterByType DEFLATE image/svg+xml
+#    AddOutputFilterByType DEFLATE text/html
+#    AddOutputFilterByType DEFLATE text/plain
+#    AddOutputFilterByType DEFLATE text/css
+#    AddOutputFilterByType DEFLATE text/javascript
+#    AddOutputFilterByType DEFLATE application/javascript
+#    AddOutputFilterByType DEFLATE application/json
+#    AddOutputFilterByType DEFLATE application/xml
+#    AddOutputFilterByType DEFLATE image/svg+xml
 </IfModule>
 
 # Disable ETags

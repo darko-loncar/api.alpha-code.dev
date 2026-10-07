@@ -6,7 +6,7 @@ use Crystal\Core\Router;
 
 return function(string $appFolder, bool $debug = false) {
 
-    $start = hrtime(true);
+    //$start = hrtime(true);
 
     // Application Context
     $appRoot = __DIR__ . "/../".$appFolder;
@@ -35,7 +35,7 @@ return function(string $appFolder, bool $debug = false) {
         'httponly' => true,
         'samesite' => 'Lax',
     ]);
-
+    session_cache_limiter('');
     session_start();
 
     // Register Crystal using static class map
@@ -53,6 +53,7 @@ return function(string $appFolder, bool $debug = false) {
         'Crystal\Components\Query\Select' => __DIR__ . '/Components/Query/Select.php',
         'Crystal\Components\Query\Insert' => __DIR__ . '/Components/Query/Insert.php',
         'Crystal\Support\UUID' => __DIR__ . '/Support/UUID.php',
+        'Crystal\Support\Slug' => __DIR__ . '/Support/Slug.php',
 
     ];
     spl_autoload_register(static function (string $class) use ($crystalClasses): void {
@@ -95,14 +96,17 @@ return function(string $appFolder, bool $debug = false) {
     // Fire controller method and get response...
     $response = $controller_instance->$method(...$params);
 
-    // Emit depending on type of response
-    match(true){
-        is_callable($response) => $response(),
-        is_array($response) || is_object($response) => print '<pre>' . htmlspecialchars(print_r($response, true)) . '</pre>',
-        default => print($response)
-    };
+    $etag = hash('xxh128', $response);
+    header('Cache-Control: no-cache');
+    header("ETag: $etag");
 
-    $elapsed = (hrtime(true) - $start) / 1_000_000;
-    error_log("Crystal formed itself in: {$elapsed} ms");
+    if (($_SERVER['HTTP_IF_NONE_MATCH'] ?? '') === $etag) {
+        http_response_code(304);
+        exit();
+    } else {
+        echo $response;
+    }
+    //$elapsed = (hrtime(true) - $start) / 1_000_000;
+    //error_log("Crystal formed itself in: {$elapsed} ms");
 
 }; //end boot function

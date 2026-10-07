@@ -74,11 +74,6 @@ class UserController
             $userQ->getBindings()
             );
 
-        if($userData === null) {
-            http_response_code(404);
-            exit;
-        }
-
         return View::render('profile', ['pageId' => 'dashboard', 'userData' => $userData]);
     }
 }

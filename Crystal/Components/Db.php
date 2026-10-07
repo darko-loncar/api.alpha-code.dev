@@ -197,7 +197,6 @@ abstract class Db
     {
         $query_tables = $this->getQueryTableDependencies($query);
         $table_versions = $this->getTableVersions();
-
         $table_key_fragment = "";
         foreach($query_tables as $table) {
             if(isset($table_versions[$table])){
@@ -232,7 +231,7 @@ abstract class Db
             file_put_contents($tableTrackerFile, '');
 
         // Get table versions from tracker file
-        return json_decode(file_get_contents($tableTrackerFile), true) ?: "";
+        return json_decode(file_get_contents($tableTrackerFile), true) ?: [];
     }
 
     private function isBumpableQuery($query){

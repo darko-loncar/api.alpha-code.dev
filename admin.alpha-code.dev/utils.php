@@ -1,7 +1,7 @@
-<?php 
+<?php
 declare(strict_types=1);
 /**
- * Helper functions 
+ * Helper functions
  */
 
  /**
@@ -94,17 +94,4 @@ function generate_csrf_token(): string {
  */
 function verify_csrf_token(string $token): bool {
     return isset($_SESSION['csrf_token']) && $_SESSION['csrf_token'] === $token;
-}
-
-/**
- * Convert a string to a slug
- *
- * @param string $string The string to convert
- * @return string The resulting slug
- */
-function slugify(string $string): string {
-    $string = strtolower(trim($string));
-    $string = preg_replace('/[^a-z0-9-]/', '-', $string);
-    $string = preg_replace('/-+/', '-', $string);
-    return $string;
 }

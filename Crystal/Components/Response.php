@@ -12,6 +12,7 @@ final class Response
                 header($value);
                 }
             echo json_encode($data, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES | JSON_THROW_ON_ERROR);
+            exit();
     }
 
     public static function text(string $data, int $status = 200, array $headers = [])
@@ -22,6 +23,8 @@ final class Response
                 header($value);
                 }
             echo $data;
+            exit();
+
     }
 
     public static function noContent(array $headers = [])
@@ -30,6 +33,7 @@ final class Response
             foreach ($headers as $value) {
                 header($value);
                 }
+            exit();
     }
 
     public static function redirect(string $url, int $status = 302, array $headers = []) {
