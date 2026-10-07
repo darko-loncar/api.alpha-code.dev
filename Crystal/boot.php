@@ -96,16 +96,41 @@ return function(string $appFolder, bool $debug = false) {
     // Fire controller method and get response...
     $response = $controller_instance->$method(...$params);
 
+    // Canonical weak ETag for the uncompressed representation.
     $etag = hash('xxh128', $response);
-    header('Cache-Control: no-cache');
-    header("ETag: $etag");
+    $etagHeader = 'W/"' . $etag . '"';
 
-    if (($_SERVER['HTTP_IF_NONE_MATCH'] ?? '') === $etag) {
-        http_response_code(304);
-        exit();
-    } else {
-        echo $response;
+    header('Cache-Control: no-cache');
+    header('ETag: ' . $etagHeader);
+
+    $ifNoneMatch = $_SERVER['HTTP_IF_NONE_MATCH'] ?? '';
+
+    if ($ifNoneMatch !== '') {
+        $clientEtags = array_map('trim', explode(',', $ifNoneMatch));
+
+        foreach ($clientEtags as $clientEtag) {
+            // Wildcard matches any current representation.
+            if ($clientEtag === '*') {
+                http_response_code(304);
+                exit;
+            }
+
+            // Accept:
+            // W/"abc123"
+            // W/"abc123-gzip"
+            //
+            // Cloudflare may append "-gzip" to the ETag.
+            if (
+                $clientEtag === $etagHeader ||
+                $clientEtag === 'W/"' . $etag . '-gzip"'
+            ) {
+                http_response_code(304);
+                exit;
+            }
+        }
     }
+
+    echo $response;
     //$elapsed = (hrtime(true) - $start) / 1_000_000;
     //error_log("Crystal formed itself in: {$elapsed} ms");
 

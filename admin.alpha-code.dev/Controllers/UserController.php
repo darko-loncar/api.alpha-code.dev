@@ -4,7 +4,6 @@ namespace App\Controllers;
 use Crystal\Components\Query\Query;
 use Crystal\Components\View;
 use Crystal\Components\Pager;
-use Crystal\Support\UUID;
 use App\Services\AuthService;
 use App\Databases\MainDb;
 
@@ -72,7 +71,7 @@ class UserController
         $userData = $this->mainDb->first(
             $userQ->getQuery(),
             $userQ->getBindings()
-            );
+        );
 
         return View::render('profile', ['pageId' => 'dashboard', 'userData' => $userData]);
     }
