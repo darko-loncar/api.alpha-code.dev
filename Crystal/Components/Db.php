@@ -186,8 +186,8 @@ abstract class Db
         $result = $row === false ? null : $row;
 
         // Save results to cache
-        file_put_contents(static::TABLE_RESULT_CACHE_DIR.$cacheKey, serialize($row), LOCK_EX); // save cache file
-        return $row;
+        file_put_contents(static::TABLE_RESULT_CACHE_DIR.$cacheKey, serialize($result), LOCK_EX); // save cache file
+        return $result;
     }
 
     /**

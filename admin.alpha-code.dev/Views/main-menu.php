@@ -1,5 +1,5 @@
 <header class="top-bar wrapper">
-<nav class="dropdown-menu" aria-label="Main navigation">
+<nav class="dropdown-menu wrapper-app" aria-label="Main navigation">
 <ul>
     <li>
         <a id="home-link" href="/">
@@ -38,20 +38,15 @@
         </ul>
     </li>
     <li><a href="/users">Users</a></li>
+    <li><a href="/pages">My profile</a>
+        <ul>
+        <li><a href="/pages">Edit my profile info</a></li>
+        <li><a href="/pages">Password & Security</a></li>
+        <li><a href="/logout">Logout</a>
+        </ul>
+    </li>
 </ul>
 </nav>
-<nav id="profile-menu" class="dropdown-menu">
-    <ul>
-        <li><a href="/pages">My profile</a>
-            <ul>
-            <li><a href="/pages">Edit my profile info</a></li>
-            <li><a href="/pages">Password & Security</a></li>
-            <li><a href="/logout">Logout</a>
-            </ul>
-        </li>
-    </ul>
-</nav>
-
 
 <!--
 <button class="mobile-nav-toggle" aria-label="Open menu"

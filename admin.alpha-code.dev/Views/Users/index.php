@@ -1,7 +1,7 @@
 <?php echo $this->partial("head") ?>
 <?php echo $this->partial("main-menu") ?>
 
-<main class="wrapper">
+<main class="wrapper-app">
     <h1>Users</h1>
 
     <?php $table = $this->getVar("dataTable"); ?>

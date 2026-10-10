@@ -30,7 +30,7 @@ class UserController
 
         // Get pagination state
         $currentPage = isset($_GET["page"]) ? $_GET["page"] : 1;
-        $itemsPerPage = 8;
+        $itemsPerPage = 2;
 
         // Users query
         $userQ = Query::select("user")
@@ -50,7 +50,7 @@ class UserController
             ->addColumn('phone', 'Phone');
 
         // Create pager
-        $pager = new Pager($currentPage, $itemsPerPage, $userCount, 5, $_SERVER['REQUEST_URI']);
+        $pager = new Pager($currentPage, $itemsPerPage, $userCount, 2, $_SERVER['REQUEST_URI']);
 
         // Return view
         return View::render('Users.index', ['dataTable' => $userTable, 'pager_object' => $pager]);

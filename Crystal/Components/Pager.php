@@ -35,45 +35,32 @@ final readonly class Pager
         if ($totalItemsCount < 0) throw new InvalidArgumentException('Total items count cannot be negative.');
         if ($pagesShownUpDown < 0) throw new InvalidArgumentException('Pages shown up/down cannot be negative.');
 
-        // Remove any existing query string from the base URL. Query parameters are supplied separately through $query.
+        // Process
         $baseUrl = strtok($requestUri, '?');
-        $queryString = parse_url($requestUri, PHP_URL_QUERY);
-        $query = [];
-        if($queryString) parse_str($queryString, $query);
+        $queryString = parse_url($requestUri, PHP_URL_QUERY) ?? "";
+        $queryArr = [];
+        parse_str($queryString, $queryArr);
 
+        // Calculate max page
         $maxPage = (int) ceil($totalItemsCount / $itemsPerPage);
 
         // A requested page beyond the last page resolves to the last page.
         $activePage = min($maxPage, $activePage);
 
-        // Start with the requested number of pages around the active page.
-        $firstPage = $activePage - $pagesShownUpDown;
-        $lastPage = $activePage + $pagesShownUpDown;
+        // Calculate offsets for shifting window when near first or last page
+        $offsetLow = min($activePage - $pagesShownUpDown, 1) - 1;
+        $offsetHigh = max($activePage + $pagesShownUpDown - $maxPage, 0);
 
-        // Shift the range right when it extends below page 1.
-        $offsetLow = 0 - $firstPage;
-        if ($offsetLow > 0) {
-            $firstPage += $offsetLow;
-            $lastPage += $offsetLow;
-        }
-
-        // Shift the range left when it extends beyond the last page.
-        $offsetHigh = $maxPage - $lastPage;
-        if ($offsetHigh < 0) {
-            $firstPage += $offsetHigh;
-            $lastPage += $offsetHigh;
-        }
-
-        // Keep the calculated range within valid page boundaries.
-        $firstPage = max(1, $firstPage);
-        $lastPage = min($maxPage, $lastPage);
+        // Calculate first and last page window
+        $firstPage = max($activePage - $pagesShownUpDown - $offsetHigh, 1);
+        $lastPage = min($activePage + $pagesShownUpDown - $offsetLow, $maxPage);
 
         // Generate pager items array
         $pagerItems = [];
         for($page = $firstPage; $page <= $lastPage; ++$page) {
             $pagerItems[] = [
                 'page_number' => $page,
-                'url' => $this->resolveQueryUrl($baseUrl, $query, $page),
+                'url' => $this->resolveQueryUrl($baseUrl, $queryArr, $page),
                 'is_active' => $page === $activePage,
             ];
         }
@@ -83,16 +70,19 @@ final readonly class Pager
 
         // First and last page links are unavailable when there are no pages.
         if ($maxPage > 0) {
-            $this->first = $this->resolveQueryUrl($baseUrl, $query, 1);
-            $this->last = $this->resolveQueryUrl($baseUrl, $query, $maxPage);
+            $this->first = $this->resolveQueryUrl($baseUrl, $queryArr, 1);
+            $this->last = $this->resolveQueryUrl($baseUrl, $queryArr, $maxPage);
+        } else {
+            $this->first = null;
+            $this->last = null;
         }
 
         $this->previous = ($activePage > 1)
-            ? $this->resolveQueryUrl($baseUrl, $query, $activePage - 1)
+            ? $this->resolveQueryUrl($baseUrl, $queryArr, $activePage - 1)
             : null;
 
         $this->next = ($activePage < $maxPage)
-            ? $this->resolveQueryUrl($baseUrl, $query, $activePage + 1)
+            ? $this->resolveQueryUrl($baseUrl, $queryArr, $activePage + 1)
             : null;
     }
 
