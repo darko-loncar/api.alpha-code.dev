@@ -43,8 +43,7 @@ class ArticleController
         $userQ = Query::select("article")
             ->leftJoin("user", "id", "id", ["first_name", "last_name"])
             ->orderBy("article.id", "desc")
-            ->where("article.id", $id)
-            ->limit(25, 0);
+            ->where("article.id", $id);
 
         $data = $this->mainDb->first(
             $userQ->getQuery(),

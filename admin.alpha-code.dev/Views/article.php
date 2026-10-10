@@ -1,6 +1,6 @@
 <?php echo $this->partial("head") ?>
 <?php echo $this->partial("main-menu") ?>
-<main class="ct-center">
+<main class="wrapper">
 
     <?php
     // Sanitize HTML coming from db
@@ -81,8 +81,6 @@ tinymce.init({
     license_key: 'gpl',
     height: 600,
     menubar: false,
-    skin: 'oxide-dark',
-    content_css: 'dark',
     plugins: ['lists','link','table','image', 'code'],
     toolbar: 'undo redo | blocks | fontfamily fontsize bold italic underline | bullist numlist table code | link image | crystalmore',
     branding: false,

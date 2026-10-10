@@ -1,9 +1,12 @@
 <?php
 namespace App\Controllers;
 
+use Crystal\Components\Response;
 use Crystal\Components\Query\Query;
 use Crystal\Components\View;
 use Crystal\Components\Pager;
+use Crystal\Components\DataTable;
+
 use App\Services\AuthService;
 use App\Databases\MainDb;
 
@@ -17,14 +20,17 @@ class UserController
     {
     }
 
-    public function users()
+    /**
+     * Users main index view
+     */
+    public function index()
     {
         // Require login
         $this->auth->requireLogin();
 
         // Get pagination state
         $currentPage = isset($_GET["page"]) ? $_GET["page"] : 1;
-        $itemsPerPage = 12;
+        $itemsPerPage = 8;
 
         // Users query
         $userQ = Query::select("user")
@@ -33,34 +39,47 @@ class UserController
             ->page($currentPage, $itemsPerPage);
 
         // Load users page data and get total count
-        $userData = $this->mainDb->getAll(
-            $userQ->getQuery(),
-            $userQ->getBindings()
-        );
-
+        $userData = $this->mainDb->getAll($userQ->getQuery(), $userQ->getBindings());
         $userCount = (int)$this->mainDb->firstValue($userQ->getCountQuery());
+
+        $userTable = (new DataTable($userData))
+            ->addColumn('id', 'ID')
+            ->addColumn('first_name', 'First name')
+            ->addColumn('last_name', 'Last name')
+            ->addColumn('email', 'Email')
+            ->addColumn('phone', 'Phone');
 
         // Create pager
         $pager = new Pager($currentPage, $itemsPerPage, $userCount, 5, $_SERVER['REQUEST_URI']);
 
-        // Insert user query
-        $insertUserQ = Query::insert("user")
-            ->set("first_name", "John22122")
-            ->set("last_name", "Doe")
-            ->set("email", "john.doe@email25.com");
-
-        // Insert user
-        //$this->mainDb->getAll($insertUserQ->getQuery(), $insertUserQ->getBindings());
-
         // Return view
-        return View::render('users', [
-            'pageId' => 'dashboard',
-            'userData' => $userData,
-            'pager_object' => $pager
-        ]);
+        return View::render('Users.index', ['dataTable' => $userTable, 'pager_object' => $pager]);
     }
 
-    public function user(string $uuid)
+    /**
+     * Delete confirmation page
+     */
+    public function delete(string $uuid)
+    {
+        $this->auth->requireLogin();
+        $userQ = Query::select("user")->where("user.uuid", $uuid);
+        $userData = $this->mainDb->first($userQ->getQuery(), $userQ->getBindings());
+        return View::render('Users.delete', ['userData' => $userData]);
+    }
+
+
+    /**
+     * Delete user action
+     */
+    public function actionDelete(string $uuid)
+    {
+        // Require login
+        $this->auth->requireLogin();
+        $this->mainDb->execute("DELETE FROM user WHERE uuid = ?", [$uuid]);
+        Response::redirect("/users");
+    }
+
+    public function view(string $uuid)
     {
         $this->auth->requireLogin();
 
@@ -73,6 +92,18 @@ class UserController
             $userQ->getBindings()
         );
 
-        return View::render('profile', ['pageId' => 'dashboard', 'userData' => $userData]);
+        return View::render('Users.profile', ['pageId' => 'dashboard', 'userData' => $userData]);
     }
 }
+
+/**
+ *         // Insert user query
+ $insertUserQ = Query::insert("user")
+     ->set("first_name", "John22122")
+     ->set("last_name", "Doe")
+     ->set("email", "john.doe@email31.com");
+
+ // Insert user
+ //$this->mainDb->execute($insertUserQ->getQuery(), $insertUserQ->getBindings());
+
+ */

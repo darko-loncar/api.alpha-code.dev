@@ -52,6 +52,9 @@ return function(string $appFolder, bool $debug = false) {
         'Crystal\Components\Query\Statement' => __DIR__ . '/Components/Query/Statement.php',
         'Crystal\Components\Query\Select' => __DIR__ . '/Components/Query/Select.php',
         'Crystal\Components\Query\Insert' => __DIR__ . '/Components/Query/Insert.php',
+        'Crystal\Components\DataTable' => __DIR__ . '/Components/DataTable.php',
+        'Crystal\Components\Column' => __DIR__ . '/Components/Column.php',
+
         'Crystal\Support\UUID' => __DIR__ . '/Support/UUID.php',
         'Crystal\Support\Slug' => __DIR__ . '/Support/Slug.php',
 

@@ -3,14 +3,23 @@ declare(strict_types=1);
 namespace Crystal\Components;
 use PDO;
 use PDOStatement;
+use LogicException;
+use RuntimeException;
 
 /**
  * PDO-based database connector
  */
 abstract class Db
 {
-    // PDO instance
+    const TABLE_VERSIONS_CACHE_FILE = __DIR__ . '/../Cache/.tableVersions';
+    const TABLE_RESULT_CACHE_DIR = __DIR__ . '/../Cache/';
+
     private ?PDO $pdo = null;
+    private string $hostname;
+    private string $dbName;
+    private string $dbUser;
+    private string $dbPassword;
+    private int $port = 3306;
 
     /**
      * Constructor
@@ -21,18 +30,27 @@ abstract class Db
      * @param string   $dbPassword Database password.
      * @param int      $port       Optional database port. Defaults 3306.
      */
-    public function __construct(
-        private string $hostname,
-        private string $dbName,
-        private string $dbUser,
-        private string $dbPassword,
-        private int $port = 3306
-        ) {}
+    public function __construct(string $hostname, string $dbName, string $dbUser, string $dbPassword, int $port = 3306)
+    {
+        $this->hostname = $hostname;
+        $this->dbName = $dbName;
+        $this->dbUser = $dbUser;
+        $this->dbPassword = $dbPassword;
+        $this->port = $port;
+    }
 
     /**
      * Returns the PDO connection. The connection is created lazily on first access.
      */
-    public function getConnection()
+    public function getConn(): PDO
+    {
+        return $this->pdo ?? $this->connect();
+    }
+
+    /**
+     * Connects to DB
+     */
+    private function connect()
     {
         if ($this->pdo !== null) return $this->pdo;
 
@@ -44,202 +62,210 @@ abstract class Db
                 PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
                 PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC,
                 PDO::ATTR_EMULATE_PREPARES => false,
-                //PDO::ATTR_PERSISTENT => true,
+                PDO::ATTR_PERSISTENT => true,
             ]
         );
 
         return $this->pdo;
     }
 
+    private function generateCacheKey(string $query, array $bindings) : string
+    {
+        $tableVersions = $this->getTableVersions();
+        $queryTables = $this->parseTables($query);
+
+        $table_key_fragment = "";
+
+        foreach($queryTables as $table) {
+            if(isset($tableVersions[$table])){
+                $table_key_fragment .= $table.$tableVersions[$table];
+            } else {
+                $table_key_fragment .= $table."0";
+            }
+        }
+        return $table_key_fragment."_".md5($query.serialize($bindings));
+    }
+
     /**
-     * Prepare and execute a query.
-     *
-     * @param string $query
-     * @param array $bindings
-     * @param array<string, array{value: mixed, type: int}> $bindings
+     * Execute generic query
      */
     public function execute(string $query, array $bindings = []): PDOStatement
     {
-        if ($this->pdo === null) $this->getConnection();
-        $statement = $this->pdo->prepare($query);
-        $statement->execute($bindings);
-        return $statement;
+        $stmt = $this->getConn()->prepare($query);
+        $stmt->execute($bindings);
+
+        if ($this->isMutableQuery($query)) {
+            $this->updateTableVersions($query);
+        }
+
+        return $stmt;
     }
 
     /**
      * Execute a query and return all rows.
-     *
-     * @param string $query
-     * @param array $bindings
-     * @return array<int, array<string, mixed>>
      */
     public function getAll(string $query, array $bindings = []): array
     {
-        // Bump table versions on INSERT, UPDATE, DELETE etc..
-        $query_tables = $this->getQueryTableDependencies($query);
-        if($this->isBumpableQuery($query)){
-            $table_versions = $this->getTableVersions();
-            foreach($query_tables as $key => $table){
-                if(isset($table_versions[$table])){
-                    $table_versions[$table] += 1;
-                } else {
-                    $table_versions[$table] = 0;;
-                }
-            }
-            file_put_contents(__DIR__ . '/../Cache/.tableVersions', json_encode($table_versions), LOCK_EX);
+        // If it is mutable query just do simple execute and fetch
+        if($this->isMutableQuery($query)){
+            throw new LogicException('Cannot use getAll() on mutable query. Use execute() for INSERT, UPDATE or DELETE.');
         }
 
+        // Generate search cache key for this particular query and current table versions
         $cacheKey = $this->generateCacheKey($query, $bindings);
-        $cacheData = $this->queryCache($cacheKey);
-        if($cacheData) return $cacheData;
 
-        $results = $this
-            ->execute($query, $bindings)
-            ->fetchAll(PDO::FETCH_ASSOC);
+        // If there is existing cache return its data
+        if($this->hasValidCache($cacheKey))
+            return $this->getCache($cacheKey);
 
-        file_put_contents(__DIR__ . '/../Cache/'.$cacheKey, serialize($results), LOCK_EX);
+        // ...or query database
+        $stmt = $this->getConn()->prepare($query);
+        $stmt->execute($bindings);
+        $results = $stmt->fetchAll();
+
+        // Save results to cache
+        file_put_contents(static::TABLE_RESULT_CACHE_DIR.$cacheKey, serialize($results), LOCK_EX); // save cache file
         return $results;
-    }
-
-    /**
-     * Execute a query and return the first row.
-     * Returns null when no rows are found.
-     *
-     * @param string $query
-     * @param array $bindings
-     * @return array<string, mixed>|null
-     */
-    public function first(string $query, array $bindings = []): ?array
-    {
-        // Bump table versions on INSERT, UPDATE, DELETE etc..
-        $query_tables = $this->getQueryTableDependencies($query);
-        if($this->isBumpableQuery($query)){
-            $table_versions = $this->getTableVersions();
-            foreach($query_tables as $key => $table){
-                if(isset($table_versions[$table])){
-                    $table_versions[$table] += 1;
-                } else {
-                    $table_versions[$table] = 0;;
-                }
-            }
-            file_put_contents(__DIR__ . '/../Cache/.tableVersions', json_encode($table_versions), LOCK_EX);
-        }
-
-
-        $cacheKey = $this->generateCacheKey($query, $bindings);
-        $cacheData = $this->queryCache($cacheKey);
-        if($cacheData) return $cacheData;
-
-        $row = $this
-            ->execute($query, $bindings)
-            ->fetch(PDO::FETCH_ASSOC);
-
-        file_put_contents(__DIR__ . '/../Cache/'.$cacheKey, serialize($row), LOCK_EX);
-
-        return $row === false ? null : $row;
     }
 
     /**
      * Execute a query and return the first value of row.
      * Returns null when no rows are found.
      *
-     * @param string $query
-     * @param array $bindings
      * @return mixed|null
      */
     public function firstValue(string $query, array $bindings = []): mixed
     {
-        // Bump table versions on INSERT, UPDATE, DELETE etc..
-        $query_tables = $this->getQueryTableDependencies($query);
-        if($this->isBumpableQuery($query)){
-            $table_versions = $this->getTableVersions();
-            foreach($query_tables as $key => $table){
-                if(isset($table_versions[$table])){
-                    $table_versions[$table] += 1;
-                } else {
-                    $table_versions[$table] = 0;;
-                }
-            }
-            file_put_contents(__DIR__ . '/../Cache/.tableVersions', json_encode($table_versions), LOCK_EX);
+        // If it is mutable query just do simple execute and fetch
+        if($this->isMutableQuery($query)){
+            throw new LogicException('Cannot use getAll() on mutable query. Use execute() for INSERT, UPDATE or DELETE.');
         }
 
+        // Generate search cache key for this particular query and current table versions
         $cacheKey = $this->generateCacheKey($query, $bindings);
-        $cacheData = $this->queryCache($cacheKey);
-        if($cacheData) return $cacheData;
 
-        $row = $this
-            ->execute($query, $bindings)
-            ->fetchColumn();
+        // If there is existing cache return its data
+        if($this->hasValidCache($cacheKey))
+            return $this->getCache($cacheKey);
 
-        file_put_contents(__DIR__ . '/../Cache/'.$cacheKey, serialize($row), LOCK_EX);
+        // ...or query database
+        $stmt = $this->getConn()->prepare($query);
+        $stmt->execute($bindings);
+        $value = $stmt->fetchColumn();
+        $result = $value === false ? null : $value;
 
-        return $row === false ? null : $row;
+        // Save results to cache
+        file_put_contents(static::TABLE_RESULT_CACHE_DIR.$cacheKey, serialize($result), LOCK_EX); // save cache file
+        return $result;
     }
 
-    private function queryCache(string $cacheKey)
+    /**
+     * Execute a query and return the first row.
+     * Returns null when no rows are found.
+     *
+     * @return array|null
+     */
+    public function first(string $query, array $bindings = []): ?array
     {
-        $cacheFile = __DIR__ . '/../Cache/' . $cacheKey;
-
-        if (is_file($cacheFile)) {
-            $data = file_get_contents($cacheFile);
-            $created = filemtime($cacheFile);
-
-            if ($data !== false && time() - $created < 60 * 60 * 24) {
-                error_log("Reusing cache");
-                return unserialize($data);
-            }
-        error_log("Cache stale, query db...");
-        }
-        return false;
-    }
-
-    private function generateCacheKey(string $query, array $bindings)
-    {
-        $query_tables = $this->getQueryTableDependencies($query);
-        $table_versions = $this->getTableVersions();
-        $table_key_fragment = "";
-        foreach($query_tables as $table) {
-            if(isset($table_versions[$table])){
-                $table_key_fragment .= $table.$table_versions[$table];
-            } else {
-                $table_key_fragment .= $table."0";
-
-                // Update table versions array with new table and set version to 0
-                $table_versions[$table] = 0;
-            }
+        // If it is mutable query just do simple execute and fetch
+        if($this->isMutableQuery($query)){
+            throw new LogicException('Cannot use getAll() on mutable query. Use execute() for INSERT, UPDATE or DELETE.');
         }
 
-        // Update table tracker file
-        file_put_contents(__DIR__ . '/../Cache/.tableVersions', json_encode($table_versions), LOCK_EX);
+        // Generate search cache key for this particular query and current table versions
+        $cacheKey = $this->generateCacheKey($query, $bindings);
 
-        return $table_key_fragment."_".md5($query.serialize($bindings));
+        // If there is existing cache return its data
+        if($this->hasValidCache($cacheKey))
+            return $this->getCache($cacheKey);
+
+        // ...or query database
+        $stmt = $this->getConn()->prepare($query);
+        $stmt->execute($bindings);
+        $row = $stmt->fetch();
+        $result = $row === false ? null : $row;
+
+        // Save results to cache
+        file_put_contents(static::TABLE_RESULT_CACHE_DIR.$cacheKey, serialize($row), LOCK_EX); // save cache file
+        return $row;
     }
 
-    private function getQueryTableDependencies(string $query)
+    /**
+     * Checks if cache file for given key is present
+     */
+    private function hasValidCache(string $cacheKey){
+        $cacheFile = static::TABLE_RESULT_CACHE_DIR . $cacheKey;
+        if (!is_file($cacheFile)) return false;  // If cache file is not found return exit
+        if (time() - filemtime($cacheFile) >= 3600 * 24) return false; // If cache file is old
+        return true;
+    }
+
+    /**
+     * Searches for result cache file using key and returns data if found
+     * @param string $cacheKey
+     * @return null|mixed
+     */
+    private function getCache(string $cacheKey) : mixed
     {
-        // Get query table dependencies by parsing query
+        $cacheFile = static::TABLE_RESULT_CACHE_DIR . $cacheKey;
+        $data = file_get_contents($cacheFile);
+        if ($data === false) throw new RuntimeException('Unable to read cache file.');
+        return unserialize($data, ['allowed_classes' => false]);
+    }
+
+    /**
+     * Get query table dependencies by parsing query
+     * @param string $query
+     * @return array
+     */
+    private function parseTables(string $query) : array
+    {
         preg_match_all('/\b(?:FROM|JOIN|UPDATE|INSERT\s+INTO|DELETE\s+FROM)\s+`?([a-zA-Z_][a-zA-Z0-9_]*)`?/i', $query, $matches);
         return array_values(array_unique($matches[1]));
     }
 
-    private function getTableVersions()
+    /**
+     * Gets array of current table versions in tracker file
+     * @return array
+     */
+    private function getTableVersions() : array
     {
-        $tableTrackerFile = __DIR__ . '/../Cache/.tableVersions';
-
-        // Check if we have table tracker file, if not create empty
-        if(!is_file($tableTrackerFile))
-            file_put_contents($tableTrackerFile, '');
-
-        // Get table versions from tracker file
-        return json_decode(file_get_contents($tableTrackerFile), true) ?: [];
+        if (!is_file(static::TABLE_VERSIONS_CACHE_FILE)) return [];
+        $data = file_get_contents(static::TABLE_VERSIONS_CACHE_FILE);
+        if ($data === false) return [];
+        return json_decode($data, true) ?: [];
     }
 
-    private function isBumpableQuery($query){
-        $queryType = strtoupper(strtok(ltrim($query), " \t\n\r"));
-        if($queryType == "INSERT" || $queryType == "UPDATE" || $queryType == "DELETE" ){
-            return true;
+    /**
+     * Checks if query is of mutable type (INSERT, UPDATE, DELETE)
+     * @param string $query
+     * @return bool
+     */
+    private function isMutableQuery(string $query): bool
+    {
+        $type = strtoupper(strtok(ltrim($query), " \t\n\r"));
+        return $type === 'INSERT' || $type === 'UPDATE' || $type === 'DELETE';
+    }
+
+    private function updateTableVersions(string $query)
+    {
+        $tables = $this->parseTables($query);
+        $versions = $this->getTableVersions();
+
+        // Loop through query tables and compare them to versions file
+        foreach($tables as $table){
+            if (isset($versions[$table])){
+                // If it is tracked table, bump version by 1
+                ++$versions[$table];
+            } else {
+                // If it is untracked add it to list with initial version 1
+                $versions[$table] = 1;
+            }
         }
-        return false;
+
+        // Update table tracker file
+        file_put_contents(static::TABLE_VERSIONS_CACHE_FILE, json_encode($versions), LOCK_EX);
     }
+
 
 }

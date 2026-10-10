@@ -2,7 +2,7 @@
 <?php echo $this->partial("main-menu") ?>
 <main>
 <body>
-<main class="ct-center">
+<main class="wrapper">
 <h1>Articles</h1>
 
 <table>

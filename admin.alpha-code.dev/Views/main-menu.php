@@ -1,10 +1,9 @@
-<header>
-
-<nav id="menu" class="ct-center" aria-label="Main navigation">
-<ul class="ct-center">
-    <li id="dashboard-link">
-        <a href="/">
-            <img id="logo" src="/gfx/logo.svg" alt="Alpha Code" width="36" height="36" loading="eager" decoding="async" fetchpriority="high">
+<header class="top-bar wrapper">
+<nav class="dropdown-menu" aria-label="Main navigation">
+<ul>
+    <li>
+        <a id="home-link" href="/">
+            <img id="logo" src="/gfx/logo.svg" alt="Alpha Code" width="40" height="40" loading="eager" decoding="async" fetchpriority="high">
             <span>Dashboard</span>
         </a>
     </li>
@@ -28,26 +27,35 @@
     <li><a href="/pages">Site settings</a>
         <ul>
         <li><a href="/pages">General</a></li>
-        <li><a href="/pages">SEO / Social</a></li>
+        <li><a href="/pages">SEO / Social</a>
+            <ul>
+                <li><a href="/pages">Facebook</a>
+                <li><a href="/pages">Twitter</a>
+            </ul>
+        </li>
         <li><a href="/pages">Copyright / Footer</a></li>
         <li><a href="/pages">Maintenance Mode</a></li>
         </ul>
     </li>
-
     <li><a href="/users">Users</a></li>
-    <li><a href="/pages">My profile</a>
-        <ul>
-        <li><a href="/pages">Edit my profile info</a></li>
-        <li><a href="/pages">Password & Security</a></li>
-        <li><a href="/logout">Logout</a>
-        </ul>
-    </li>
-
 </ul>
 </nav>
+<nav id="profile-menu" class="dropdown-menu">
+    <ul>
+        <li><a href="/pages">My profile</a>
+            <ul>
+            <li><a href="/pages">Edit my profile info</a></li>
+            <li><a href="/pages">Password & Security</a></li>
+            <li><a href="/logout">Logout</a>
+            </ul>
+        </li>
+    </ul>
+</nav>
 
-<button class="mobile-nav-toggle" aria-label="Open menu">
-<!--svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill=none stroke=#fff stroke-width=2 stroke-linecap=round><line x1=3 y1=6 x2=21 y2=6/><line x1=3 y1=12 x2=21 y2=12/><line x1=3 y1=18 x2=21 y2=18/></svg>-->
+
+<!--
+<button class="mobile-nav-toggle" aria-label="Open menu"
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill=none stroke=#fff stroke-width=2 stroke-linecap=round><line x1=3 y1=6 x2=21 y2=6/><line x1=3 y1=12 x2=21 y2=12/><line x1=3 y1=18 x2=21 y2=18/></svg>
 </button>
-
+-->
 </header>
