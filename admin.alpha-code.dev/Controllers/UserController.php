@@ -36,7 +36,7 @@ class UserController
 
         // Get pagination state
         $currentPage = isset($_GET["page"]) ? $_GET["page"] : 1;
-        $itemsPerPage = 2;
+        $itemsPerPage = 5;
 
         // Users query
         $userQ = Query::select("user")

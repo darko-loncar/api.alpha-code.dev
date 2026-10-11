@@ -9,7 +9,7 @@ $start = hrtime(true);
 
 if (!defined('CRYSTAL_DEBUG')) define('CRYSTAL_DEBUG', false);
 if (!defined('CRYSTAL_APP_ROOT')) throw new RuntimeException("CRYSTAL_APP_ROOT not defined.");
-if (!defined('CRYSTAL_SECURE_COOKIES')) define('CRYSTAL_SECURE_COOKIES', true);
+if (!defined('CRYSTAL_SECURE_COOKIES')) define('CRYSTAL_SECURE_COOKIES', false);
 
 // Error handling
 ini_set('display_errors', CRYSTAL_DEBUG ? '1' : '0');
@@ -32,10 +32,10 @@ session_set_cookie_params([
     'lifetime' => 0,
     'path' => '/',
     'secure' => CRYSTAL_SECURE_COOKIES,
-    'httponly' => true,
+    'httponly' => false,
     'samesite' => 'Lax',
 ]);
-session_cache_limiter('');
+//session_cache_limiter('');
 session_start();
 
 // Register Crystal using static class map
@@ -97,7 +97,7 @@ $controllerInstance = $container->make($class);
 
 // Fire controller method and get response...
 $response = $controllerInstance->$method(...$params);
-
+/**
 // Canonical weak ETag for the uncompressed representation.
 $etag = hash('xxh128', $response);
 $etagHeader = 'W/"' . $etag . '"';
@@ -130,7 +130,7 @@ if ($ifNoneMatch !== '') {
         }
     }
 }
-
+*/
 echo $response;
 $elapsed = (hrtime(true) - $start) / 1_000_000;
 error_log("Crystal formed itself in: {$elapsed} ms");
