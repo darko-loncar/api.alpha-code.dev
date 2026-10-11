@@ -11,8 +11,8 @@ $pager = $pager_object;
 <?php if ($pager->previous !== null): ?>
     <li><a href="<?= $pager->previous ?>" aria-label="Previous page">Previous</a></li>
 <?php endif; ?>
-<?php foreach ($pager->pagerItems as $page): ?>
-    <li><a href="<?= $this->e($page['url']) ?>"<?= $page['is_active'] ? ' aria-current="page"' : '' ?>><?= $page['page_number'] ?></a></li>
+<?php foreach ($pager->pages as $pageNumber => $page): ?>
+    <li><a href="<?= $this->e($page['url']) ?>"<?= $page['active'] ? ' aria-current="page"' : '' ?>><?= $pageNumber ?></a></li>
 <?php endforeach; ?>
 <?php if ($pager->next !== null): ?>
     <li><a href="<?= $pager->next ?>" aria-label="Next page">Next</a></li>

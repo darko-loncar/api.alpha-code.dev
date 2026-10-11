@@ -13,13 +13,13 @@ final class Container
 
     public function register(callable $factory): void
     {
-        $name = $this->getFactoryReturnType($factory);
+        $name = self::getFactoryReturnType($factory);
         $this->services[$name] = $factory;
     }
 
     public function registerAsSingleton(callable $factory): void
     {
-        $name = $this->getFactoryReturnType($factory);
+        $name = self::getFactoryReturnType($factory);
         $instance = null;
         $resolved = false;
 
@@ -36,21 +36,18 @@ final class Container
 
     public function make(string $class): object
     {
-        if (isset($this->services[$class])) {
-            return ($this->services[$class])();
-        }
+        if (isset($this->services[$class])) return ($this->services[$class])();
 
         $ref = new ReflectionClass($class);
 
-        if (!$ref->isInstantiable()) {
-            throw new RuntimeException("Cannot instantiate '{$class}'. It may be an interface or abstract class.");
-        }
+        if (!$ref->isInstantiable()) throw new RuntimeException("Cannot instantiate '{$class}'. It may be an interface or abstract class.");
 
         $constructor = $ref->getConstructor();
         if ($constructor === null) return new $class();
 
         $params = [];
         $constructorParams = $constructor->getParameters();
+
         foreach ($constructorParams as $param) {
             $type = $param->getType();
 
@@ -60,9 +57,7 @@ final class Container
                     continue;
                 }
 
-                throw new RuntimeException(
-                    "Cannot resolve parameter '{$param->getName()}' of '{$class}'."
-                );
+                throw new RuntimeException("Cannot resolve parameter '{$param->getName()}' of '{$class}'.");
             }
 
             $params[] = $this->make($type->getName());
@@ -71,7 +66,7 @@ final class Container
         return $ref->newInstanceArgs($params);
     }
 
-    private function getFactoryReturnType(callable $factory): string
+    private static function getFactoryReturnType(callable $factory): string
     {
         $reflection = new ReflectionFunction($factory);
         $returnType = $reflection->getReturnType();

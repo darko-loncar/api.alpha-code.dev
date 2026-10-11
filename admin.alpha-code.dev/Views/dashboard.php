@@ -1,8 +1,6 @@
 <?php echo $this->partial("head") ?>
 <?php echo $this->partial("main-menu") ?>
-<main>
-<body>
-<main class="ct-center">
+<main class="wrapper-app">
 <h1>Dashboard</h1>
 
 <h2>The standard Lorem Ipsum passage, used since 1966</h2>

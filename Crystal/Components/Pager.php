@@ -11,7 +11,7 @@ use InvalidArgumentException;
  */
 final readonly class Pager
 {
-    public array $pagerItems;   // @var list<array{ page_number: int, url: string, is_active: bool}>
+    public array $pages;        // @var list<array{ page_number: int, url: string, is_active: bool}>
     public ?string $first;      // URL of the first page, or null when there are no pages.
     public ?string $last;       // URL of the last page, or null when there are no pages.
     public ?string $previous;   // URL of the previous page, or null when on the first page.
@@ -20,69 +20,67 @@ final readonly class Pager
     /**
      * Create a pagination result.
      *
-     * @param int $activePage               Current page number.
-     * @param int $itemsPerPage             Number of items displayed per page.
-     * @param int $totalItemsCount          Total number of items being paginated.
-     * @param int $pagesShownUpDown         Number of page links shown on either side of the active page.
-     * @param string $requestUri            Base URL used for pagination links.
+     * @param int $activePage       Current page number.
+     * @param int $perPage          Number of items displayed per page.
+     * @param int $recordCount      Total number of items being paginated.
+     * @param int $pageRadius       Number of page links shown on either side of the active page.
+     * @param string $requestUri    Base URL used for pagination links.
      *
-     * @throws InvalidArgumentException     If any pagination input value is invalid.
+     * @throws InvalidArgumentException
      */
-    public function __construct(int $activePage, int $itemsPerPage, int $totalItemsCount = 0, int $pagesShownUpDown = 5, string $requestUri = '/')
+    public function __construct(int $activePage, int $perPage = 10, int $recordCount = 0, int $pageRadius = 5, string $requestUri = '/')
     {
-        if ($activePage < 1) throw new InvalidArgumentException('Active page must be greater than 0.');
-        if ($itemsPerPage < 1) throw new InvalidArgumentException('Items per page must be greater than 0.');
-        if ($totalItemsCount < 0) throw new InvalidArgumentException('Total items count cannot be negative.');
-        if ($pagesShownUpDown < 0) throw new InvalidArgumentException('Pages shown up/down cannot be negative.');
-
-        // Process
-        $baseUrl = strtok($requestUri, '?');
-        $queryString = parse_url($requestUri, PHP_URL_QUERY) ?? "";
-        $queryArr = [];
-        parse_str($queryString, $queryArr);
+        if ($activePage < 1)    throw new InvalidArgumentException('Active page must be greater than 0.');
+        if ($perPage < 1)       throw new InvalidArgumentException('Items per page must be greater than 0.');
+        if ($recordCount < 0)   throw new InvalidArgumentException('Total items count cannot be negative.');
+        if ($pageRadius < 0)    throw new InvalidArgumentException('Page radius cannot be negative.');
 
         // Calculate max page
-        $maxPage = (int) ceil($totalItemsCount / $itemsPerPage);
+        $maxPage = (int) ceil($recordCount / $perPage);
 
         // A requested page beyond the last page resolves to the last page.
-        $activePage = min($maxPage, $activePage);
+        if ($activePage > $maxPage) throw new InvalidArgumentException('Requested non-existing page.');
 
-        // Calculate offsets for shifting window when near first or last page
-        $offsetLow = min($activePage - $pagesShownUpDown, 1) - 1;
-        $offsetHigh = max($activePage + $pagesShownUpDown - $maxPage, 0);
+        // Process base URL and query variables into array.
+        $urlParts = parse_url($requestUri);
+        $baseUrl = $urlParts['path'] ?? '/';
+        $queryArr = [];
+        parse_str($urlParts['query'] ?? '', $queryArr);
 
-        // Calculate first and last page window
-        $firstPage = max($activePage - $pagesShownUpDown - $offsetHigh, 1);
-        $lastPage = min($activePage + $pagesShownUpDown - $offsetLow, $maxPage);
+        // Calculate visible page window
+        $offsetLow = min($activePage - $pageRadius, 1) - 1;
+        $offsetHigh = max($activePage + $pageRadius - $maxPage, 0);
 
-        // Generate pager items array
-        $pagerItems = [];
+        $firstPage = max($activePage - $pageRadius - $offsetHigh, 1);
+        $lastPage = min($activePage + $pageRadius - $offsetLow, $maxPage);
+
+        // Generate page array
+        $pages = [];
         for($page = $firstPage; $page <= $lastPage; ++$page) {
-            $pagerItems[] = [
-                'page_number' => $page,
-                'url' => $this->resolveQueryUrl($baseUrl, $queryArr, $page),
-                'is_active' => $page === $activePage,
+            $pages[$page] = [
+                'url' => self::makeUrl($baseUrl, $queryArr, $page),
+                'active' => $page === $activePage,
             ];
         }
 
-        // Assign the fully calculated state only after all pagination values have been determined.
-        $this->pagerItems = $pagerItems;
+        // Assign the pages.
+        $this->pages = $pages;
 
         // First and last page links are unavailable when there are no pages.
         if ($maxPage > 0) {
-            $this->first = $this->resolveQueryUrl($baseUrl, $queryArr, 1);
-            $this->last = $this->resolveQueryUrl($baseUrl, $queryArr, $maxPage);
+            $this->first = self::makeUrl($baseUrl, $queryArr, 1);
+            $this->last = self::makeUrl($baseUrl, $queryArr, $maxPage);
         } else {
             $this->first = null;
             $this->last = null;
         }
 
         $this->previous = ($activePage > 1)
-            ? $this->resolveQueryUrl($baseUrl, $queryArr, $activePage - 1)
+            ? self::makeUrl($baseUrl, $queryArr, $activePage - 1)
             : null;
 
         $this->next = ($activePage < $maxPage)
-            ? $this->resolveQueryUrl($baseUrl, $queryArr, $activePage + 1)
+            ? self::makeUrl($baseUrl, $queryArr, $activePage + 1)
             : null;
     }
 
@@ -90,7 +88,7 @@ final readonly class Pager
      * Build a pagination URL while preserving existing query parameters.
      * The supplied page number replaces any existing "page" parameter.
      */
-    private function resolveQueryUrl(string $baseUrl, array $query, int $page): string
+    private static function makeUrl(string $baseUrl, array $query, int $page): string
     {
         $query["page"] = $page;
         return $baseUrl . '?' . http_build_query($query);

@@ -46,19 +46,19 @@ $router->get("pages/{id}/{aux}", App\Controllers\IndexController::class, 'pages'
 $userController = "App\Controllers\UserController";
 $router->get("users", $userController, 'index');
 $router->get("users/new", $userController, 'new');
-$router->get("users/{uuid}", $userController, 'view');
-$router->get("users/edit/{uuid}", $userController, 'edit');
-$router->get("users/delete/{uuid}", $userController, 'delete');
+$router->get("users/:uuid", $userController, 'view');
+$router->get("users/edit/:uuid", $userController, 'edit');
+$router->get("users/delete/:uuid", $userController, 'delete');
 $router->post("users/create", $userController, 'actionCreate');
-$router->post("users/update/{uuid}", $userController, 'actionUpdate');
-$router->post("users/delete/{uuid}", $userController, 'actionDelete');
+$router->post("users/update/:uuid", $userController, 'actionUpdate');
+$router->post("users/delete/:uuid", $userController, 'actionDelete');
 
 // Article routes
 $router->get("articles", App\Controllers\ArticleController::class, 'index');
-$router->get("article/{id}", App\Controllers\ArticleController::class, 'article');
+$router->get("article/:id", App\Controllers\ArticleController::class, 'article');
 $router->post("article", App\Controllers\ArticleController::class, 'create');
-$router->post("article/{id}", App\Controllers\ArticleController::class, 'update');
-$router->post("article/delete/{id}", App\Controllers\ArticleController::class, 'delete');
+$router->post("article/:id", App\Controllers\ArticleController::class, 'update');
+$router->post("article/delete/:id", App\Controllers\ArticleController::class, 'delete');
 
 // Auth Routes
 $router->get("login", App\Controllers\AuthController::class, 'login');

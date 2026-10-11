@@ -14,9 +14,8 @@ a           { color:#2F45ff;text-decoration:none }
 a:hover     { text-decoration:underline }
 
 /* Wrappers */
-.wrapper, .wrapper-app { margin-inline:auto; padding-inline:2rem; width:100% }
-.wrapper-app { max-width:1920px }
-.wrapper-small  { max-width:70rem; }
+.wrapper, .wrapper-app { margin-inline:auto; width:100%; outline:1px dashed #000 }
+.wrapper-app { padding-inline:2rem; max-width:1920px }
 
 /* Grid containers */
 .gr-2, .gr-3, .gr-4, .gr-5, .gr-7-3 {display: grid;gap: clamp(1rem, 2vw, 2rem);min-width: 0}
@@ -28,7 +27,7 @@ a:hover     { text-decoration:underline }
 .full {grid-column: 1 / -1; min-width: 0;}
 
 /* Top bar */
-.top-bar { display: flex; align-items: center; flex-wrap: nowrap; position:sticky; top:0; background: #534; z-index:1000; box-shadow:0 0 10px 10px rgba(0,0,0,0.2); }
+.top-bar { display: flex; align-items: center; flex-wrap: nowrap; position:sticky; top:0; background: #534; z-index:1000; box-shadow:0 0 10px 10px rgba(0,0,0,0.3); }
 
 /* Nav */
 .dropdown-menu {
@@ -59,7 +58,6 @@ a:hover     { text-decoration:underline }
 
 /*Table*/
 table{width:100%;border-collapse:collapse;background:#4f6579;box-shadow:0 0 5px 5px rgba(0,0,0,0.2);border-radius:8px}
-thead {}
 
 th,td{text-align:left;padding:0.6rem 1rem}
 th{border:none;color:#fff}

@@ -28,6 +28,12 @@ class UserController
         // Require login
         $this->auth->requireLogin();
 
+        $insertUserQ = Query::insert("user")
+            ->set("first_name", "John22122")
+            ->set("last_name", "Doe")
+            ->set("email", "john.doe@email31.com");
+        //$this->mainDb->execute($insertUserQ->getQuery(), $insertUserQ->getBindings());
+
         // Get pagination state
         $currentPage = isset($_GET["page"]) ? $_GET["page"] : 1;
         $itemsPerPage = 2;
@@ -39,8 +45,8 @@ class UserController
             ->page($currentPage, $itemsPerPage);
 
         // Load users page data and get total count
-        $userData = $this->mainDb->getAll($userQ->getQuery(), $userQ->getBindings());
-        $userCount = (int)$this->mainDb->firstValue($userQ->getCountQuery());
+        $userData = $this->mainDb->execute($userQ->getQuery(), $userQ->getBindings())->getAll();
+        $userCount = (int)$this->mainDb->execute($userQ->getCountQuery())->firstValue();
 
         $userTable = (new DataTable($userData))
             ->addColumn('id', 'ID')
@@ -63,10 +69,9 @@ class UserController
     {
         $this->auth->requireLogin();
         $userQ = Query::select("user")->where("user.uuid", $uuid);
-        $userData = $this->mainDb->first($userQ->getQuery(), $userQ->getBindings());
+        $userData = $this->mainDb->execute($userQ->getQuery(), $userQ->getBindings())->first();
         return View::render('Users.delete', ['userData' => $userData]);
     }
-
 
     /**
      * Delete user action
@@ -87,23 +92,11 @@ class UserController
             ->where("user.uuid", $uuid)
             ->where("user.is_active", true);
 
-        $userData = $this->mainDb->first(
+        $userData = $this->mainDb->execute(
             $userQ->getQuery(),
             $userQ->getBindings()
-        );
+        )->first();
 
         return View::render('Users.profile', ['pageId' => 'dashboard', 'userData' => $userData]);
     }
 }
-
-/**
- *         // Insert user query
- $insertUserQ = Query::insert("user")
-     ->set("first_name", "John22122")
-     ->set("last_name", "Doe")
-     ->set("email", "john.doe@email31.com");
-
- // Insert user
- //$this->mainDb->execute($insertUserQ->getQuery(), $insertUserQ->getBindings());
-
- */
