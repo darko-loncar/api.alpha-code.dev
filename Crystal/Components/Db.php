@@ -77,6 +77,9 @@ class Db
 
     /**
      * Execute generic query
+     * @param string $query
+     * @param array $bindings
+     * @return self
      */
     public function execute(string $query, array $bindings = []): self
     {
@@ -155,6 +158,13 @@ class Db
         return $result;
     }
 
+    /**
+     * Generate cache key
+     * @param string $dbName
+     * @param string $query,
+     * @param array $bindings
+     * @return string
+     */
     private static function generateCacheKey(string $dbName, string $query, array $bindings): string
     {
         $tableVersions = self::getTableVersions();
@@ -174,6 +184,7 @@ class Db
 
     /**
      * Checks if cache file for given key is present
+     * @param string $cacheKey
      * @return bool
      */
     private static function isValidCache(string $cacheKey): bool
@@ -204,7 +215,12 @@ class Db
         return unserialize($data);
     }
 
-    private static function updateTableVersions(string $query)
+    /**
+     * Updates table versions tracker file
+     * @param string $query
+     * @return void
+     */
+    private static function updateTableVersions(string $query): void
     {
         $tables = self::parseTables($query);
         $versions = self::getTableVersions();
@@ -229,7 +245,7 @@ class Db
      * @param string $query
      * @return array
      */
-    private static function parseTables(string $query) : array
+    private static function parseTables(string $query): array
     {
         preg_match_all('/\b(?:FROM|JOIN|UPDATE|INSERT\s+INTO|DELETE\s+FROM)\s+`?([a-zA-Z_][a-zA-Z0-9_]*)`?/i', $query, $matches);
         return array_values(array_unique($matches[1]));
