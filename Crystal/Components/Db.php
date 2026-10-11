@@ -9,12 +9,12 @@ use PDOStatement;
 use RuntimeException;
 
 /**
- * PDO-based database connector
+ * PDO/MySQL - based database connector with results cache layer
  */
 class Db
 {
-    private const TABLE_VERSIONS_CACHE_FILE = __DIR__ . '/../Cache/.tableVersions';
-    private const TABLE_RESULT_CACHE_DIR = __DIR__ . '/../Cache/';
+    protected const TABLE_VERSIONS_CACHE_FILE = __DIR__ . '/../Cache/.tableVersions';
+    protected const TABLE_RESULT_CACHE_DIR = __DIR__ . '/../Cache/';
 
     protected ?PDO $pdo = null;
     protected ?PDOStatement $pdoStatement = null;
