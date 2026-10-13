@@ -5,57 +5,38 @@ declare(strict_types=1);
 namespace Crystal\Components;
 
 use PDO;
-use PDOStatement;
 use RuntimeException;
 
 /**
  * PDO/MySQL - based database connector with results cache layer
  */
-class Db
+abstract class Db
 {
     protected const TABLE_VERSIONS_CACHE_FILE = __DIR__ . '/../Cache/.tableVersions';
     protected const TABLE_RESULT_CACHE_DIR = __DIR__ . '/../Cache/';
-
     protected ?PDO $pdo = null;
-    protected ?PDOStatement $pdoStatement = null;
-    protected ?string $cacheKey = null;
-    protected bool $hasValidCache = false;
-    protected string $hostname;
-    protected string $dbName;
-    protected string $dbUser;
-    protected string $dbPassword;
-    protected int $port = 3306;
 
     /**
      * Constructor
      *
-     * @param string   $hostname   Database host.
-     * @param string   $dbName     Database name.
-     * @param string   $dbUser     Database username.
-     * @param string   $dbPassword Database password.
-     * @param int      $port       Optional database port. Defaults 3306.
+     * @param string $hostname   Database host.
+     * @param string $dbName     Database name.
+     * @param string $dbUser     Database username.
+     * @param string $dbPassword Database password.
+     * @param int $port       Optional database port. Defaults 3306.
      */
-    public function __construct(string $hostname, string $dbName, string $dbUser, string $dbPassword, int $port = 3306)
-    {
-        $this->hostname = $hostname;
-        $this->dbName = $dbName;
-        $this->dbUser = $dbUser;
-        $this->dbPassword = $dbPassword;
-        $this->port = $port;
-    }
-
-    /**
-     * Returns the PDO connection. The connection is created lazily on first access.
-     */
-    public function getConn(): PDO
-    {
-        return $this->pdo ?? $this->connect();
-    }
+    public function __construct(
+        protected string $hostname,
+        protected string $dbName,
+        protected string $dbUser,
+        protected string $dbPassword,
+        protected int $port = 3306
+    ){}
 
     /**
      * Connects to DB
      */
-    private function connect(): PDO
+    public function getConn(): PDO
     {
         if ($this->pdo !== null) {
             return $this->pdo;
@@ -76,54 +57,52 @@ class Db
     }
 
     /**
-     * Execute generic query
+     * Prepare query
+     * @param string $dbName
      * @param string $query
      * @param array $bindings
-     * @return self
+     * @return array
      */
-    public function execute(string $query, array $bindings = []): self
+    private function prepare(string $host, string $dbName, string $mode, string $query, array $bindings = []): array
     {
-        // Reset state on every query execution
-        $this->cacheKey = null;
-        $this->hasValidCache = false;
-        $this->pdoStatement = null;
+        $cacheKey = self::generateCacheKey($host, $dbName, $mode, $query, $bindings);
+        $isCacheable = preg_match('/^SELECT\s/i', ltrim($query)) === 1;
 
-        // If it is mutable query execute it directly, store prepared statement and update table tracker
-        if (strtoupper(strtok(ltrim($query), " \t\n\r")) !== "SELECT") {
-            $stmt = $this->getConn()->prepare($query);
-            $stmt->execute($bindings);
-            self::updateTableVersions($query);
-            return $this;
+        if ($isCacheable === true && self::isValidCache($cacheKey)) {
+            return [
+                "isCacheable" => true,
+                "cacheHit" => true,
+                "cacheKey" => $cacheKey,
+                "cachedResult" => static::getCache($cacheKey),
+                "pdoStatement" => null
+            ];
         }
 
-        // Generate search cache key for this particular query and current table versions
-        $this->cacheKey = $this->generateCacheKey($this->dbName, $query, $bindings);
-
-        if (isset($this->cacheKey)) {
-            if (self::isValidCache($this->cacheKey)) {
-                $this->hasValidCache = true;
-                return $this;
-            }
-        }
-
-        // In last case we need to fallback to query DB
         $stmt = $this->getConn()->prepare($query);
         $stmt->execute($bindings);
-        $this->pdoStatement = $stmt;
-        return $this;
+
+        if (!$isCacheable) {
+            self::updateTableVersions($dbName, $query);
+        }
+        return [
+            "isCacheable" => $isCacheable,
+            "cacheHit" => false,
+            "cacheKey" => $cacheKey,
+            "cachedResult" => null,
+            "pdoStatement" => $stmt
+        ];
     }
 
     /**
      * Execute a query and return all rows.
      * @return array
      */
-    public function getAll(): array
+    public function getAll(string $query, array $bindings = []): array
     {
-        if ($this->hasValidCache) {
-            return self::getCache($this->cacheKey);
-        }
-        $results = $this->pdoStatement->fetchAll();
-        file_put_contents(static::TABLE_RESULT_CACHE_DIR . $this->cacheKey, serialize($results), LOCK_EX);
+        $queryData = $this->prepare($this->hostname, $this->dbName, "getAll", $query, $bindings);
+        if ($queryData["cacheHit"]) return $queryData["cachedResult"];
+        $results = $queryData["pdoStatement"]->fetchAll();
+        if($queryData["isCacheable"] === true) file_put_contents(static::TABLE_RESULT_CACHE_DIR . $queryData["cacheKey"], serialize($results), LOCK_EX);
         return $results;
     }
 
@@ -131,14 +110,13 @@ class Db
      * Execute a query and return the first value of row.
      * @return mixed|null
      */
-    public function firstValue(): mixed
+    public function firstValue(string $query, array $bindings = []): mixed
     {
-        if ($this->hasValidCache) {
-            return self::getCache($this->cacheKey);
-        }
-        $value = $this->pdoStatement->fetchColumn();
+        $queryData = $this->prepare($this->hostname, $this->dbName, "firstValue", $query, $bindings);
+        if ($queryData["cacheHit"]) return $queryData["cachedResult"];
+        $value = $queryData["pdoStatement"]->fetchColumn();
         $result = $value === false ? null : $value;
-        file_put_contents(static::TABLE_RESULT_CACHE_DIR . $this->cacheKey, serialize($result), LOCK_EX);
+        if($queryData["isCacheable"] === true) file_put_contents(static::TABLE_RESULT_CACHE_DIR . $queryData["cacheKey"], serialize($result), LOCK_EX);
         return $result;
     }
 
@@ -147,14 +125,13 @@ class Db
      * Returns null when no rows are found.
      * @return array|null
      */
-    public function first(): ?array
+    public function first(string $query, array $bindings = []): ?array
     {
-        if ($this->hasValidCache) {
-            return self::getCache($this->cacheKey);
-        }
-        $value = $this->pdoStatement->fetch();
+        $queryData = $this->prepare($this->hostname, $this->dbName, "first", $query, $bindings);
+        if ($queryData["cacheHit"]) return $queryData["cachedResult"];
+        $value = $queryData["pdoStatement"]->fetch();
         $result = $value === false ? null : $value;
-        file_put_contents(static::TABLE_RESULT_CACHE_DIR . $this->cacheKey, serialize($result), LOCK_EX);
+        if($queryData["isCacheable"] === true) file_put_contents(static::TABLE_RESULT_CACHE_DIR . $queryData["cacheKey"], serialize($result), LOCK_EX);
         return $result;
     }
 
@@ -165,21 +142,19 @@ class Db
      * @param array $bindings
      * @return string
      */
-    private static function generateCacheKey(string $dbName, string $query, array $bindings): string
+    private static function generateCacheKey(string $host, string $dbName, string $mode, string $query, array $bindings): string
     {
         $tableVersions = self::getTableVersions();
         $queryTables = self::parseTables($query);
 
-        $table_key_fragment = "";
+        $tableKeyFragment = '';
 
         foreach ($queryTables as $table) {
-            if (isset($tableVersions[$table])) {
-                $table_key_fragment .= $table . $tableVersions[$table];
-            } else {
-                $table_key_fragment .= $table . "0";
-            }
+            $key = $dbName . '.' . $table;
+            $tableKeyFragment .= $key . ($tableVersions[$key] ?? 0);
         }
-        return $dbName . "_" . $table_key_fragment . "_" . md5($query . serialize($bindings));
+
+        return hash("xxh128", $mode. "." . $host . '.' . $dbName . '_' . $tableKeyFragment . '_' . $query . serialize($bindings));
     }
 
     /**
@@ -212,27 +187,28 @@ class Db
         if ($data === false) {
             throw new RuntimeException('Unable to read cache file.');
         }
-        return unserialize($data);
+        return unserialize($data, ['allowed_classes' => false]);
     }
 
     /**
      * Updates table versions tracker file
+     * @param string $dbName
      * @param string $query
      * @return void
      */
-    private static function updateTableVersions(string $query): void
+    private static function updateTableVersions(string $dbName, string $query): void
     {
         $tables = self::parseTables($query);
         $versions = self::getTableVersions();
 
         // Loop through query tables and compare them to versions file
         foreach ($tables as $table) {
-            if (isset($versions[$table])) {
+            if (isset($versions[$dbName.".".$table])) {
                 // If it is tracked table, bump version by 1
-                ++$versions[$table];
+                ++$versions[$dbName.".".$table];
             } else {
                 // If it is untracked add it to list with initial version 1
-                $versions[$table] = 1;
+                $versions[$dbName.".".$table] = 1;
             }
         }
 

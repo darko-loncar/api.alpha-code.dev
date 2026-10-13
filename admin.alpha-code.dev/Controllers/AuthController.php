@@ -33,10 +33,10 @@ class AuthController
             ->where("is_active", true)
             ->leftJoin("user","user_id","id", ["uuid"]);
 
-        $user = $this->db->execute(
+        $user = $this->db->first(
             $userQ->getQuery(),
             $userQ->getBindings()
-        )->first();
+        );
 
         if (empty($user)) {
             echo "User not found";

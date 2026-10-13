@@ -2,6 +2,10 @@
 declare(strict_types=1);
 namespace Crystal\Components;
 
+use Crystal\Components\Column;
+use InvalidArgumentException;
+
+
 final class DataTable
 {
     private array $rows;
@@ -15,20 +19,16 @@ final class DataTable
     public function addColumn(string $field, string $label): self
     {
         $this->columns[$field] = new Column($field, $label);
-
         return $this;
     }
 
-    public function setColumnCallable(
-        string $field,
-        ?callable $callable
+    public function setColumnCallable(string $field, ?callable $callable
     ): self {
         $this->getColumn($field)->setCallable($callable);
-
         return $this;
     }
 
-    public function getColumn(string $field): DataTableColumn
+    public function getColumn(string $field): Column
     {
         if (!isset($this->columns[$field])) {
             throw new InvalidArgumentException(

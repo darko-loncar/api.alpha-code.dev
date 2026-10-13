@@ -32,11 +32,12 @@ class UserController
             ->set("first_name", "John22122")
             ->set("last_name", "Doe")
             ->set("email", "john.doe@email31.com");
-        //$this->mainDb->execute($insertUserQ->getQuery(), $insertUserQ->getBindings());
+        //$this->mainDb->firstValue($insertUserQ->getQuery(), $insertUserQ->getBindings());
+
 
         // Get pagination state
         $currentPage = isset($_GET["page"]) ? $_GET["page"] : 1;
-        $itemsPerPage = 5;
+        $itemsPerPage = 15;
 
         // Users query
         $userQ = Query::select("user")
@@ -45,8 +46,8 @@ class UserController
             ->page($currentPage, $itemsPerPage);
 
         // Load users page data and get total count
-        $userData = $this->mainDb->execute($userQ->getQuery(), $userQ->getBindings())->getAll();
-        $userCount = (int)$this->mainDb->execute($userQ->getCountQuery())->firstValue();
+        $userData = $this->mainDb->getAll($userQ->getQuery(), $userQ->getBindings());
+        $userCount = (int)$this->mainDb->firstValue($userQ->getCountQuery());
 
         $userTable = (new DataTable($userData))
             ->addColumn('id', 'ID')
@@ -69,7 +70,7 @@ class UserController
     {
         $this->auth->requireLogin();
         $userQ = Query::select("user")->where("user.uuid", $uuid);
-        $userData = $this->mainDb->execute($userQ->getQuery(), $userQ->getBindings())->first();
+        $userData = $this->mainDb->first($userQ->getQuery(), $userQ->getBindings());
         return View::render('Users.delete', ['userData' => $userData]);
     }
 
@@ -80,7 +81,7 @@ class UserController
     {
         // Require login
         $this->auth->requireLogin();
-        $this->mainDb->execute("DELETE FROM user WHERE uuid = ?", [$uuid]);
+        $this->mainDb->first("DELETE FROM user WHERE uuid = ?", [$uuid]);
         Response::redirect("/users");
     }
 
@@ -92,10 +93,10 @@ class UserController
             ->where("user.uuid", $uuid)
             ->where("user.is_active", true);
 
-        $userData = $this->mainDb->execute(
+        $userData = $this->mainDb->first(
             $userQ->getQuery(),
             $userQ->getBindings()
-        )->first();
+        );
 
         return View::render('Users.profile', ['pageId' => 'dashboard', 'userData' => $userData]);
     }
