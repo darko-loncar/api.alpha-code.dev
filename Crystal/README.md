@@ -1,137 +1,38 @@
-# CrystalCore — Minimal PHP Microframework
+# Crystal
 
-> Copy-to-folder, minimal-configuration PHP microframework for small in-house apps. Designed to run with zero setup for simple deployments and to be extended by developers who want a tiny, dependency-light foundation.
+Crystal is a small, modular PHP framework intended to provide a lightweight, copy-friendly foundation for web applications. Its reusable `Core/` contains the dependency container and router and can be shared by multiple independent websites or services. Application-specific code and optional components are added by each project; the repository's `admin.alpha-code.dev/` directory is an example application, not a requirement.
 
----
+Crystal does not require Composer to load its framework classes. Composer may still be used if desired for application dependencies or autoloading.
 
-## Quick start — Copy & Go
+## Repository contents
 
-1. Copy the project folder to your server (or clone the repo).
-2. Make a writable logs directory and cache directory:
+- `boot.php` — initializes the framework, registers the built-in class map, loads the application bootstrap, and dispatches the matched route.
+- `Core/` — dependency container and router.
+- `Components/` — optional reusable functionality, including PDO/MySQL access, query helpers, views, responses, authentication, pagination, and an HTTP client.
+- `Support/` — small helpers such as UUID and slug utilities.
+- `Tests/` — PHPUnit tests.
 
-   PowerShell
-   ```powershell
-   New-Item -ItemType Directory -Path var\log -Force
-   New-Item -ItemType Directory -Path var\cache -Force
-   ```
+The example app and a quick-start guide are documented in the repository's [root README](../README.md).
 
-   Bash
-   ```bash
-   mkdir -p var/log var/cache
-   chmod 0775 var/log var/cache
-   ```
+## Requirements
 
-3. (Optional) Create `.env` in the project root by copying `.env.example` and editing values.
-4. Point your webserver document root to the `public/` folder (see `public/index.php`). If you cannot change the document root, `app_init.php` can be used directly for simple setups.
-5. Open the site in the browser — the app should boot with defaults.
+- PHP 8.0 or newer.
+- PDO with the MySQL driver enabled when using the database component.
 
-For local development, run:
+## Tests
 
-```powershell
-# on Windows (PowerShell)
-composer install
-# start built-in PHP server (dev only)
-php -S localhost:8000 -t public
+Tests are configured in `phpunit.xml`. Run them with PHPUnit installed in your development environment:
+
+```sh
+phpunit -c Crystal/phpunit.xml
 ```
 
-```bash
-# on Linux / macOS
-composer install
-php -S localhost:8000 -t public
+Alternatively, when working from the `Crystal/` directory:
+
+```sh
+phpunit -c phpunit.xml
 ```
 
----
+## License
 
-## What this repo contains
-
-- `boot.php` — main bootstrap for the app.
-- `public/index.php` — webroot file (tiny front controller).
-- `Core/` — framework core (Router, Request, Response, Controller base, Env, Db, QueryBuilder, exceptions, helpers).
-- `Components/` — application controllers.
-- `Storage/` — static data like `currencies.csv` and other storage files.
-
-The framework is intentionally minimal: core features are kept inside `Core/`. App can run without installing any Composer packages.
-
----
-
-## Configuration
-
-Create `.env` (copy `.env.example`) with values like:
-
-```ini
-# Example .env
-APP_DEBUG=false
-DB_CONNECTION=mysql
-DB_HOST=127.0.0.1
-DB_DATABASE=mydb
-DB_USERNAME=root
-DB_PASSWORD=
-DB_PORT=3306
-CORS_ALLOW_ORIGIN=*
-```
-
-- `APP_DEBUG` toggles more verbose error output.
-- `CORS_ALLOW_ORIGIN` can be set to a single origin in production (avoid `*` for credentials).
-
-`AppCore/Env::load()` is tolerant — if no `.env` file exists the app will still start using defaults.
-
----
-
-## Runtime flow & API contract
-
-Design pattern used by the framework:
-
-- `Request` → `Router` → `Controller::dispatch(...)` → returns `Response` or throws `HttpException` → `Response::render()` outputs the result.
-
-Controller contract:
-
-- Controllers should return an instance of `AppCore\Response` (or throw `AppCore\HttpException`/`AppCore\APIError`).
-- Response has `status`, `contentType`, `headers` and `body`, and a single public `render()` method which performs final output.
-
-API response envelope (recommended)
-
-- Success:
-
-```json
-{ "data": ... , "meta": { ... } }
-```
-
-- Error:
-
-```json
-{ "error": { "code": <int>, "message": "...", "details": {...} } }
-```
-
-This makes the API predictable for clients.
-
----
-
-## Development notes & conventions
-
-- Core (`AppCore/`) should be dependency-free. Optional features that require Composer should be documented and loaded only when `vendor/autoload.php` exists.
-- Keep controllers thin; move business logic into `Services/` classes.
-- Use `AppCore\Controller` helpers (e.g., `json()`, `abort()`, `input()`) when available.
-- Avoid `echo` and `exit` in controllers — return a `Response` or throw an exception instead.
-
----
-
-## Optional dependencies & packaging
-
-- The only optional runtime dependency in `composer.json` is for extra features (QR generation, etc.). Those are not required for the core to work.
-- For non-developer deployments, produce a `dist` archive that includes `vendor/` (generated by `composer install --no-dev`) and ship that zip or a PHAR so end users do not need Composer.
-
-Packaging example (bash):
-
-```bash
-composer install --no-dev --prefer-dist
-zip -r dist/crystal-core.zip . -x ".git/*" "tests/*"
-```
-
-Packaging (PowerShell):
-
-```powershell
-composer install --no-dev --prefer-dist
-Compress-Archive -Path * -DestinationPath dist\crystal-core.zip -Force
-```
-
----
+See [`LICENSE`](LICENSE).

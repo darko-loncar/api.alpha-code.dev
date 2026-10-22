@@ -26,5 +26,20 @@ abstract class Query
         return new Insert($table);
     }
 
+    /**
+     * Factory method: Update statement.
+     */
+    public static function update(string $table) : Statement
+    {
+        return new Update($table);
+    }
+
+    /**
+     * Factory method: Delete statement.
+     */
+    public static function delete(string $table) : Statement
+    {
+        return new Delete($table);
+    }
 
 }

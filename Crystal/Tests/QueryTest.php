@@ -9,6 +9,39 @@ use PHPUnit\Framework\TestCase;
 
 final class QueryTest extends TestCase
 {
+    public function testUpdateStatement(): void
+    {
+        $query = Query::update('user')
+            ->where('id', 10)
+            ->set('first_name', 'Ada')
+            ->set('is_active', true);
+
+        $this->assertSame(
+            'UPDATE `user` SET `first_name` = ?, `is_active` = ? WHERE id = ?',
+            $query->getQuery()
+        );
+        $this->assertSame(['Ada', true, 10], $query->getBindings());
+    }
+
+    public function testUpdateRequiresValues(): void
+    {
+        $this->expectException(\\LogicException::class);
+        Query::update('user')->getQuery();
+    }
+
+    public function testDeleteStatement(): void
+    {
+        $query = Query::delete('user')
+            ->where('is_active', false)
+            ->whereIn('id', [10, 20]);
+
+        $this->assertSame(
+            'DELETE FROM `user` WHERE is_active = ? AND id IN (?, ?)',
+            $query->getQuery()
+        );
+        $this->assertSame([false, 10, 20], $query->getBindings());
+    }
+
     public function testSelectAll(): void
     {
         $query = Query::select('user');
