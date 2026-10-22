@@ -25,7 +25,7 @@ final class QueryTest extends TestCase
 
     public function testUpdateRequiresValues(): void
     {
-        $this->expectException(\\LogicException::class);
+        $this->expectException(\LogicException::class);
         Query::update('user')->getQuery();
     }
 
