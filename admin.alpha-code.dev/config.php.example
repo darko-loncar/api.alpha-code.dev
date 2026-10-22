@@ -7,5 +7,12 @@ return [
         "user" => "user_name",
         "password" => "user_password",
         "port" => 3306
+    ],
+    "commonDb" => [
+        "host" => "localhost",
+        "database" => "common_database_name",
+        "user" => "user_name",
+        "password" => "user_password",
+        "port" => 3306
     ]
 ];

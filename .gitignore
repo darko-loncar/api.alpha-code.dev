@@ -2,6 +2,7 @@
 /admin.alpha-code.dev/public/Uploads
 /admin.alpha-code.dev/config.php
 /admin.alpha-code.dev/config.php.prod
+/admin.alpha-code.dev/config.bkp.php
 /admin.alpha-code.dev/error.log
 
 # Crystal

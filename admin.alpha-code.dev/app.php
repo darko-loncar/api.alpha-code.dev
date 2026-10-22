@@ -35,8 +35,14 @@ $container->registerAsSingleton(
 
 // Register common database service
 $container->registerAsSingleton(
-    fn(): CommonDb => new CommonDb('192.168.1.102', 'common', 'nyxx@localhost', 'Chronos_1', 3306)
-    );
+    fn(): CommonDb => new CommonDb(
+        $config["commonDb"]["host"],
+        $config["commonDb"]["database"],
+        $config["commonDb"]["user"],
+        $config["commonDb"]["password"],
+        $config["commonDb"]["port"]
+    )
+);
 
 // Dashboard Routes
 $router->get("", App\Controllers\IndexController::class, 'dashboard');
