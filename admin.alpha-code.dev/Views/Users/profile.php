@@ -49,7 +49,7 @@ $user = $this->getVar("userData");
     </div>
 
     <div class="user-card-actions">
-        <a href="/users/<?= $this->e($user["uuid"]); ?>/edit">Edit user</a>
+        <a href="/users/edit/<?= $this->e($user["uuid"]); ?>">Edit user</a>
     </div>
 
 </div>

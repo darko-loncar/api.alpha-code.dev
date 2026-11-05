@@ -61,10 +61,15 @@ $router->post("users/delete/:uuid", $userController, 'actionDelete');
 
 // Article routes
 $router->get("articles", App\Controllers\ArticleController::class, 'index');
+$router->get("new-article", App\Controllers\ArticleController::class, 'newArticle');
 $router->get("article/:id", App\Controllers\ArticleController::class, 'article');
 $router->post("article", App\Controllers\ArticleController::class, 'create');
 $router->post("article/:id", App\Controllers\ArticleController::class, 'update');
 $router->post("article/delete/:id", App\Controllers\ArticleController::class, 'delete');
+
+// Public, read-only article API (published articles only)
+$router->get("api/articles", App\Controllers\APIController::class, 'articles');
+$router->get("api/article/:id", App\Controllers\APIController::class, 'article');
 
 // Auth Routes
 $router->get("login", App\Controllers\AuthController::class, 'login');

@@ -1,0 +1,43 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="A small collection of articles and notes.">
+    <meta name="articles-api-base" content="http://admin.alpha-code.home.arpa/api">
+    <title>Fieldnotes — Articles</title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="app.js" defer></script>
+</head>
+<body>
+    <header class="site-header">
+        <a class="wordmark" href="#articles" aria-label="Fieldnotes home">Fieldnotes<span>.</span></a>
+        <span class="header-note">Thoughts, gathered</span>
+    </header>
+
+    <main class="layout">
+        <section id="article-list-view" aria-labelledby="page-title">
+            <div class="intro">
+                <p class="eyebrow">THE JOURNAL</p>
+                <h1 id="page-title">Articles &amp; notes</h1>
+                <p class="intro-copy">Ideas, lessons, and things worth remembering.</p>
+            </div>
+            <div id="article-list" class="article-list" aria-live="polite" aria-busy="true">
+                <p class="status-message">Loading articles…</p>
+            </div>
+        </section>
+
+        <article id="article-detail-view" class="article-detail" hidden>
+            <button id="back-to-list" class="back-link" type="button">← All articles</button>
+            <div id="article-detail" aria-live="polite" aria-busy="true">
+                <p class="status-message">Loading article…</p>
+            </div>
+        </article>
+    </main>
+
+    <footer class="site-footer">
+        <span>Fieldnotes</span>
+        <span>Made with care.</span>
+    </footer>
+</body>
+</html>

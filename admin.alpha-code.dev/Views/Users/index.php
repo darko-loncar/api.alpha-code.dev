@@ -3,6 +3,7 @@
 
 <main class="wrapper-app">
     <h1>Users</h1>
+    <p><a href="/users/new">Create user</a></p>
 
     <?php $table = $this->getVar("dataTable"); ?>
 
@@ -30,6 +31,9 @@
                     <td>
                         <a href="/users/<?= $this->e($row['uuid']) ?>">
                             View
+                        </a>
+                        <a href="/users/edit/<?= $this->e($row['uuid']) ?>">
+                            Edit
                         </a>
                         <a href="/users/delete/<?= $this->e($row['uuid']) ?>">
                             Delete
